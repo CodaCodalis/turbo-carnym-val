@@ -1,0 +1,2 @@
+{"frage":"Welches ist die vierte Schicht des OSI-Modells?","antwort":["Darstellung","Sicherung","Transport","Bit\u00fcbertragung"],"wahr":["0","0","1","0"],"index":""}
+{"frage":"Wof\u00fcr steht die Abk\u00fcrzung \"CSS\"?      ","antwort":["Cerealien satt am Sonntag","Cascading Stylesheets","Cool Sangria selbermachen","Chinakohl schmeckt super"],"wahr":["0","1","0","0"],"index":""}
