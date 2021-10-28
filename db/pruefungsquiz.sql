@@ -28,7 +28,7 @@ CREATE TABLE `kategorien` (
 
 CREATE TABLE `rollen` (
   	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  	`name` varchar(32) NOT NULL
+  	`name` varchar(32) UNIQUE NOT NULL
 );
 
 
