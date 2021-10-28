@@ -1,0 +1,61 @@
+// Beim Einloggen: eingegebenen Namen und Passwort abgleichen mit der Datenbank
+SELECT * FROM user WHERE name='Blub' AND passwort='Test';
+
+// Rollen anlegen (fix)
+INSERT IGNORE INTO `rollen` (`name`) VALUES
+	('user'),
+	('admin');
+
+// Registrierung neuer User:
+// zunächst prüfen, ob das Login schon in der Datenbank vorhanden ist (falls ja, Fehlermeldung ausgeben)
+SELECT * FROM user WHERE name = 'BieneMaja';
+
+// Die eingebenen Daten (User-Registrierung) werden als neuer Datensatz in die DB geschrieben
+INSERT INTO user (name, passwort) VALUES('BieneMaja','Honig');
+INSERT INTO user_rolle (user_id, rolle_id) VALUES ((SELECT id FROM user WHERE name = 'BieneMaja'),(SELECT id FROM rollen WHERE name = 'admin'));
+
+INSERT INTO user (name, passwort) VALUES('DagobertDuck','Goldtaler');
+INSERT INTO user_rolle (user_id, rolle_id) VALUES ((SELECT id FROM user WHERE name = 'DagobertDuck'),(SELECT id FROM rollen WHERE name = 'user'));
+
+// Kategorie erstellen
+INSERT INTO kategorien (name) VALUES ('Netzwerk');
+
+// neue Frage erstellen (user_id später über php übergeben, aktuell: Platzhalter) und mit Kategorie verknüpfen (Drop-Down)
+INSERT INTO fragen (fragetext, user_id) VALUES ('Warum ist die Banane krumm?', 9);
+INSERT INTO frage_kategorie (frage_id, kategorie_id) VALUES ((SELECT id FROM fragen WHERE fragetext = 'Warum ist die Banane krumm?'),(SELECT id FROM kategorien WHERE name = 'Netzwerk'));
+
+
+// Antworten zur eingebenen Frage inkl. Wahrheitswert übergeben (frage_id aus php)
+// Antwort 1
+INSERT INTO antworten (antworttext, wahrheit, frage_id) VALUES ('Weil niemand in den Urwald zog und die Banane gerade bog.', '1', 
+(SELECT id FROM fragen WHERE fragetext = 'Warum ist die Banane krumm?')
+);
+
+// Antwort 2
+INSERT INTO antworten (antworttext, wahrheit, frage_id) VALUES ('Weil sie es kann.', '0', 
+(SELECT id FROM fragen WHERE fragetext = 'Warum ist die Banane krumm?')
+);
+
+// Antwort 3
+INSERT INTO antworten (antworttext, wahrheit, frage_id) VALUES ('Weil sie Rückenschmerzen hat.', '0', 
+(SELECT id FROM fragen WHERE fragetext = 'Warum ist die Banane krumm?')
+);
+
+// Antwort 4
+INSERT INTO antworten (antworttext, wahrheit, frage_id) VALUES ('Weil es evolutionäre Gründe dafür gibt.', '0', 
+(SELECT id FROM fragen WHERE fragetext = 'Warum ist die Banane krumm?')
+);
+
+// Fragen bearbeiten (frage_id später über php übergeben, aktuell: Platzhalter)
+UPDATE fragen SET fragetext='Warum ist die Banane gelb?' WHERE id=2;
+
+// Antworten bearbeiten (frage_id später über php übergeben, aktuell: Platzhalter); darf mehr als eine Antwort richtig sein? Kontrollstruktur über php oder Datenbank oder beides regeln?
+UPDATE antworten SET wahrheit=1 WHERE id=4;
+
+// Fragen einer bestimmten Kategorie auswählen
+SELECT * FROM fragen WHERE (SELECT frage_id FROM frage_kategorie WHERE kategorie_id=(SELECT id FROM kategorien WHERE name = 'Netzwerk'));
+// oder
+SELECT * FROM fragen, kategorien, frage_kategorie WHERE fragen.id = frage_kategorie.frage_id AND frage_kategorie.kategorie_id = kategorien.id AND kategorien.name = 'Netzwerk'; 
+// oder
+SELECT * FROM fragen f, frage_kategorie fk, kategorien k WHERE f.id = fk.fragen_id AND fk.kategorie_id = k.id AND k.name = 'Netzwerk'; 
+

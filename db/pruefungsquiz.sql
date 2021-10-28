@@ -46,10 +46,3 @@ CREATE TABLE `user_rolle` (
 	FOREIGN KEY (`rolle_id`) REFERENCES `rollen` (`id`)
 );
 
-INSERT INTO `rollen` (`id`, `name`) VALUES
-	(1, 'user'),
-	(2, 'admin');
-
-INSERT INTO `user` (`id`, `name`, `passwort`) VALUES
-	(1, 'Blub', 'Test'),
-	(2, 'Bla', '1234');
