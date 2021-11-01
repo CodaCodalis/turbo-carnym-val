@@ -18,11 +18,15 @@
         function aufgabe2($zahl, $text) {
             echo "$zahl $text<br>";
         }
-            	
+        
+        echo "Aufgabe 1:<br>";
     	halloWelt();
+    	
+    	echo "Aufgabe 2:<br>";
     	aufgabe2(3, "Wörter");
     	
     	//Aufgabe 3
+    	echo "Aufgabe 3:<br>";
     	aufgabe2("<i>5</i>", "<b>Dinge</b>");
     	
     	//Aufgabe 4:
@@ -30,6 +34,7 @@
             return ($betrag * 1.19);
     	}
     	
+    	echo "Aufgabe 4:<br>";
     	echo mwstBerechnung(10.00)."<br>";
     	
     	//Aufgabe 5:
@@ -49,6 +54,7 @@
 
     	}
     	
+    	echo "Aufgabe 5:<br>";
     	testPlausibility(3,4,5);
     	testPlausibility(3, "vier", 5);
     	testPlausibility("drei", "vier", "fünf");

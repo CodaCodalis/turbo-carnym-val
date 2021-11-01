@@ -7,7 +7,8 @@
   	<body>
       	<h1>Übung 1</h1>
       	
-      	Hallo Welt!
+      	Textausgabe mit HTML:<br>
+      	Hallo Welt!<br>
       <div id="uebung">
     	<?php
         	# Das Doppelkreuz ist neben dem Doppelslash eine Möglichkeit, Codezeilen in php-Blöcken auszukommentieren. 
@@ -16,6 +17,7 @@
         	/*
             Mit echo können Strings in php-Code-Blöcken ausgegeben werden.
             */
+                echo "Ausgabe mit PHP:<br>";
 				echo "Hallo Welt!";
 
 		?>
