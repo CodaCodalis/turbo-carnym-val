@@ -5,8 +5,10 @@
   	</head>
 	
   	<body>
-      	<h1>Hallo Welt!</h1>
-      <div id="uebung1">
+      	<h1>Übung 1</h1>
+      	
+      	Hallo Welt!
+      <div id="uebung">
     	<?php
         	# Das Doppelkreuz ist neben dem Doppelslash eine Möglichkeit, Codezeilen in php-Blöcken auszukommentieren. 
         	# Mehrzeilige Kommentare können mit Slash-Stern eingeleitet und Stern-Slash wieder ausgeleitet werden.
@@ -18,5 +20,6 @@
 
 		?>
       </div>
+      <a href="index.php">zurück</a>
   	</body>
 </html>
