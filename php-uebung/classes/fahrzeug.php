@@ -9,19 +9,21 @@
         {
             if($wert > 0) {
                 $this->geschwindigkeit += $wert;
+                echo "Es wurde um $wert beschleunigt!<br>";
             } else {
-                echo "Nur positive Werte möglich!<br>";
+                echo "Es wurde versucht zu beschleunigen, aber nur positive Werte sind möglich!<br>";
             }
         }
         function bremsen($wert)
         {
             if($wert > 0) {
                 $this->geschwindigkeit -= $wert;
+                echo "Es wurde um $wert gebremst!<br>";
                 if($this->geschwindigkeit < 0) {
                     $this->geschwindigkeit = 0;
                 }
             } else {
-                echo "Nur positive Werte möglich!<br>";
+                echo "Es wurde versucht zu bremsen, aber nur positive Werte sind möglich!<br>";
             }
             
         }
