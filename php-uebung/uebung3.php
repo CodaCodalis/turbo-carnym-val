@@ -5,7 +5,7 @@
   	</head>
 	
   	<body>
-      	<h1>Uebung 2</h1>
+      	<h1>Übung 2</h1>
       <div id="uebung">
       
       
