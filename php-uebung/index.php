@@ -10,6 +10,8 @@
       		<a href="uebung2.php">Übung 2</a><br>
       		<a href="uebung3.php">Übung 3</a><br>
       		<a href="uebung4.php">Übung 4</a><br>
+       		<a href="uebung5.php">Übung 5</a><br>
+      		<a href="uebung6.php">Übung 6</a><br>
     <?php
 	?>
   	</body>
