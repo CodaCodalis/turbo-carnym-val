@@ -10,7 +10,7 @@
       
       
     	<?php
-            echo "Ausgabe einer Variablen mit print_r:<br>"
+            echo "Ausgabe einer Variablen mit print_r:<br>";
             $data = "Hallo Welt"; 
             print_r($data);
             die;
