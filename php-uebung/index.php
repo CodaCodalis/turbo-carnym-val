@@ -8,6 +8,7 @@
       	<h1>Willkommen</h1>
       		<a href="uebung1.php">Übung 1</a><br>
       		<a href="uebung2.php">Übung 2</a><br>
+      		<a href="uebung3.php">Übung 3</a><br>
     <?php
 	?>
   	</body>

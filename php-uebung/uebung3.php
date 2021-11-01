@@ -7,52 +7,30 @@
   	<body>
       	<h1>Uebung 2</h1>
       <div id="uebung">
+      
+      
     	<?php
-
-    	//Aufgabe 1
-    	function halloWelt() {
-            echo "Hallo Welt!<br>";
-    	}
-    	
-    	//Aufgabe 2
-        function aufgabe2($zahl, $text) {
-            echo "$zahl $text<br>";
-        }
-            	
-    	halloWelt();
-    	aufgabe2(3, "Wörter");
-    	
-    	//Aufgabe 3
-    	aufgabe2("<i>5</i>", "<b>Dinge</b>");
-    	
-    	//Aufgabe 4:
-    	function mwstBerechnung($betrag) {
-            return ($betrag * 1.19);
-    	}
-    	
-    	echo mwstBerechnung(10.00)."<br>";
-    	
-    	//Aufgabe 5:
-    	function testPlausibility($wert1, $wert2, $wert3) {
-            if (!is_integer($wert1)) {
-                echo "Wert 1 ist kein Integer!<br>"; 
-            }
-            if (!is_integer($wert2)) {
-                echo "Wert 2 ist kein Integer!<br>"; 
-            }
-            if (!is_integer($wert3)) {
-                echo "Wert 3 ist kein Integer!<br>"; 
-            } 
-            if (is_integer($wert1) AND is_integer($wert2) AND is_integer($wert3)){
-                echo "Alle übergebenen Werte sind Integer!<br>";
-            }
-
-    	}
-    	
-    	testPlausibility(3,4,5);
-    	testPlausibility(3, "vier", 5);
-    	testPlausibility("drei", "vier", "fünf");
-    	
+    	//1. Schleife (while), bei der von 1 bis 7 hochgezählt wird
+    	echo "1. Beispielschleife (while) von 1 bis 7:<br>";
+    	 $i = 1; 
+    	 while ($i <= 7) { 
+            echo "$i<br>"; 
+            $i++;
+    	 }
+    	 
+    	 //2. Schleife (do while), bei der von 11 ausgegeben wird, weil die Schleifenbeding nachstehend ist
+    	 echo "2. Beispielschleife (do while) gibt 11 aus:<br>";
+    	 $i = 11; 
+    	 do { 
+            echo "$i<br>";  
+            $i++;
+    	 } while ($i <= 5);
+    	 
+    	 //3. Schleife (for) gibt von 1 bis 4 i aus
+    	 echo "3. Beispielschleife (for) von 1 bis 4:<br>";
+    	 for ($i = 1; $i <= 4; $i++ ) { 
+            echo $i . "<br>"; 
+    	 }
 		?>
       </div>
       <a href="index.php">zurück</a>
