@@ -65,4 +65,5 @@
             	"Die Fläche von $this->bezeichnung beträgt $this->flaeche.<br>".
 		$keller ? "$this->bezeichnung hat einen Keller!" : "$this->bezeichnung hat keinen Keller!";
     }
+}
 ?>
