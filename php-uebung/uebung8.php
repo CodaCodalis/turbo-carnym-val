@@ -1,5 +1,5 @@
 <?php
-    require_once "classes/haus.php";
+    require_once "classes/vaidate.php";
 ?>
 <!DOCTYPE html>
 <html lang="de">
