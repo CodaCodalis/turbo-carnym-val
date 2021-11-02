@@ -24,6 +24,11 @@
                 if(isset($_POST['text'])){
                     $text = $_POST['text'];
 
+                    var_dump($text);
+                    echo "<br>";
+                    print_r($text);
+                    echo "<br>";
+                    echo "<br>";
                     $validate = new Validate();
                     if(!$validate->validateText($text)){
                         echo "Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";

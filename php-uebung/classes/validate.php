@@ -5,8 +5,11 @@
         function validateText($text){
             $valid = false;
             if(is_string($text)){
-                if(preg_match("#([a-zA-ZÄÜÖ0-9äöüß _-?.,])#si",$text)){
+                echo "isString klappt";
+                if(preg_match('~^[-a-z0-9_:%? .,!]+$~i',$text)){
                     $valid = true;
+                    echo "<br>";
+                    var_dump($valid);
                 }
             }
             return $valid;
