@@ -1,5 +1,5 @@
 <?php
-    require_once "classes/vaidate.php";
+    require_once "classes/validate.php";
 ?>
 <!DOCTYPE html>
 <html lang="de">
