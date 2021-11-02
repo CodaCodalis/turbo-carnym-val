@@ -4,13 +4,8 @@
 
         function validateText($text){
             $valid = false;
-            if(is_string($text)){
-                echo "isString klappt";
-                if(preg_match('~^[-a-z0-9_:%? .,!]+$~i',$text)){
-                    $valid = true;
-                    echo "<br>";
-                    var_dump($valid);
-                }
+            if(is_string($text) AND strlen($text)<300 AND preg_match('~^[-a-z0-9_:%? .,!]+$~i',$text)){
+                $valid = true;
             }
             return $valid;
         } 
