@@ -14,17 +14,17 @@
             echo "Haus:<br>";
             $schuppen = new Haus("Schuppen", "rosa", 2, 100, true);
 
-            echo $schuppen;
+            $schuppen->status();
             
             $schuppen->anstreichen("blau");
             $schuppen->aufstocken(1);
             $schuppen->anbauen(20);
             
-            echo $schuppen;
+            $schuppen->status();
             
             $schuppen->abreissen();
             
-            echo $schuppen;
+            $schuppen->status();
 		?>
       </div>
       <a href="index.php">zurück</a>

@@ -46,7 +46,7 @@
             echo "$this->bezeichnung ist jetzt $farbe.<br>";
         }
         
-        function __toString()
+        function status()
         {
             echo "Die derzeitige Farbe von $this->bezeichnung ist $this->farbe.<br>";
             echo "Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtage.<br>";
