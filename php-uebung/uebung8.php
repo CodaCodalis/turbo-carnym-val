@@ -26,11 +26,12 @@
 
             <input type="button" name="send" id="send" onclick="sndBtnClick();" value="Daten absenden">
             <input type="reset" name="reset" id="reset"
-                onclick="  document.getElementsByClassName('ausgabe')[0].setAttribute('style', 'display: none');">
+                onclick="document.getElementsByClassName('ausgabe')[0].setAttribute('style', 'display: none');">
 
         </div>
     
     	<?php
+    	
 		?>
       </div>
       <a href="index.php">zurück</a>
