@@ -51,13 +51,8 @@
             echo "Die derzeitige Farbe von $this->bezeichnung ist $this->farbe.<br>";
             echo "Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtagen.<br>";
             echo "Die Fläche von $this->bezeichnung beträgt $this->flaeche.<br>";
-<<<<<<< HEAD
             if ($this->keller) {
             echo "$this->bezeichnung hat einen Keller!<br>";
-=======
-            if ($keller == true) {
-              echo "$this->bezeichnung hat einen Keller!<br>";
->>>>>>> cd0bda51c8437b1ee91d9735cdb179b7a1a3b596
             } else {
                 echo "$this->bezeichnung hat keinen Keller!<br>";
             }
@@ -71,9 +66,5 @@
 		        ($this->keller ? "$this->bezeichnung hat einen Keller!<br>" : "$this->bezeichnung hat keinen Keller!<br>");
 	    }
     }
-<<<<<<< HEAD
     
-=======
-}
->>>>>>> cd0bda51c8437b1ee91d9735cdb179b7a1a3b596
 ?>
