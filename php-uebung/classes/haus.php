@@ -49,20 +49,22 @@
         function status()
         {
             echo "Die derzeitige Farbe von $this->bezeichnung ist $this->farbe.<br>";
-            echo "Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtage.<br>";
+            echo "Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtagen.<br>";
             echo "Die Fläche von $this->bezeichnung beträgt $this->flaeche.<br>";
-            if ($keller == true) {
+            if ($this->keller) {
             echo "$this->bezeichnung hat einen Keller!<br>";
             } else {
                 echo "$this->bezeichnung hat keinen Keller!<br>";
             }
-	}
+	    }
 
-	function __toString()
-	{
-		return "Die derzeitige Farbe von $this->bezeichnung ist $this->farbe.<br>".
-            	"Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtage.<br>".
+	    function __toString()
+	    {
+		return  "Die derzeitige Farbe von $this->bezeichnung ist $this->farbe.<br>".
+            	"Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtagen.<br>".
             	"Die Fläche von $this->bezeichnung beträgt $this->flaeche.<br>".
-		$keller ? "$this->bezeichnung hat einen Keller!" : "$this->bezeichnung hat keinen Keller!";
+		        ($this->keller ? "$this->bezeichnung hat einen Keller!<br>" : "$this->bezeichnung hat keinen Keller!<br>");
+	    }
     }
+    
 ?>
