@@ -52,9 +52,9 @@
             echo "Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtage.<br>";
             echo "Die Fläche von $this->bezeichnung beträgt $this->flaeche.<br>";
             if ($keller == true) {
-            echo "$this->bezeichnung hat einen Keller!";
+            echo "$this->bezeichnung hat einen Keller!<br>";
             } else {
-                echo "$this->bezeichnung hat keinen Keller!";
+                echo "$this->bezeichnung hat keinen Keller!<br>";
             }
 	}
 
