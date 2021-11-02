@@ -25,6 +25,7 @@
             $schuppen->abreissen();
             
             $schuppen->status();
+            echo $schuppen;
 		?>
       </div>
       <a href="index.php">zurück</a>

@@ -1,7 +1,5 @@
 <?php
-	require_once ("haus.php");
-	error_reporting(E_ALL);
-ini_set("display_errors",1);
+    require_once "classes/vaidate.php";
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -26,8 +24,7 @@ ini_set("display_errors",1);
             
             $schuppen->abreissen();
             
-	    //$schuppen->status();
-	    echo $schuppen;
+            $schuppen->status();
 		?>
       </div>
       <a href="index.php">zurück</a>
