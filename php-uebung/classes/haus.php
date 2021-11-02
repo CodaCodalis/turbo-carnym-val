@@ -56,6 +56,13 @@
             } else {
                 echo "$this->bezeichnung hat keinen Keller!<br>";
             }
-        }
+	}
+
+	function __toString()
+	{
+		return "Die derzeitige Farbe von $this->bezeichnung ist $this->farbe.<br>".
+            	"Die Anzahl der Etagen von $this->bezeichnung beträgt $this->anzahlEtage.<br>".
+            	"Die Fläche von $this->bezeichnung beträgt $this->flaeche.<br>".
+		$keller ? "$this->bezeichnung hat einen Keller!" : "$this->bezeichnung hat keinen Keller!";
     }
 ?>
