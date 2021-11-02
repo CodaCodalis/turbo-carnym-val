@@ -9,6 +9,7 @@
                     $valid = true;
                 }
             }
+            return $valid;
         } 
 
     }
