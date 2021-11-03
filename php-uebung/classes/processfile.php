@@ -77,14 +77,14 @@
         // 7. Lasse dir über ein Methode Dateiinformationen ausgeben.
         function dateiInfo($dateiname){ //mit Dateiendung
             $fn = "$dateiname";
-            $info = stat($fn);
+            $info = stat(getcwd()."/data/".$dateiname);
 
             echo "<br>";
             var_dump($info);
             echo "<br>";
 
             echo "Datei: $fn<br>";
-            echo "Anzahl Byte: $info[7]<br>";
+            echo "Anzahl Byte: ".$info[7]."<br>";
             echo "Zeitpunkt der letzten Modifizierung: ". date("d.m.Y H:i:s", $info[9]) . "<br>";
         }
 
@@ -93,8 +93,10 @@
         function verzeichnisInfo($vname, $auswahl){
             if($auswahl){
                 // einzelnes Verzeichnis, wenn Auswahl true
+                echo getcwd();
                 $verz = $vname;
                 chdir($verz);
+                echo getcwd();
                 echo "<h2>Verzeichnis $verz</h2>";
                 echo "<table border='1'>";
                 /* Überschrift */
@@ -104,9 +106,9 @@
                 echo "<td align='right'>Anzahl<br>Byte</td>";
                 echo "<td>Letzte<br>Modifizierung</td>";
                 /* Öffnet Handle */
-                $handle = opendir($verz);
+                $handle = opendir(getcwd().$verz);
                 /* Liest alle Objektnamen */
-                while ($dname = readdir($handle)){
+                while (false !== ($dname = readdir($handle))){
                     echo "<tr>";
                     echo "<td>$dname</td>";
                     
@@ -160,7 +162,7 @@
                         /* Falls Unterverzeichnis */
                         if(is_dir($dname)){
                             chdir($dname); // nach unten
-                           // objektliste(); // rekursiv
+                            objektliste(); // rekursiv
                             chdir(".."); // nach oben
                         }
                         

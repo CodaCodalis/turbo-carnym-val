@@ -1,5 +1,7 @@
 <?php
-    require_once "classes/haus.php";
+	require_once ("haus.php");
+	error_reporting(E_ALL);
+ini_set("display_errors",1);
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -24,8 +26,8 @@
             
             $schuppen->abreissen();
             
-            $schuppen->status();
-            echo $schuppen;
+	    //$schuppen->status();
+	    echo $schuppen;
 		?>
       </div>
       <a href="index.php">zurück</a>
