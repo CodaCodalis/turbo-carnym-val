@@ -14,11 +14,11 @@ require_once "classes/processfile.php";
         <?php
             $klasse = new Processfile("testKlasse");
 
-            echo "Aufgabe 1:<br>".
+            echo "Aufgabe 1 + 5:<br>".
                 "Dateiname: Liste; Inhalt: Das ist einfach ein Satz.<br>";
             $klasse->schreibeDatei("Liste", "Das ist einfach ein Satz.");
             
-            echo "Aufgabe 2:<br>".
+            echo "Aufgabe 2 + 6:<br>".
                 "Datei Liste auslesen:<br>";
             $klasse->leseDatei("Liste");
 
@@ -34,6 +34,16 @@ require_once "classes/processfile.php";
             echo "Aufgabe 4:<br>".
                 "CSV-Datei auslesen:<br>";
             $klasse->leseCSV("datei");
+
+            echo "Aufgabe 7:<br>".
+                "Informationen zu Liste.txt<br>";
+            $klasse->dateiInfo("Liste.txt");
+
+            echo "<br><br>Aufgabe 8:<br>".
+                "Verzeichnisinformationen eines einzelnen Verz.:<br>";
+            $klasse->verzeichnisInfo("data", true);
+            echo "Verzeichnisinformationen mit Baum:<br>";
+            $klasse->verzeichnisInfo("data", false);
 
         ?>
     </div>
