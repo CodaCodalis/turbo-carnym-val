@@ -65,5 +65,3 @@ class Saeugetier extends Tier{
         "Hunger: $this->hunger <br>";
     }
 }
-
-?>
