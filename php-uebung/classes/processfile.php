@@ -160,7 +160,7 @@
                         /* Falls Unterverzeichnis */
                         if(is_dir($dname)){
                             chdir($dname); // nach unten
-                            objektliste(); // rekursiv
+                           // objektliste(); // rekursiv
                             chdir(".."); // nach oben
                         }
                         
