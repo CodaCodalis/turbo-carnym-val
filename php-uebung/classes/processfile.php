@@ -177,7 +177,7 @@
             }
         }
        
-    }
+    
 /* Erstelle eine Klasse die nachfolgende Methoden erhält.
 
 
