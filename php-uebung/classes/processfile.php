@@ -106,7 +106,7 @@
                 /* Öffnet Handle */
                 $handle = opendir($verz);
                 /* Liest alle Objektnamen */
-                while (false!==($dname = readdir($handle))){
+                while ($dname = readdir($handle)){
                     echo "<tr>";
                     echo "<td>$dname</td>";
                     
