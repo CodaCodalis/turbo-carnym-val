@@ -113,10 +113,10 @@
                     echo "<td>$dname</td>";
                     
                     /* Datei oder Verzeichnis? */
-                    if(is_file($dname)){
+                    if(is_file(getcwd().$verz."/".$dname)){
                         echo "<td>Datei</td>";
                     }
-                    else if(is_dir($dname)){
+                    else if(is_dir(getcwd().$verz."/".$dname)){
                         echo "<td>Verzeichnis</td>";
                     }
                     else{
@@ -125,14 +125,14 @@
                     
                     /* Lesbar bzw. schreibbar? */
                     echo "<td>";
-                    if(is_readable($dname)){
+                    if(is_readable(getcwd().$verz."/".$dname)){
                         echo "R - lesbar";
                     }
                     else{
                         echo "- nicht lesbar";
                     }
 
-                    if(is_writeable($dname)){
+                    if(is_writeable(getcwd().$verz."/".$dname)){
                         echo "W - beschreibbar";
                     }
                     else{
@@ -141,27 +141,34 @@
                     echo "</td>";
                     
                     /* Zugriffsdaten */
-                    $info = stat($dname);
+                    $info = stat(getcwd().$verz."/".$dname);
                     echo "<td align='right'>$info[7]</td>";
                     echo "<td>" . date("d.m.y H:i", $info[9]) . "</td>";
                     echo "</tr>";
+                    
                 }
                 /* Schließt Handle */
+                echo "</table>";
                 closedir($handle);
             }
             else{
                 // kompletter Verzeichnisbaum, wenn Auswahl false
                 /* Aktuelles Verzeichnis ermitteln */
                 $verz = getcwd();
+                echo $verz."<br>";
                 
                 /* Handle für aktuelles Verzeichnis */
-                $handle = opendir(".");
-                
-                while ($dname = readdir($handle)){
-                    if($dname!="." && $dname!=".."){
+                $handle = opendir($verz);
+                echo "<table border='1'>";
+                echo "<td>Pfad</td>";
+                echo "<td>Name file / dir</td>";
+
+                while (false !== ($dname = readdir($handle))){
+                    if($dname!=="." && $dname!==".."){
                         /* Falls Unterverzeichnis */
-                        if(is_dir($dname)){
-                            chdir($dname); // nach unten
+                        echo $dname."<br>";
+                        if(is_dir(getcwd()."/".$dname)){
+                            chdir("/".$dname); // nach unten
                             objektliste(); // rekursiv
                             chdir(".."); // nach oben
                         }
