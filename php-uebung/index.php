@@ -15,6 +15,7 @@
       		<a href="uebung7.php">Übung 7</a><br>
       		<a href="uebung8.php">Übung 8</a><br>
 			<a href="uebung9.php">Übung 9</a><br>
+			<a href="uebung10.php">Übung 10</a><br>
     <?php
 	?>
   	</body>
