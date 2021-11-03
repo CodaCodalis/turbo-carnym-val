@@ -90,7 +90,7 @@
 
         // 8. Lasse dir in einer Methode Verzeichnisinformationen anzeigen. Dabei steuere über die Argumente ob ein einzelnes Verzeichnis,
         // oder der komplette Verzeichnisbaum angezeigt werden soll.
-        function verzeichnisInfo($vname, ($auswahl):boolean){
+        function verzeichnisInfo($vname, $auswahl){
             if($auswahl){
                 // einzelnes Verzeichnis, wenn Auswahl true
                 $verz = $vname;
@@ -106,7 +106,7 @@
                 /* Öffnet Handle */
                 $handle = opendir($verz);
                 /* Liest alle Objektnamen */
-                while ($dname = readdir($handle)){
+                while (false!==($dname = readdir($handle))){
                     echo "<tr>";
                     echo "<td>$dname</td>";
                     
@@ -173,7 +173,7 @@
                 closedir($handle);
             }
             /* Startverzeichnis */
-            chdir("K:/itw");
+            chdir($verz);
             }
         }
        
