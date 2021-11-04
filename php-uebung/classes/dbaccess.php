@@ -27,8 +27,12 @@ private function db_connect(){
     $this->pass = 'Gr4hsvSbdDbSmKH';
     $this->db = 'dbs4516370';
     $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     return $this->mysqli;
     }
+
+
+   
 
 // Datensätze zählen
 public function db_num($sql){
@@ -46,7 +50,20 @@ public function show_num($table){
     } else {
     return false;
             }
-        }   
+        }  
+        
+        public function show_content($table){
+        
+        
+        $query = "SELECT * from $table";
+        $result = $this->mysqli->query($query);
+        /* numeric array */
+        $row = $result->fetch_array(MYSQLI_NUM);
+        printf("%s (%s)\n", $row[0], $row[1]);
+        /* associative array */
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        printf("%s (%s)\n", $row["name"]); 
+    }
     }
 
 ?>
