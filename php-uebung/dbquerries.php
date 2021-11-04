@@ -17,7 +17,7 @@ $db = new Database();
 
 $db->show_num("kategorien");
 
-
+$db->show_content("kategorien");
 
 ?>
 </body>

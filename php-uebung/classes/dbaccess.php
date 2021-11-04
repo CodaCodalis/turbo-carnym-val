@@ -52,9 +52,7 @@ public function show_num($table){
             }
         }  
         
-        public function show_content($table){
-        
-        
+public function show_content($table){        
         $query = "SELECT * from $table";
         $result = $this->mysqli->query($query);
         /* numeric array */
