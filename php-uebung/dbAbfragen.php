@@ -10,7 +10,7 @@ require_once "classes/dbaccess.php";
 
 <body>
 
-<h1>dbquerries</h1>
+<h1>DB Abfragen</h1>
 <?php
 
 $db = new Database();
