@@ -15,17 +15,9 @@ require_once "classes/dbaccess.php";
 
 $db = new Database();
 
-$db->show_num("Select Count() FROM Fragen");
+$db->show_num("Fragen");
 
-
-
-
-
-
-
-    
-
-
+?>
 </body>
 </html>
    

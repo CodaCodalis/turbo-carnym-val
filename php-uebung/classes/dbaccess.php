@@ -39,8 +39,8 @@ public function db_num($sql){
     }
 
 // db_num aufrufen und Anzahl DS anzeigen
-public function show_num(){
-    $wert = $this->db_num("SELECT * FROM personen");
+public function show_num($table){
+    $wert = $this->db_num("SELECT * FROM $table");
     echo $wert;
     if ($wert > 0) {
     return true;
