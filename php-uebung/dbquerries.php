@@ -15,8 +15,11 @@ require_once "classes/dbaccess.php";
 
 $db = new Database();
 
+echo "<br>Zähle Kategorien<br>";
 $db->show_num("kategorien");
 
+
+echo "<br>Zeige Kategorien<br>";
 $db->show_content("kategorien");
 
 ?>
