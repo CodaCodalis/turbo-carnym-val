@@ -43,7 +43,8 @@ require_once "classes/processfile.php";
                 "Verzeichnisinformationen eines einzelnen Verz.:<br>";
             $klasse->verzeichnisInfo("/data", true);
             echo "Verzeichnisinformationen mit Baum:<br>";
-            $klasse->verzeichnisInfo("/data", false);
+            //$klasse->verzeichnisInfo("/data", false);
+            $klasse->verzeichnisInfo(".", false);
 
         ?>
     </div>

@@ -154,32 +154,53 @@
             else{
                 // kompletter Verzeichnisbaum, wenn Auswahl false
                 /* Aktuelles Verzeichnis ermitteln */
-                $verz = getcwd();
-                echo $verz."<br>";
+                $verz = getcwd()."/".$vname;
+                //echo getcwd()."<br>";
                 
                 /* Handle für aktuelles Verzeichnis */
                 $handle = opendir($verz);
-                echo "<table border='1'>";
-                echo "<td>Pfad</td>";
-                echo "<td>Name file / dir</td>";
+                //echo "<table border='1'>";
+                //echo "<td>Pfad</td>";
+                //echo "<td>Name file / dir</td>";
 
                 while (false !== ($dname = readdir($handle))){
                     if($dname!=="." && $dname!==".."){
                         /* Falls Unterverzeichnis */
-                        echo $dname."<br>";
-                        if(is_dir(getcwd()."/".$dname)){
-                            chdir("/".$dname); // nach unten
-                            objektliste(); // rekursiv
-                            chdir(".."); // nach oben
+                        if(is_dir($dname)){ //(is_dir(getcwd()."/".$dname))
+                            $dirs[]=$dname;
+                            //echo "Verzeichnis: ".$dname."<br>";
+                            //echo "<br>";
+                            //chdir(getcwd()."/".$dname); // nach unten
+                            //$verz = getcwd();
+                            //$this->verzeichnisInfo($verz, false);
+                            //$handle2 = opendir($verz);
+                            //$dateiname = readdir($handle2);
+                            //echo "echo-Aufruf 2: ".$dateiname."<br>";
+                            //echo "getcwd-Aufruf 1: ".getcwd()."<br>";
+                            //$this->verzeichnisInfo(".", false); // rekursiv
+                            //chdir(".."); // nach oben
+                            //echo "<br>Wechsle zurück in den Überordner...<br>";
+                            //$handle = opendir(getcwd());
+                            //echo "getcwd-Aufruf 2: ".getcwd()."<br>";
                         }
                         
                         /* Falls Datei */
                         else{
-                            echo "<tr><td>$verz</td><td>$dname</td></tr>";
+                            $files[]=$dname;
+                            //echo "Datei: ".$dname."<br>";
                         }
                     }
                 }
                 closedir($handle);
+                
+                foreach($dirs AS $dir) {
+                    echo $dir."/<br>";
+                    $this->verzeichnisInfo($dir, false);
+                    chdir("..");
+                }
+                foreach($files AS $file) {
+                    echo "$file<br>";
+                }
             }
             /* Startverzeichnis */
             chdir($verz);
