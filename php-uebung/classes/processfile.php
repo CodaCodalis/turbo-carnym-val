@@ -194,10 +194,11 @@
                 closedir($handle);
                 
                 foreach($dirs AS $dir) {
-                    echo $dir."/<br>";
+                    echo "<br><b>$dir/</b><br>";
                     $this->verzeichnisInfo($dir, false);
                     chdir("..");
                 }
+                echo "<br>";
                 foreach($files AS $file) {
                     echo "$file<br>";
                 }
