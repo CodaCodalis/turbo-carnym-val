@@ -60,9 +60,9 @@ public function show_content($table){
         printf("%s (%s)\n", $row[0], $row[1]);
         /* associative array */
         $row = $result->fetch_array(MYSQLI_ASSOC);
-        printf("%s (%s)\n", $row["name"]); 
-    }
-    }
+        printf("%s (%s)\n", $row["name"], $row["name"]); 
+        }
+}
 
 ?>
 
