@@ -15,7 +15,7 @@ require_once "classes/dbaccess.php";
 
 $db = new Database();
 
-$db->show_num("fragen");
+$db->show_num("kategorien");
 
 ?>
 </body>

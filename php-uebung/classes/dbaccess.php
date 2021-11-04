@@ -22,10 +22,9 @@ public function __construct() {
 
 //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
 private function db_connect(){
-    $this->host = 'pma-eu3.schlund.de
-    ';
-    $this->user = 'dbu2655548';
-    $this->pass = 'hsrnzBRryQhqk7W';
+    $this->host = 'db5005383230.hosting-data.io';
+    $this->user = 'dbu2117629';
+    $this->pass = 'Gr4hsvSbdDbSmKH';
     $this->db = 'dbs4516370';
     $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
     return $this->mysqli;
