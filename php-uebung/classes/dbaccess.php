@@ -59,9 +59,12 @@ public function show_content($table){
         while($row = $result->fetch_array(MYSQLI_NUM)){
         printf("%s (%s)\n", $row[0], $row[1]);
         }
+
+        $result = $this->mysqli->query($query);
         /* associative array */
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        printf("%s (%s)\n", $row["name"], $row["name"]); 
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+        printf("%s<br>", $row["name"]); 
+        }
         }
 }
 
