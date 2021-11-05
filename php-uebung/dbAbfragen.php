@@ -23,6 +23,7 @@ echo "<br>Zeige Kategorien<br>";
 $db->show_content("kategorien");
 
 ?>
+<a href="index.php">zurück</a>
 </body>
 </html>
    
