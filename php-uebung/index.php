@@ -6,7 +6,6 @@
 	
   	<body>
       	<h1>Willkommen</h1>
-      	<div id="indexlinks">
       		<a href="uebung1.php">Übung 1: Textausgabe mit HTML und PHP</a><br>
       		<a href="uebung2.php">Übung 2: Funktionen</a><br>
       		<a href="uebung3.php">Übung 3: Schleifen</a><br>
@@ -18,7 +17,6 @@
 			<a href="uebung9.php">Übung 9: Vererbung</a><br>
 			<a href="uebung10.php">Übung 10: Dateien und Verzeichnisse</a><br>
 			<a href="dbAbfragen.php">Übung 11: Datenbankanbindung</a><br>
-        </div>
     <?php
 	?>
   	</body>

@@ -15,11 +15,3 @@ h1 {
   min-width: 800px;
   text-align: center;
 }
-
-#indexlinks {
-    width: 400px;
-}
-
-#indexlinks a {
-    text-align: left;
-}
