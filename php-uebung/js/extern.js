@@ -10,6 +10,7 @@ function inputCheck() {
         alert("Es müssen alle Felder ausgefüllt sein!");
     }
 
+    /*
     var korrektarray = document.getElementsByName("korrekt");
     var correct = null;
 
@@ -23,7 +24,7 @@ function inputCheck() {
     if(correct==null){
         alert("Ein Radiobutton muss ausgewählt werden!");
     }
-
+    */
 
 }
 
