@@ -7,37 +7,38 @@
 <html lang="de">
 	<head>
 		<link href="css/style.css" type="text/css" rel="stylesheet">
+      <script src="js/extern.js"></script>
     </head>
 	<body>
 		<h1>Uebung 16</h1>
 
-            
+         <form action="uebung16.php" method="POST">
             <label for="frage">Frage</label>
             <input type="text" name="frage" id="frage" class="eingabe" required>
             <br>
             
             <label for="antwort">Antwort 1</label>
             <input type="text" name="antwort1" id="antwort1" class="eingabe" required>
-            <input type="checkbox" name="korrekt1" id="korrekt1" value="korrekt" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check">Diese Antwort ist richtig.
             <br>
             
             <label for="antwort">Antwort 2</label>
             <input type="text" name="antwort2" id="antwort2" class="eingabe" required>
-            <input type="checkbox" name="korrekt2" id="korrekt2" value="korrekt" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check">Diese Antwort ist richtig.
             <br>
             
             <label for="antwort">Antwort 3</label>
             <input type="text" name="antwort3" id="antwort3" class="eingabe" required>
-            <input type="checkbox" name="korrekt3" id="korrekt3" value="korrekt" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check">Diese Antwort ist richtig.
             <br>
             
             <label for="antwort">Antwort 4</label>
             <input type="text" name="antwort4" id="antwort4" class="eingabe" required>
-            <input type="checkbox" name="korrekt4" id="korrekt4" value="korrekt" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check">Diese Antwort ist richtig.
             <br>
             
-            <input type="submit" name="send" id="send" value="Senden">
-
+            <input onclick="inputCheck();" type="submit" name="send" id="send" value="Senden">
+         </form>
 
  <?php
  if (isset($_REQUEST['send'])) {
@@ -96,7 +97,7 @@
 
  $db = new Database();
 
- 
+
 
 
  
