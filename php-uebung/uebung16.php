@@ -44,7 +44,7 @@
             <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check"><a>Diese Antwort ist richtig.</a>
             <br>
             
-            <input onclick="inputCheck();" type="submit" name="send" id="send" value="Senden"><a href="index.php" id="btn">zurück</a>
+            <input onclick="inputCheck();" type="submit" name="send" id="send" value="Senden"><a href="index.php" id="btn">Zurück</a>
          </form>
          <i>Gruppe 4 ist cool.</i>  
    </div>
