@@ -19,7 +19,7 @@
   }
   
 #formular{
-    width: 425px;
+    width: 500px;
     margin: auto;
     padding: 30px 30px 30px 80px;
     text-align: left;
@@ -71,4 +71,21 @@ i{
     color: rgb(221, 221, 221);
     margin-left: -78px;
     margin-bottom: -78px;
+}
+
+#btn{
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #FFF;
+    padding: 4px 10px;
+    margin-left: 30px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+#btn:hover{
+    background: #FFF;
+    color: #939393;
+    transition: 1s;
 }
