@@ -1,3 +1,8 @@
+<?php
+    require_once "classes/validate.php";
+    require_once "classes/dbaccess.php";
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 	<head>
@@ -39,21 +44,63 @@
  //    echo $_POST['send'];
 
  $frage = $_POST['frage'];
+
+   $validate = new Validate();
+      if(!$validate->validateText($frage)){
+         echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+      }else{
+         echo "<br>Eingabe der Frage valide!";
+      }
+
+
  $antwort1 = $_POST['antwort1'];
+
+   
+      if(!$validate->validateText($antwort1)){
+         echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+      }else{
+         echo "<br>Eingabe der Frage valide!";
+      }
+
  $antwort2 = $_POST['antwort2'];
+
+      if(!$validate->validateText($antwort2)){
+         echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+      }else{
+         echo "<br>Eingabe der Frage valide!";
+      }
+
  $antwort3 = $_POST['antwort3'];
+
+      if(!$validate->validateText($antwort3)){
+         echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+      }else{
+         echo "<br>Eingabe der Frage valide!";
+      }
+
  $antwort4 = $_POST['antwort4'];
+
+      if(!$validate->validateText($antwort4)){
+         echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+      }else{
+         echo "<br>Eingabe der Frage valide!";
+      }
  
+
  $korrekt1 = $_POST['korrekt1'];
  $korrekt2 = $_POST['korrekt2'];
  $korrekt3 = $_POST['korrekt3'];
  $korrekt4 = $_POST['korrekt4']; 
 
+
+
+ $db = new Database();
+
  
- if (isset($_POST['korrekt1'])) {
-    $=$_POST[''];
-    } else {
-    $newsletter = "nicht abonniert";
+
+
+ 
+
  }
  
  
