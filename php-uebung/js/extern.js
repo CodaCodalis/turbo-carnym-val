@@ -10,7 +10,6 @@ function inputCheck() {
     korrektarray.forEach(element => {
       if(element.checked) {
           correct=element.value;
-          break;
       } 
 
     });
