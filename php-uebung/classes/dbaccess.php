@@ -70,7 +70,7 @@ public function show_content($table){
 
     public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt)       
     {
-        $queryFrage = "INSERT INTO fragen(fragetext, 'user_id') VALUES ('$frage', 1);"; #user_id 1 ist erstmal ein filler
+        $queryFrage = "INSERT INTO fragen(fragetext, `user_id`) VALUES ('$frage', 1);"; #user_id 1 ist erstmal ein filler
         $this->mysqli->query($queryFrage);
         $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
         $result = $this->mysqli->query($queryFrageId);
