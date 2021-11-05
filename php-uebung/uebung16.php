@@ -97,14 +97,17 @@
       }
  
 
- $korrekt1 = $_POST['korrekt1'];
+ $korrekt = $_POST['korrekt'];
+ /*
  $korrekt2 = $_POST['korrekt2'];
  $korrekt3 = $_POST['korrekt3'];
  $korrekt4 = $_POST['korrekt4']; 
-
+*/
 
 
  $db = new Database();
+
+ $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt);
 
 
 
