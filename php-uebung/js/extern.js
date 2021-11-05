@@ -38,4 +38,4 @@ function validateForm() {
 
     if (!formValid) alert("Must check some option!");
     return formValid;
-}​
+}
