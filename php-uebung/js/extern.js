@@ -6,7 +6,7 @@ function inputCheck() {
     var antwort3 = document.getElementById("antwort3").value;
     var antwort4 = document.getElementById("antwort4").value;
     var korrektarray = document.getElementsByName("korrekt");
-    var correct;
+    var correct = null;
     korrektarray.forEach(element => {
       if(element.checked) {
           correct=element.value;
@@ -14,7 +14,7 @@ function inputCheck() {
       } 
 
     });
-    if(correct==undefined){
+    if(correct==null){
         alert("Ein Radiobutton muss ausgewählt werden!");
     }
 
