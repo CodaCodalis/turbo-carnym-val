@@ -14,26 +14,26 @@
 
          <form action="uebung16.php" method="POST">
             <label for="frage">Frage</label>
-            <input type="text" name="frage" id="frage" class="eingabe" required>
+            <input type="text" name="frage" id="frage" class="eingabe">
             <br>
             
             <label for="antwort">Antwort 1</label>
-            <input type="text" name="antwort1" id="antwort1" class="eingabe" required>
+            <input type="text" name="antwort1" id="antwort1" class="eingabe">
             <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check">Diese Antwort ist richtig.
             <br>
             
             <label for="antwort">Antwort 2</label>
-            <input type="text" name="antwort2" id="antwort2" class="eingabe" required>
+            <input type="text" name="antwort2" id="antwort2" class="eingabe">
             <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check">Diese Antwort ist richtig.
             <br>
             
             <label for="antwort">Antwort 3</label>
-            <input type="text" name="antwort3" id="antwort3" class="eingabe" required>
+            <input type="text" name="antwort3" id="antwort3" class="eingabe">
             <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check">Diese Antwort ist richtig.
             <br>
             
             <label for="antwort">Antwort 4</label>
-            <input type="text" name="antwort4" id="antwort4" class="eingabe" required>
+            <input type="text" name="antwort4" id="antwort4" class="eingabe">
             <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check">Diese Antwort ist richtig.
             <br>
             
