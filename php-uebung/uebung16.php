@@ -1,10 +1,3 @@
-<?php 
-//Innerhalb der zusammengeführten Kontaktseite ist ein Teil das HTML Formular und der 2. Teil der ausführende PHP Script Teil. Da PHP Elemente vorkommen, muss die Endung PHP sein.
-
-//in der PHP Superglobalen $_SERVER['PHP_SELF']; steckt immer der aktuelle Pfad der Datei und daher kann sich u.a. ein Dokument darüber selbst aufrufen.
-//echo $_SERVER['PHP_SELF'];
-?>
-
 <!DOCTYPE html>
 <html lang="de">
 	<head>
