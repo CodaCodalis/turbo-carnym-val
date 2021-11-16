@@ -1,0 +1,91 @@
+* {
+    background-color: #939393;
+    color: #FFF;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  
+  
+  h1 {
+    color: #FFF;
+    font-size: 32px;
+    text-align: center;
+    margin: 1.2em 1.2em 1.6em 1.2em;
+  }
+
+  h3{
+      font-size: 18px;
+
+  }
+  
+#formular{
+    width: 500px;
+    margin: auto;
+    padding: 30px 30px 30px 80px;
+    text-align: left;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+}
+
+input{
+    margin-bottom: 15px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+#frage{
+    width: 335px;
+}
+
+label{
+    width: 100px;
+    display: block;
+    font-size: 16px;
+}
+
+.check{
+    font-size: 14px;
+    color: #FFF;
+}
+
+a{
+    font-size: 12px;
+}
+
+#send{
+    color: #fff;
+    border: 1px solid #fff;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+#send:hover{
+    background: #FFF;
+    color: #939393;
+    transition: 1s;
+}
+
+i{
+    font-size: 6px;
+    color: rgb(221, 221, 221);
+    margin-left: -78px;
+    margin-bottom: -78px;
+}
+
+#btn{
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #FFF;
+    padding: 4px 10px;
+    margin-left: 30px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+#btn:hover{
+    background: #FFF;
+    color: #939393;
+    transition: 1s;
+}

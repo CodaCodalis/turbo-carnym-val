@@ -6,12 +6,19 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<link href="css/style.css" type="text/css" rel="stylesheet">
+		<link href="css/formular.css" type="text/css" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    
       <script src="js/extern.js"></script>
     </head>
 	<body>
 		<h1>Uebung 16</h1>
 
+      <div id="formular">
+
+      <h3>Füge eine Prüfungsfrage hinzu:</h3>
          <form action="uebung16.php" method="POST">
             <label for="frage">Frage</label>
             <input type="text" name="frage" id="frage" class="eingabe">
@@ -19,26 +26,28 @@
             
             <label for="antwort">Antwort 1</label>
             <input type="text" name="antwort1" id="antwort1" class="eingabe">
-            <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check"><a>Diese Antwort ist richtig.</a>
             <br>
             
             <label for="antwort">Antwort 2</label>
             <input type="text" name="antwort2" id="antwort2" class="eingabe">
-            <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check"><a>Diese Antwort ist richtig.</a>
             <br>
             
             <label for="antwort">Antwort 3</label>
             <input type="text" name="antwort3" id="antwort3" class="eingabe">
-            <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check"><a>Diese Antwort ist richtig.</a>
             <br>
             
             <label for="antwort">Antwort 4</label>
             <input type="text" name="antwort4" id="antwort4" class="eingabe">
-            <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check">Diese Antwort ist richtig.
+            <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check"><a>Diese Antwort ist richtig.</a>
             <br>
             
-            <input onclick="inputCheck();" type="submit" name="send" id="send" value="Senden">
+            <input onclick="inputCheck();" type="submit" name="send" id="send" value="Senden"><a href="index.php" id="btn">Zurück</a>
          </form>
+         <i>Gruppe 4 ist cool.</i>  
+   </div>
 
  <?php
  if (isset($_REQUEST['send'])) {
@@ -88,14 +97,17 @@
       }
  
 
- $korrekt1 = $_POST['korrekt1'];
+ $korrekt = $_POST['korrekt'];
+ /*
  $korrekt2 = $_POST['korrekt2'];
  $korrekt3 = $_POST['korrekt3'];
  $korrekt4 = $_POST['korrekt4']; 
-
+*/
 
 
  $db = new Database();
+
+ $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt);
 
 
 
