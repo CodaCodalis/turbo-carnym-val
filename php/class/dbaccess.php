@@ -110,7 +110,7 @@ public function show_content($table){
         
     }
 
-    public getZufallsfrage() {
+    public function getZufallsfrage() {
         $min = 1;
         $maxQuery = "SELECT id FROM fragen;";
         $result = $this->mysqli->query($maxQuery);
