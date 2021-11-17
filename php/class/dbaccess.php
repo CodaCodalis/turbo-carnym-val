@@ -111,12 +111,12 @@ public function show_content($table){
     }
 
     public function getZufallsfrage() {
-        $min = 1;
+        $min = 0;
         $maxQuery = "SELECT id FROM fragen;";
         $result = $this->mysqli->query($maxQuery);
         $max = $this->mysqli->affected_rows;
-        $zufallszahl = rand($min,$max);
-        $zufallsfrageId = $result->fetch_array()[$zufallszahl-1];
+        $zufallszahl = rand($min,$max-1);
+        $zufallsfrageId = $result->fetch_all()[$zufallszahl][0];
         $zufallsfrageQuery = "SELECT fragetext FROM fragen WHERE id=$zufallsfrageId;";
         $result = $this->mysqli->query($zufallsfrageQuery);
         return $result->fetch_array()[0];
