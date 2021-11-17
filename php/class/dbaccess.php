@@ -114,7 +114,7 @@ public function show_content($table){
         $min = 1;
         $maxQuery = "SELECT id FROM fragen;";
         $result = $this->mysqli->query($maxQuery);
-        $max = $this->mysqli->affected_rows();
+        $max = $this->mysqli->affected_rows;
         $zufallszahl = rand($min,$max);
         $zufallsfrageId = $result->fetch_array()[$zufallszahl-1];
         $zufallsfrageQuery = "SELECT fragetext FROM fragen WHERE id=$zufallsfrageId;";
