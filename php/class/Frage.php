@@ -1,6 +1,6 @@
 <?php
 
-class Frage extends Antwort{
+class Frage {
 
     private $fragetext;
     private $frageId;
@@ -27,36 +27,22 @@ class Frage extends Antwort{
     }
 
     function getAntwort1(){
-        return $this->antwort1->getAntworttext();
+        return $this->antwort1;
     }
 
     function getAntwort2(){
-        return $this->antwort2->getAntworttext();
+        return $this->antwort2;
     }
 
     function getAntwort3(){
-        return $this->antwort3->getAntworttext();
+        return $this->antwort3;
     }
 
     function getAntwort4(){
-        return $this->antwort4->getAntworttext();
+        return $this->antwort4;
     }
 
-    function getWahr1(){
-        return $this->antwort1->getWahr();
-    }
-
-    function getWahr2(){
-        return $this->antwort2->getWahr();
-    }
-
-    function getWahr3(){
-        return $this->antwort3->getWahr();
-    }
-
-    function getWahr4(){
-        return $this->antwort4->getWahr();
-    }
+    
 
 }
 
