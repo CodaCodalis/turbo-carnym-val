@@ -22,9 +22,6 @@
                 $DB_CONNECTION = new Database();
                 echo $DB_CONNECTION->getZufallsfrage();
             ?>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.<br>
-            Iste officia vero incidunt aliquam, magnam fugiat ducimus culpa iure odio quisquam,<br> 
-            voluptates aliquid non quos mollitia perspiciatis animi dignissimos ipsa sunt.<br>
         </div>
 
         <div id="login">
