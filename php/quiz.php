@@ -1,5 +1,5 @@
 <?php
-    include("php/init.inc.php");
+    include("init.inc.php");
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
         <div id="quizwindow">
         <?php
                 $DB_CONNECTION = new Database();
-                echo $DB_CONNECTION->getFrage();
+                echo $DB_CONNECTION->get10Questions();
             ?>
             
 
