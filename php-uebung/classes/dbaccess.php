@@ -70,34 +70,41 @@ public function show_content($table){
 
     public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt)       
     {
-        $queryFrage = "INSERT INTO fragen(fragetext, `user_id`) VALUES ('$frage', 1);"; #user_id 1 ist erstmal ein filler
+        $antworten[] = $antwort1;
+        $antworten[] = $antwort2;
+        $antworten[] = $antwort3;
+        $antworten[] = $antwort4;
+        
+        $korrekt_array = array(0, 0, 0, 0);
+        
+        $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', 1);"; #user_id 1 ist erstmal ein filler
         $this->mysqli->query($queryFrage);
+        
         $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
         $result = $this->mysqli->query($queryFrageId);
         $frageId = $result->fetch_array();
-        $korrekt1 = 0;
-        $korrekt2 = 0;
-        $korrekt3 = 0;
-        $korrekt4 = 0;
+        
+    
         if($korrekt === "korrekt1")
         {
-            $korrekt1 = 1;
+            $korrekt_array[0] = 1;
         } 
         else if($korrekt === "korrekt2")
         {
-            $korrekt2 = 1;
+            $korrekt_array[1] = 1;
         }
         else if($korrekt === "korrekt3")
         {
-            $korrekt3 = 1;
+            $korrekt_array[2] = 1;
         }
         else if($korrekt === "korrekt4")
         {
-            $korrekt4 = 1;
+            $korrekt_array[3] = 1;
         }
-        for ($i=1; $i < 5; $i++) 
+
+        for ($i=0; $i < count($antworten); $i++) 
         { 
-            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES ($antwort".$i.", $korrekt".$i.", ".$frageId[0].");";
+            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (".$antworten[$i].", ".$korrekt_array[$i].", ".$frageId[0].");";
             $this->mysqli->query($queryAntwort);
         }
         
