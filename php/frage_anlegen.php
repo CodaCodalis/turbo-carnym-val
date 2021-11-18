@@ -127,6 +127,9 @@ if(!$validate->validateText($antwort4)){
    echo "<br>Eingabe der Frage valide!";
 }
 
+if(isset($_POST['kategorien'])) {
+    $kategorien = $_POST['kategorien'];
+}
 
 $korrekt = $_POST['korrekt'];
 /*
@@ -136,7 +139,7 @@ $korrekt4 = $_POST['korrekt4'];
 */
 
 if(!$db->checkObFrageExistiert($frage)) {
-    $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt);
+    $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien);
 } else {
     echo "<script>alert(\"Frage existiert bereits\");</script>";
 }
