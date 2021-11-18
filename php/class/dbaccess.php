@@ -68,7 +68,7 @@ public function show_content($table){
         }
 
 
-    public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt)       
+    public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien)       
     {
         $antworten[] = $antwort1;
         $antworten[] = $antwort2;
@@ -104,10 +104,18 @@ public function show_content($table){
 
         for ($i=0; $i < count($antworten); $i++) 
         { 
-            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (".$antworten[$i].", ".$korrekt_array[$i].", ".$frageId[0].");";
+            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES ('".$antworten[$i]."', ".$korrekt_array[$i].", ".$frageId[0].");";
             $this->mysqli->query($queryAntwort);
         }
+
+        $this->mysqli->insert_frage_kategorie($frageId[0], $kategorien);
         
+    }
+
+    public function insert_frage_kategorie($frageId, $kategorien) {
+        for($i = 0; $i < count($kategorien); $i++) {
+            $query = "INSERT INTO frage_kategorie(frage_id, kategorie_id) VALUES ($frageId, (SELECT id FROM kategorien WHERE name=".$kategorien[$i]."));";
+        }
     }
 
     public function getZufallsfrage() {
@@ -120,6 +128,23 @@ public function show_content($table){
         $zufallsfrageQuery = "SELECT fragetext FROM fragen WHERE id=$zufallsfrageId;";
         $result = $this->mysqli->query($zufallsfrageQuery);
         return $result->fetch_array()[0];
+
+    }
+
+    public function checkObFrageExistiert($frage) {
+        $checkQuery = "SELECT id FROM fragen WHERE fragetext='$frage';";
+        $result = $this->mysqli->query($checkQuery);
+        return ($this->mysqli->affected_rows > 0);
+    }
+
+    public function getKategorien() {
+        $kategorienQuery = "SELECT name FROM kategorien;";
+        $result = $this->mysqli->query($kategorienQuery);
+        while($zeile = $result->fetch_assoc()) {
+            $resultArray[] = $zeile;
+        }
+        return $resultArray;
+       // return $result->fetch_all(MYSQLI_ASSOC);
 
     }
 }
