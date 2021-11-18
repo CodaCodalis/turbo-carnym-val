@@ -53,11 +53,12 @@
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
 
             <?php
-                $kategorien = $db->getKategorien();
+                $kategorien = $db->get_kategorien();
                 for ($i = 0; $i < count($kategorien); $i++) {
-                    echo "<input type=\"checkbox\" name=\"kategorien[]\"><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
+                    echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\"><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
                 }
             ?>
+            <input type="text" name="neueKategorie" id="neueKategorie"><input type="checkbox" name="neueKategorieCheck"><br>
             
             <input onclick="inputCheck();" type="submit" name="send" id="send" value="Speichern">
             <input type="reset" name="reset" id="reset" value="Reset">
@@ -83,66 +84,99 @@
 </html>
 
 <?php
-if (isset($_REQUEST['send'])) {
-//    echo $_POST['send'];
+    if (isset($_REQUEST['send'])) {
+        //    echo $_POST['send'];
 
-$frage = $_POST['frage'];
+        $frage = $_POST['frage'];
+        $valide = TRUE;
+        $validate = new Validate();
+        if(!$validate->validateText($frage)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-$validate = new Validate();
-if(!$validate->validateText($frage)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort1 = $_POST['antwort1'];
 
-$antwort1 = $_POST['antwort1'];
+        if(!$validate->validateText($antwort1)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort1)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort2 = $_POST['antwort2'];
 
-$antwort2 = $_POST['antwort2'];
+        if(!$validate->validateText($antwort2)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort2)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort3 = $_POST['antwort3'];
 
-$antwort3 = $_POST['antwort3'];
+        if(!$validate->validateText($antwort3)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort3)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort4 = $_POST['antwort4'];
 
-$antwort4 = $_POST['antwort4'];
+        if(!$validate->validateText($antwort4)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort4)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        if(isset($_POST['kategorien'])) {
+            $kategorienPost = $_POST['kategorien'];
+        }
 
-if(isset($_POST['kategorien'])) {
-    $kategorien = $_POST['kategorien'];
-}
+        if(isset($_POST['neueKategorieCheck']))
+        {
+            $neueKategorie = $_POST['neueKategorie'];
+            if(!$validate->validateText($neueKategorie)){
+                echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+                $valide = FALSE;
+            } else{
+                echo "<br>Eingabe der Frage valide!";
+                $db->insert_neue_kategorie($neueKategorie);
+                $kategorienPost[] = $neueKategorie;
+            }
+            
 
-$korrekt = $_POST['korrekt'];
-/*
-$korrekt2 = $_POST['korrekt2'];
-$korrekt3 = $_POST['korrekt3'];
-$korrekt4 = $_POST['korrekt4']; 
-*/
+            
+            
+        }
 
-if(!$db->checkObFrageExistiert($frage)) {
-    $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien);
-} else {
-    echo "<script>alert(\"Frage existiert bereits\");</script>";
-}
-}
+        if(!$kategorienPost)
+        {
+            echo "<br>Mindestens eine Kategorie muss ausgewählt sein oder eine neue erstellt worden <br>";
+            $valide = FALSE;
+        }
+
+
+        $korrekt = $_POST['korrekt'];
+        /*
+        $korrekt2 = $_POST['korrekt2'];
+        $korrekt3 = $_POST['korrekt3'];
+        $korrekt4 = $_POST['korrekt4']; 
+        */
+
+        if(!$valide)
+        {
+            die();
+        }
+        if(!$db->check_ob_frage_existiert($frage)) {
+            $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost);
+        } else {
+            echo "<script>alert(\"Frage existiert bereits\");</script>";
+        }
+    }
 
 ?>

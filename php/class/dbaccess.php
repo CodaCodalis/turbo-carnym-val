@@ -20,15 +20,20 @@ class Database{
         $this->db_connect();
     }
 
-//mysql_connect() - öffnet eine Verbindung zum Datenbankserver
-private function db_connect(){
-    $this->host = 'db5005383230.hosting-data.io';
-    $this->user = 'dbu2117629';
-    $this->pass = 'Gr4hsvSbdDbSmKH';
-    $this->db = 'dbs4516370';
-    $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    return $this->mysqli;
+    public function __deconstruct()
+    {
+        $this->mysqli->close();
+    }
+
+    //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
+    private function db_connect(){
+        $this->host = 'db5005383230.hosting-data.io';
+        $this->user = 'dbu2117629';
+        $this->pass = 'Gr4hsvSbdDbSmKH';
+        $this->db = 'dbs4516370';
+        $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        return $this->mysqli;
     }
 
 
@@ -67,9 +72,27 @@ private function db_connect(){
         }
     }
 
+    public function insert_frage_kategorie($frageId, $kategorien) {
+        if(is_array($kategorien)){
+            
+
+            for($i = 0; $i < count($kategorien); $i++) {
+                
+                $query = "INSERT INTO frage_kategorie(frage_id, kategorie_id) VALUES ($frageId, (SELECT id FROM kategorien WHERE name=\"".$kategorien[$i]."\"));";
+                $this->mysqli->query($query);
+            }
+        }
+        else
+        {
+            $query = "INSERT INTO frage_kategorie(frage_id, kategorie_id) VALUES ($frageId, (SELECT id FROM kategorien WHERE name=\"".$kategorien."\"));";
+            $this->mysqli->query($query);
+        }
+        
+    }
 
     public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien)       
     {
+        
         $antworten[] = $antwort1;
         $antworten[] = $antwort2;
         $antworten[] = $antwort3;
@@ -104,21 +127,30 @@ private function db_connect(){
 
         for ($i=0; $i < count($antworten); $i++) 
         { 
-            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (".$antworten[$i].", ".$korrekt_array[$i].", ".$frageId[0].");";
+            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (\"".$antworten[$i]."\", ".$korrekt_array[$i].", ".$frageId[0].");";
             $this->mysqli->query($queryAntwort);
         }
 
-        $this->mysqli->insert_frage_kategorie($frageId[0], $kategorien);
+        $this->insert_frage_kategorie($frageId[0], $kategorien);
         
     }
 
-    public function insert_frage_kategorie($frageId, $kategorien) {
-        for($i = 0; $i < count($kategorien); $i++) {
-            $query = "INSERT INTO frage_kategorie(frage_id, kategorie_id) VALUES ($frageId, (SELECT id FROM kategorien WHERE name=".$kategorien[$i]."));";
-        }
+    public function check_ob_kategorie_existiert($kategorie) {
+        $checkQuery = "SELECT id FROM kategorien WHERE name='$kategorie';";
+        $result = $this->mysqli->query($checkQuery);
+        return ($this->mysqli->affected_rows > 0);
     }
 
-    public function getZufallsfrage() {
+    public function insert_neue_kategorie($kategorie)
+    {
+        if(!$this->check_ob_kategorie_existiert($kategorie)){
+            $query = "INSERT INTO kategorien(name) VALUES (\"$kategorie\");";
+            $this->mysqli->query($query);
+        }
+        
+    }
+
+    public function get_zufallsfrage() {
         $min = 0;
         $maxQuery = "SELECT id FROM fragen;";
         $result = $this->mysqli->query($maxQuery);
@@ -130,13 +162,13 @@ private function db_connect(){
         return $result->fetch_array()[0];
     }
 
-    public function checkObFrageExistiert($frage) {
+    public function check_ob_frage_existiert($frage) {
         $checkQuery = "SELECT id FROM fragen WHERE fragetext='$frage';";
         $result = $this->mysqli->query($checkQuery);
         return ($this->mysqli->affected_rows > 0);
     }
 
-    public function getKategorien() {
+    public function get_kategorien() {
         $kategorienQuery = "SELECT name FROM kategorien;";
         $result = $this->mysqli->query($kategorienQuery);
         while($zeile = $result->fetch_assoc()) {
