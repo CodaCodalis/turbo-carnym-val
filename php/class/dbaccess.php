@@ -15,9 +15,9 @@ class Database{
     private $db;
     public $mysqli;
 
-// im Konstruktor wird die Verbindung zur DB durch Aufruf der Funktion db_connect hergestellt
-public function __construct() {
-    $this->db_connect();
+    // im Konstruktor wird die Verbindung zur DB durch Aufruf der Funktion db_connect hergestellt
+    public function __construct() {
+        $this->db_connect();
     }
 
 //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
@@ -32,32 +32,32 @@ private function db_connect(){
     }
 
 
-   
+    
 
-// Datensätze zählen
-public function db_num($sql){
-    $result = $this->mysqli->query($sql);
-    return $result->num_rows;
-//$result->num_rows; gibt die Anzahl der DS zurück
+    // Datensätze zählen
+    public function db_num($sql){
+        $result = $this->mysqli->query($sql);
+        return $result->num_rows;
+    //$result->num_rows; gibt die Anzahl der DS zurück
     }
 
-// db_num aufrufen und Anzahl DS anzeigen
-public function show_num($table){
-    $wert = $this->db_num("SELECT * FROM $table");
-    echo $wert;
-    if ($wert > 0) {
-    return true;
-    } else {
-    return false;
-            }
-        }  
-        
-public function show_content($table){        
+    // db_num aufrufen und Anzahl DS anzeigen
+    public function show_num($table){
+        $wert = $this->db_num("SELECT * FROM $table");
+        echo $wert;
+        if ($wert > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
+            
+    public function show_content($table){        
         $query = "SELECT * from $table";
         $result = $this->mysqli->query($query);
         /* numeric array */
         while($row = $result->fetch_array(MYSQLI_NUM)){
-        printf("%s (%s)<br>", $row[0], $row[1]);
+            printf("%s (%s)<br>", $row[0], $row[1]);
         }
         echo "Assoziatives Array: <br>";
         $result = $this->mysqli->query($query);
@@ -65,7 +65,7 @@ public function show_content($table){
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
             printf("%s<br>", $row["name"]); 
         }
-        }
+    }
 
 
     public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien)       
@@ -104,7 +104,7 @@ public function show_content($table){
 
         for ($i=0; $i < count($antworten); $i++) 
         { 
-            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES ('".$antworten[$i]."', ".$korrekt_array[$i].", ".$frageId[0].");";
+            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (".$antworten[$i].", ".$korrekt_array[$i].", ".$frageId[0].");";
             $this->mysqli->query($queryAntwort);
         }
 
@@ -128,7 +128,6 @@ public function show_content($table){
         $zufallsfrageQuery = "SELECT fragetext FROM fragen WHERE id=$zufallsfrageId;";
         $result = $this->mysqli->query($zufallsfrageQuery);
         return $result->fetch_array()[0];
-
     }
 
     public function checkObFrageExistiert($frage) {
@@ -147,7 +146,22 @@ public function show_content($table){
        // return $result->fetch_all(MYSQLI_ASSOC);
 
     }
+
+    //neuen User in die DB schreiben
+    public function write_User_to_database($userObj){
+        // Überprüfen ob Login bereits vorhanden
+        $sql = "SELECT * FROM user WHERE name = '".$userObj->getUsername()."';";
+        $result = $this->mysqli->query($sql);
+        $cnt = $this->mysqli->affected_rows;
+        if($cnt){
+            echo "<br>Login ist bereits vorhanden!<br>";
+        }else{
+            $sql = "INSERT INTO user (name, passwort) VALUES('".$userObj->getUsername()."', '".crypt($userObj->getPassword(), 'salt')."');";
+            $result = $this->mysqli->query($sql);
+        }
+    }
 }
+
 ?>
 
 </body>

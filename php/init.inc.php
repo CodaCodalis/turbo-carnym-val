@@ -1,5 +1,6 @@
 <?php
 include ("class/dbaccess.php");
+include ("class/user.php");
 // Diese Datei kann auf jeder Seite eingebunden werden
 // und enthält Variablen und Kommandos, die auf jeder
 // Seite benötigt werden:
