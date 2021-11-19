@@ -306,6 +306,27 @@ class Database{
           $_SESSION['frageCount']+=1;
           // echo "<div id="frage">$Frage</div>"."<div id="a1">$Antwort</div>" ."<div id="a2">$Antwort2</div>"."<div id="a3">$Antwort3</div>"."<div id="a4">$Antwort4</div>"
       }
+
+    //alle User in einer Tabelle ausgeben
+    public function get_all_user(){
+
+        // Daten aus Tabellen user und user_role auslesen, nach user_id gruppieren
+        $sql="SELECT name, id FROM user;";
+
+        $result = $this->mysqli -> query($sql);
+
+        while ($userArray=$result->fetch_assoc()){
+            //var_dump($userArray);
+            echo "<tr>";
+            echo "<td>".$userArray['id']."</td>";
+            echo "<td>".$userArray['name']."</td>";
+            //echo "<td>".$userArray['roles']."</td>";
+            echo "<td>Rollenplatzhalter</td>";
+            echo "<td><a href='' id=".$userArray['id']."'><img src='' alt='User anpassen'></a></td>";
+            echo "<td><a href='' id=".$userArray['id']."'><img src='' alt='User löschen'></a></td>";
+            echo "</tr>";
+        }
+    }
 }
 
 ?>

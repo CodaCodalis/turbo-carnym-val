@@ -1,5 +1,7 @@
 <?php
     include("init.inc.php");
+
+    $DB_CONNECT = new Database();
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +26,22 @@
     <div class="clearfix"></div>
     <div class="content">
 
-        <h2></h2>
+        <h2>Userverwaltung</h2>
         <div id="">
+            <table>
+                <tr>
+                    <th>User-ID</th>
+                    <th>Username</th>
+                    <th>Rollen</th>
+                </tr>
+                <?php $DB_CONNECT->get_all_user(); ?>
+            </table>     
+        </div>
 
+        <div>
+            <form action="user_new.php" method="POST">
+                <input type="submit" value="User anlegen">
+            </form>
         </div>
 
     </div>

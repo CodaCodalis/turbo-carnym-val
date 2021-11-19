@@ -77,7 +77,14 @@
         </div>
 
         <div id="login">
-            <h3>Wenn bereits eingeloggt, kein Anmeldefenster</h3>
+            <?php
+                if(isset($_SESSION['userName'])){
+                    echo "<h3>Hallo ".$_SESSION['userName']."</h3>";
+                }
+                else{
+                    echo "<h3>Hallo, bitte anmelden oder Registrieren.</h3>";
+                }
+            ?>
             <?php
                 /* Hier wird bei angemeldetem User (Session enthält einen Username) ein Logout- und je nach Rolle 
                 weitere Buttons angezeigt, ansonsten ein Login-Button: */
@@ -88,6 +95,7 @@
                     echo "<input type='submit' name='aktion' value='anmelden'></form>";
                 }
             ?>
+            <button onClick="window.location.href='php/user_new.php'; return false;">Registrieren</button>
         </div>
     </div>
     <footer>
