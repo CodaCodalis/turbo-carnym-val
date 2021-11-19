@@ -1,18 +1,23 @@
+<?php
+    include("init.inc.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
 
-<title>Startseite</title>
+<title>Quizauswahl</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="about.html">Abmelden</a></li>
+                <li><a href="logout.php">Abmelden</a></li>
                 <li><a href="frage_anlegen.php">Frage erstellen</a></li>
-                <li><a href="index.html">Startseite</a></li>
+                <li><a href="userverwaltung.php">Userverwaltung</a></li>
+                <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
     </header>
@@ -22,8 +27,10 @@
         <h2>Hier kann man das Quiz starten!</h2>
         <div id="randomquestion">
             <h3>Zufallsquiz starten mit</h3>
-
-            <form>
+            <?php
+                $_SESSION['frageCount']=0;
+            ?>
+            <form action="quiz.php" method="POST">
                 <input type="radio" id="anzahl10" name="anzahl" value="10">
                 <label for="anzahl10">10 Fragen</label>
                 <input type="radio" id="anzahl20" name="anzahl" value="20">
@@ -31,11 +38,11 @@
                 <input type="radio" id="anzahl30" name="anzahl" value="30">
                 <label for="anzahl30">30 Fragen</label><br>
                 
-                <input type="button" value="Zufallsquiz starten">
+                <input type="submit" name="quiz_zufall" value="Zufallsquiz starten">
             </form>
 
             <h3>Kategorie auswählen</h3>
-            <form>
+            <form action="quiz.php" method="POST">
                 <select name="categories" id="categories">
                     <option>--- Bitte auswählen ---</option>
                     <option value="">Netzwerk</option>
@@ -51,7 +58,7 @@
                 <input type="radio" id="catAll" name="cat" value="COUNT aus DB">
                 <label for="catAll">Alle Fragen</label><br>
              
-                <input type="button" value="Quiz starten">
+                <input type="submit" name="quiz_kategorie" value="Quiz starten">
             </form>
         </div>
 

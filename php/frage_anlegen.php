@@ -16,8 +16,10 @@
     <header>
         <nav>
             <ul>
-                <li><a href="about.html">Abmelden</a></li>
-                <li><a href="quizauswahl.html">Startseite</a></li>
+            <li><a href="logout.php">Abmelden</a></li>
+                <li><a href="quizauswahl.php">Quizauswahl</a></li>
+                <li><a href="userverwaltung.php">Userverwaltung</a></li>
+                <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
     </header>

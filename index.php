@@ -34,14 +34,11 @@
                 // aktuelle User-ID und -Name in der Session speichern
                 $_SESSION['userID']=$userObj->get_user_ID();
                 $_SESSION['userName']=$userObj->get_username();
-                // Umleitung zur ursprünglichen Seite bzw. Startseite:
-                $ziel="/";
+                // Umleitung zur quizauswahl:
+                $ziel="php/quizauswahl.php";
                 
-                if(isset($_SESSION['referer'])){
-                    $ziel=$_SESSION['referer'];
-                }
                 // Hier wird die eigentliche Umleitung veranlasst (. für denselben Ordner):
-                header("Location: .$ziel");
+                header("Location: $ziel");
             }
         }
     }
@@ -56,7 +53,18 @@
 </head>
 <body>
     <header>
-
+        <?php
+            if(isset($_SESSION['userName'])) {
+                echo '<nav>';
+                echo '<ul>';    
+                echo '<li><a href="php/logout.php">Abmelden</a></li>';       
+                echo '<li><a href="php/frage_anlegen.php">Frage erstellen</a></li>';
+                echo '<li><a href="php/quizauswahl.php">Quizauswahl</a></li>';
+                echo '<li><a href="php/userverwaltung.php">Userverwaltung</a></li>';
+                echo '</ul>';
+                echo '</nav>';
+            }
+        ?>
     </header>
     <div class="content">
         <h1>Quizubi</h1>
@@ -79,9 +87,6 @@
                     echo "<label>Passwort</label><input type='password' name='password'><br>";
                     echo "<input type='submit' name='aktion' value='anmelden'></form>";
                 }
-                else {
-                    logout();
-                }
             ?>
         </div>
     </div>
@@ -90,6 +95,9 @@
             <ul>
                 <li>
                     <a href="impressum.html">Impressum</a>
+                </li>
+                <li>
+                    <a href="datenschutz.html">Datenschutz</a>
                 </li>
             </ul>
         </div>

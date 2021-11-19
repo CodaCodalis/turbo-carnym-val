@@ -16,8 +16,9 @@ include("init.inc.php");
     <header>
         <nav>
             <ul>
-                <li><a href="about.html">Abmelden</a></li>
-                <li><a href="index.html">Startseite</a></li>
+                <li><a href="logout.php">Abmelden</a></li>
+                <li><a href="quizauswahl.php">Quizauswahl</a></li>
+                <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
     </header>
@@ -33,7 +34,12 @@ include("init.inc.php");
               // if(isset($_SESSION['frageCount'])){
               //  echo $_SESSION['frageCount'];
               //  }
-            $nrQuestion=8;
+
+            if(isset($_POST['anzahl'])){
+                $_SESSION['anzahlAuswahlFragen']=$_POST['anzahl'];
+            }
+
+            $nrQuestion=$_SESSION['anzahlAuswahlFragen'];
             $DB_CONNECTION = new Database();
             if(!isset($_SESSION ['selectedQuestions'])){
             $randomIDs = $DB_CONNECTION->get_random_IDs($nrQuestion);
@@ -42,12 +48,15 @@ include("init.inc.php");
             if($_SESSION['frageCount']<$nrQuestion){
             $DB_CONNECTION->show_questions($_SESSION ['selectedQuestions'],$_SESSION['frageCount']);
             $DB_CONNECTION->show_answers($_SESSION ['selectedQuestions'],$_SESSION['frageCount']);
+            echo '<input type="submit" value="Nächste Frage">';
             }
             else{
-                echo "Quizende";}
+                echo "Quizende";
+                $_SESSION['frageCount']=0;
+            }
             
             ?>
-            <input type="submit" value="Nächste Frage">
+        
         </form>
 
 

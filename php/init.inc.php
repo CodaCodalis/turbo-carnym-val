@@ -7,12 +7,13 @@ session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-/*
-$DB_HOST="localhost";
-$DB_USER="quiz";
-$DB_PASS="quiz";
-$DB_NAME="quiz";
-*/
+//wenn nicht angemeldet, andere Seiten nicht erlauben
+$myPath = getcwd();
+if(preg_match("/php/", $myPath)){
+    if (!isset($_SESSION['userName'])){
+        header("Location: ../access_denied.php");
+    }
+}
 
 function logout(){
     echo "<div class='unten_rechts' id='logout'>";
