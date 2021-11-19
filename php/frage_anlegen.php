@@ -253,15 +253,18 @@
         $korrekt4 = $_POST['korrekt4']; 
         */
 
-        if(!$valide)
+        if($valide)
         {
-            die();
+            if(!$db->check_ob_frage_existiert($frage)) 
+            {
+                $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost);
+            } 
+            else 
+            {
+                echo "<script>alert(\"Frage existiert bereits\");</script>";
+            }
         }
-        if(!$db->check_ob_frage_existiert($frage)) {
-            $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost);
-        } else {
-            echo "<script>alert(\"Frage existiert bereits\");</script>";
-        }
+        
     }
 
 ?>
