@@ -245,8 +245,13 @@
             $valide = FALSE;
         }
 
-
-        $korrekt = $_POST['korrekt'];
+        if(isset($_POST['korrekt'])){
+            $korrekt = $_POST['korrekt'];
+        }
+        else
+        {
+            $valide = FALSE;
+        }
         /*
         $korrekt2 = $_POST['korrekt2'];
         $korrekt3 = $_POST['korrekt3'];
