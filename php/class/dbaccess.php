@@ -27,10 +27,10 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        $this->host = 'localhost'; //'db5005383230.hosting-data.io';
-        $this->user = 'quizubi'; //'dbu2117629';
-        $this->pass = 'quizubi'; //'Gr4hsvSbdDbSmKH';
-        $this->db = 'quizubi'; //'dbs4516370';
+        $this->host = 'db5005383230.hosting-data.io';
+        $this->user = 'dbu2117629';
+        $this->pass = 'Gr4hsvSbdDbSmKH';
+        $this->db = 'dbs4516370';
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
