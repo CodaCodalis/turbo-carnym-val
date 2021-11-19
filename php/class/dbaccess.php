@@ -162,6 +162,36 @@ class Database{
         return $result->fetch_array()[0];
     }
 
+    public function get_alle_fragen() {
+        $alleFragenQuery = "SELECT fragetext FROM fragen;";
+        $result = $this->mysqli->query($alleFragenQuery);
+        while($zeile = $result->fetch_assoc()) {
+            $resultArray[] = $zeile;
+        }
+        return $resultArray;
+    }
+
+    public function get_user_fragen($user) {
+        $userFragenQuery = "SELECT fragetext FROM fragen WHERE user_id=(SELECT id FROM user WHERE name='$user');";
+        $result = $this->mysqli->query($userFragenQuery);
+        while($zeile = $result->fetch_assoc()) {
+            $resultArray[] = $zeile;
+        }
+        return $resultArray;
+    }
+
+    public function get_kategorie_fragen($kategorie) {
+        $kategorieFragenQuery = "SELECT fragen.fragetext, kategorien.name FROM frage_kategorie
+                            JOIN fragen ON fragen.id = frage_kategorie.frage_id 
+                            JOIN kategorien ON kategorien.id = frage_kategorie.kategorie_id
+                            WHERE name LIKE '$kategorie';";
+        $result = $this->mysqli->query($kategorieFragenQuery);
+        while($zeile = $result->fetch_assoc()) {
+            $resultArray[] = $zeile;
+        }
+        return $resultArray;
+    }
+
     public function check_ob_frage_existiert($frage) {
         $checkQuery = "SELECT id FROM fragen WHERE fragetext='$frage';";
         $result = $this->mysqli->query($checkQuery);
@@ -177,6 +207,15 @@ class Database{
         return $resultArray;
        // return $result->fetch_all(MYSQLI_ASSOC);
 
+    }
+
+    public function get_user() {
+        $userQuery = "SELECT name FROM user;";
+        $result = $this->mysqli->query($userQuery);
+        while($zeile = $result->fetch_assoc()) {
+            $resultArray[] = $zeile;
+        }
+        return $resultArray;
     }
 
     //neuen User in die DB schreiben

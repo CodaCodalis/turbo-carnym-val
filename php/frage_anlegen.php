@@ -58,14 +58,99 @@
                     echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\"><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
                 }
             ?>
-            <input type="text" name="neueKategorie" id="neueKategorie"><input type="checkbox" name="neueKategorieCheck"><br>
+            <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie"><br>
             
             <input onclick="inputCheck();" type="submit" name="send" id="send" value="Speichern">
             <input type="reset" name="reset" id="reset" value="Reset">
-            <a href="quizauswahl.html" id="btn">Abbrechen</a>
-
-    
+            
+                    
         </form>
+        <form action="frage_anlegen.php" method="POST">
+        <h3>Bearbeite Prüfungsfragen:</h3>
+            <h4>Lass' Dir alle Fragen anzeigen oder nach Benutzer bzw. Kategorien gefiltert:</h4>
+                <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
+                <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
+                    <?php
+                        $userNamen = $db->get_user();
+                        for ($i = 0; $i < count($userNamen); $i++) {
+                            echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
+                        }
+                    ?>
+                </select><input type="submit" name="userFragen" id="userFragen" value="anzeigen"><br>
+                
+                <label for="kategorieName">nach Kategorie: </label><select name="kategorieName" id="kategorieName">
+                    <?php
+                        $kategorien = $db->get_kategorien();
+                        for ($i = 0; $i < count($kategorien); $i++) {
+                            echo "<option value=\"".$kategorien[$i]['name']."\">".$kategorien[$i]['name']."</option>";
+                        }
+                    ?>
+                </select><input type="submit" name="kategorieFragen" id="kategorieFragen" value="anzeigen"><br>
+                <br>
+                    <?php
+                    if(isset($_REQUEST['alleFragen']))
+                    {
+                        $alleFragenArray = $db->get_alle_fragen();
+                        echo "<br>
+                            <table>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>edit</th>
+                                </tr>";
+                        for ($i=0; $i < count($alleFragenArray); $i++) 
+                        {
+                            echo "<tr>
+                                <td>".$alleFragenArray[$i]['fragetext']."</td>
+                                <td><a href=\"\">edit</a></td>
+                                </tr>";
+                        }
+                        echo "</table>";
+                        
+                    }
+
+                    if(isset($_REQUEST['userFragen']))
+                    {
+                        $userFragenArray = $db->get_user_fragen($_POST['userName']);
+                        echo "<br>
+                            <table>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>edit</th>
+                                </tr>";
+                        for ($i=0; $i < count($userFragenArray); $i++) 
+                        {
+                            echo "<tr>
+                                <td>".$userFragenArray[$i]['fragetext']."</td>
+                                <td><a href=\"\">edit</a></td>
+                                </tr>";
+                        }
+                        echo "</table>";
+                    }
+
+                    if(isset($_REQUEST['kategorieFragen']))
+                    {
+                        $kategorieFragenArray = $db->get_kategorie_fragen($_POST['kategorieName']);
+                        echo "<br>
+                            <table>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>edit</th>
+                                </tr>";
+                        for ($i=0; $i < count($kategorieFragenArray); $i++) 
+                        {
+                            echo "<tr>
+                                <td>".$kategorieFragenArray[$i]['fragetext']."</td>
+                                <td><a href=\"\">edit</a></td>
+                                </tr>";
+                        }
+                        echo "</table>";
+                    }
+                    ?>
+                <br>
+                <a href="quizauswahl.html" id="btn">Abbrechen</a>
+
+        </form>
+
     </div>
 
     <footer>

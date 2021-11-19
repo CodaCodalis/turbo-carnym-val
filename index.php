@@ -20,7 +20,7 @@
             <h3>Zufallsfrage</h3>
             <?php
                 $DB_CONNECTION = new Database();
-                echo $DB_CONNECTION->getZufallsfrage();
+                echo $DB_CONNECTION->get_zufallsfrage();
             ?>
         </div>
 
