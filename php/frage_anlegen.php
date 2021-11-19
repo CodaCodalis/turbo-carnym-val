@@ -53,18 +53,104 @@
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
 
             <?php
-                $kategorien = $db->getKategorien();
+                $kategorien = $db->get_kategorien();
                 for ($i = 0; $i < count($kategorien); $i++) {
-                    echo "<input type=\"checkbox\" name=\"kategorien[]\"><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
+                    echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\"><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
                 }
             ?>
+            <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie"><br>
             
             <input onclick="inputCheck();" type="submit" name="send" id="send" value="Speichern">
             <input type="reset" name="reset" id="reset" value="Reset">
-            <a href="quizauswahl.html" id="btn">Abbrechen</a>
-
-    
+            
+                    
         </form>
+        <form action="frage_anlegen.php" method="POST">
+        <h3>Bearbeite Prüfungsfragen:</h3>
+            <h4>Lass' Dir alle Fragen anzeigen oder nach Benutzer bzw. Kategorien gefiltert:</h4>
+                <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
+                <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
+                    <?php
+                        $userNamen = $db->get_user();
+                        for ($i = 0; $i < count($userNamen); $i++) {
+                            echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
+                        }
+                    ?>
+                </select><input type="submit" name="userFragen" id="userFragen" value="anzeigen"><br>
+                
+                <label for="kategorieName">nach Kategorie: </label><select name="kategorieName" id="kategorieName">
+                    <?php
+                        $kategorien = $db->get_kategorien();
+                        for ($i = 0; $i < count($kategorien); $i++) {
+                            echo "<option value=\"".$kategorien[$i]['name']."\">".$kategorien[$i]['name']."</option>";
+                        }
+                    ?>
+                </select><input type="submit" name="kategorieFragen" id="kategorieFragen" value="anzeigen"><br>
+                <br>
+                    <?php
+                    if(isset($_REQUEST['alleFragen']))
+                    {
+                        $alleFragenArray = $db->get_alle_fragen();
+                        echo "<br>
+                            <table>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>edit</th>
+                                </tr>";
+                        for ($i=0; $i < count($alleFragenArray); $i++) 
+                        {
+                            echo "<tr>
+                                <td>".$alleFragenArray[$i]['fragetext']."</td>
+                                <td><a href=\"\">edit</a></td>
+                                </tr>";
+                        }
+                        echo "</table>";
+                        
+                    }
+
+                    if(isset($_REQUEST['userFragen']))
+                    {
+                        $userFragenArray = $db->get_user_fragen($_POST['userName']);
+                        echo "<br>
+                            <table>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>edit</th>
+                                </tr>";
+                        for ($i=0; $i < count($userFragenArray); $i++) 
+                        {
+                            echo "<tr>
+                                <td>".$userFragenArray[$i]['fragetext']."</td>
+                                <td><a href=\"\">edit</a></td>
+                                </tr>";
+                        }
+                        echo "</table>";
+                    }
+
+                    if(isset($_REQUEST['kategorieFragen']))
+                    {
+                        $kategorieFragenArray = $db->get_kategorie_fragen($_POST['kategorieName']);
+                        echo "<br>
+                            <table>
+                                <tr>
+                                    <th>Frage</th>
+                                    <th>edit</th>
+                                </tr>";
+                        for ($i=0; $i < count($kategorieFragenArray); $i++) 
+                        {
+                            echo "<tr>
+                                <td>".$kategorieFragenArray[$i]['fragetext']."</td>
+                                <td><a href=\"\">edit</a></td>
+                                </tr>";
+                        }
+                        echo "</table>";
+                    }
+                    ?>
+                <br>
+                <a href="quizauswahl.html" id="btn">Abbrechen</a>
+
+        </form>
+
     </div>
 
     <footer>
@@ -83,63 +169,99 @@
 </html>
 
 <?php
-if (isset($_REQUEST['send'])) {
-//    echo $_POST['send'];
+    if (isset($_REQUEST['send'])) {
+        //    echo $_POST['send'];
 
-$frage = $_POST['frage'];
+        $frage = $_POST['frage'];
+        $valide = TRUE;
+        $validate = new Validate();
+        if(!$validate->validateText($frage)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-$validate = new Validate();
-if(!$validate->validateText($frage)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort1 = $_POST['antwort1'];
 
-$antwort1 = $_POST['antwort1'];
+        if(!$validate->validateText($antwort1)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort1)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort2 = $_POST['antwort2'];
 
-$antwort2 = $_POST['antwort2'];
+        if(!$validate->validateText($antwort2)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort2)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort3 = $_POST['antwort3'];
 
-$antwort3 = $_POST['antwort3'];
+        if(!$validate->validateText($antwort3)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort3)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        $antwort4 = $_POST['antwort4'];
 
-$antwort4 = $_POST['antwort4'];
+        if(!$validate->validateText($antwort4)){
+            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+            $valide = FALSE;
+        } else{
+            echo "<br>Eingabe der Frage valide!";
+        }
 
-if(!$validate->validateText($antwort4)){
-   echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-}else{
-   echo "<br>Eingabe der Frage valide!";
-}
+        if(isset($_POST['kategorien'])) {
+            $kategorienPost = $_POST['kategorien'];
+        }
+
+        if(isset($_POST['neueKategorieCheck']))
+        {
+            $neueKategorie = $_POST['neueKategorie'];
+            if(!$validate->validateText($neueKategorie)){
+                echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+                $valide = FALSE;
+            } else{
+                echo "<br>Eingabe der Frage valide!";
+                $db->insert_neue_kategorie($neueKategorie);
+                $kategorienPost[] = $neueKategorie;
+            }
+            
+
+            
+            
+        }
+
+        if(!$kategorienPost)
+        {
+            echo "<br>Mindestens eine Kategorie muss ausgewählt sein oder eine neue erstellt worden <br>";
+            $valide = FALSE;
+        }
 
 
-$korrekt = $_POST['korrekt'];
-/*
-$korrekt2 = $_POST['korrekt2'];
-$korrekt3 = $_POST['korrekt3'];
-$korrekt4 = $_POST['korrekt4']; 
-*/
+        $korrekt = $_POST['korrekt'];
+        /*
+        $korrekt2 = $_POST['korrekt2'];
+        $korrekt3 = $_POST['korrekt3'];
+        $korrekt4 = $_POST['korrekt4']; 
+        */
 
-if(!$db->checkObFrageExistiert($frage)) {
-    $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt);
-} else {
-    echo "<script>alert(\"Frage existiert bereits\");</script>";
-}
-}
+        if(!$valide)
+        {
+            die();
+        }
+        if(!$db->check_ob_frage_existiert($frage)) {
+            $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost);
+        } else {
+            echo "<script>alert(\"Frage existiert bereits\");</script>";
+        }
+    }
 
 ?>

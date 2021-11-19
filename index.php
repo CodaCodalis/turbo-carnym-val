@@ -64,7 +64,7 @@
         <div id="randomquestion">
             <h3>Zufallsfrage</h3>
             <?php
-                echo $DB_CONNECTION->getZufallsfrage();
+                echo $DB_CONNECTION->get_zufallsfrage();
             ?>
         </div>
 
