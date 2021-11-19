@@ -14,28 +14,28 @@ class User{
     }
 
     //Getter
-    function getUsername(){
+    function get_username(){
         return $this->username;
     }
 
-    function getUserID(){
+    function get_user_ID(){
         return $this->userid;
     }
 
-    function getPassword(){
+    function get_password(){
         return $this->password;
     }
 
     //Setter
-    function setUsername($username){
+    function set_username($username){
         $this->username = $username;
     }
 
-    function setPassword($password){
+    function set_password($password){
         $this->password = $password;
     }
 
-    function setUserID(){
+    function set_user_ID(){
         $this->userid;//Abfrage aus DB
     }
 }

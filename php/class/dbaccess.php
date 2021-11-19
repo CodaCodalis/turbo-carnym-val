@@ -22,17 +22,15 @@ class Database{
 
 //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
 private function db_connect(){
-    $this->host = 'db5005383230.hosting-data.io';
-    $this->user = 'dbu2117629';
-    $this->pass = 'Gr4hsvSbdDbSmKH';
-    $this->db = 'dbs4516370';
+    $this->host = 'localhost'; //'db5005383230.hosting-data.io';
+    $this->user = 'quizubi'; //'dbu2117629';
+    $this->pass = 'quizubi'; //'Gr4hsvSbdDbSmKH';
+    $this->db = 'quizubi'; //'dbs4516370';
     $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     return $this->mysqli;
     }
 
-
-    
 
     // Datensätze zählen
     public function db_num($sql){
@@ -150,15 +148,30 @@ private function db_connect(){
     //neuen User in die DB schreiben
     public function write_User_to_database($userObj){
         // Überprüfen ob Login bereits vorhanden
-        $sql = "SELECT * FROM user WHERE name = '".$userObj->getUsername()."';";
+        $sql = "SELECT * FROM user WHERE name = '".$userObj->get_username()."';";
         $result = $this->mysqli->query($sql);
         $cnt = $this->mysqli->affected_rows;
         if($cnt){
             echo "<br>Login ist bereits vorhanden!<br>";
         }else{
-            $sql = "INSERT INTO user (name, passwort) VALUES('".$userObj->getUsername()."', '".crypt($userObj->getPassword(), 'salt')."');";
+            $sql = "INSERT INTO user (name, passwort) VALUES('".$userObj->get_username()."', '".crypt(trim($userObj->get_password()), 'salt')."');";
             $result = $this->mysqli->query($sql);
         }
+    }
+
+    // ein Userobjekt aus eingegebenen Werten mit entsprechenden Daten aus der Datenbank anlegen
+    function create_userobject_from_database($username, $password){
+        // Userdaten werden abgefragt
+        // Passwort liegt verschlüsselt in der DB vor und muss hier ebenfalls verschlüsselt eingegeben werden
+        $sql="SELECT * FROM user WHERE name='$username' AND passwort='".crypt(trim($password), 'salt')."';";
+        $result=$this->mysqli->query($sql);
+        // Der ermittelte Datensatz wird in Form eines Objektes geholt
+        $userObjectDB=$result->fetch_all()[0];
+        // neues Userobjekt anlegen (nicht in der Datenbank)
+        $userObject = new User($userObjectDB[1], $userObjectDB[2]);
+        $userObject->set_user_ID($userObjectDB[0]);
+        // das Objekt wird zurückgegeben
+        return $userObject;
     }
 }
 
@@ -167,3 +180,4 @@ private function db_connect(){
 </body>
 
 </html>
+
