@@ -1,0 +1,104 @@
+
+
+/*Font family*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.clearfix{
+    clear: both;
+}
+
+body{
+    background-color: royalblue ;
+}
+
+.content{
+    min-height: 615px;
+    background-color: royalblue ;
+}
+
+h1{
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+}
+h2{
+    font-size: 28px;
+    color: #fff; 
+    text-align: center;
+}
+
+#login{
+    padding-top: 100px;
+    color: #fff;
+    width: 300px;
+    margin: auto;
+}
+
+#login label{
+    width: 300px;
+}
+
+#randomquestion{
+    color: #fff;
+    width: 500px;
+    margin: auto;
+}
+
+/*-------------Nav-Menü--------------*/
+header{
+    height: 50px;
+    border: 1px solid #fff;
+}
+
+header nav li{
+    float: right;
+    display: inline;
+    list-style: none;
+}
+
+header a {
+    padding-left:10px;
+    color:#fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+/*-------------Footer--------------*/
+footer{
+    border-top: 1px solid #fff;
+   text-align: center;
+}
+
+footer li a{
+    display: inline;
+    text-decoration: none;
+    color: #fff;
+}
+
+footer li{
+    padding:10px;
+    display: inline;
+    list-style: none;
+}
+
+
+/*---------------QUIZ-----------------------*/
+
+#frage{
+    border:1px solid white;
+    color: white;
+    font-size: 24px;
+    width: 500px;
+    margin: auto;
+}
+
+#antwort{
+    border:1px solid white;
+    color: white;
+    font-size: 20px;
+    width: 500px;
+    margin: auto;
+}

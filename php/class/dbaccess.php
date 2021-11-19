@@ -244,6 +244,75 @@ class Database{
         // das Objekt wird zurückgegeben
         return $userObject;
     }
+
+
+      //$selctedInput ist die Anzahl der Fragen die bei der Quizauswahl (von quizauswahl.php) übergebn wird (Radio Button oder Direkteingabe)
+      public function get_random_IDs($selectedInput)
+      {   $_SESSION ['frageCount']=0;
+          $_SESSION ['selectedQuestions']=array();
+          $i = 0;
+          while ($i < $selectedInput) {
+              $min = 0;
+              $maxQuery = "SELECT id FROM fragen;";
+              $result = $this->mysqli->query($maxQuery);
+              $max = $this->mysqli->affected_rows;
+              $zufallszahl = rand($min, $max - 1);
+
+              $zufallsfrageId = $result->fetch_all()[$zufallszahl][0];
+              if (!in_array($zufallsfrageId, $_SESSION ['selectedQuestions'])) {
+                  $_SESSION ['selectedQuestions'][$i] = $zufallsfrageId;
+                  $i++;
+              }
+          }
+         // var_dump($_SESSION ['selectedQuestions']);
+          return $_SESSION ['selectedQuestions'];
+          
+
+
+          //      echo "Zufallszahlen: <br>";
+          //       var_dump($selectedQuestions);
+          
+      }
+
+
+      //$selectedQuestions ist ein Array aus zufällig ausgewählten Frage IDs aus der Funktion getRandomIds()
+      //$questionNr spricht die jeweilige Position im Array an
+
+      public function show_questions($selectedQuestions, $questionNr)
+      {   
+          $query = "SELECT fragetext FROM fragen WHERE id=$selectedQuestions[$questionNr];";
+          $Frage = $this->mysqli->query($query);
+
+          //      echo "<br> Frage <br>";
+          $row = $Frage->fetch_array(MYSQLI_ASSOC);
+          
+          printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
+          
+      
+      }
+
+
+      public function get_answer_IDs($selectedQuestions, $questionNr)
+      {   
+          $answerID = "SELECT id FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
+          $answer = $this->mysqli->query($answerID);
+          $resultAnswer = $answer->fetch_all()[$answerID][0];
+      }
+
+
+      public function show_answers($selectedQuestions, $questionNr)
+      {   
+          $queryAnswer = "SELECT antworttext FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
+          $answer = $this->mysqli->query($queryAnswer);
+
+          //       echo "<br> Antwort <br>";
+
+          while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
+              printf("<div id='antwort'>%s</div><br>", $row["antworttext"]);
+          }
+          $_SESSION['frageCount']+=1;
+          // echo "<div id="frage">$Frage</div>"."<div id="a1">$Antwort</div>" ."<div id="a2">$Antwort2</div>"."<div id="a3">$Antwort3</div>"."<div id="a4">$Antwort4</div>"
+      }
 }
 
 ?>
