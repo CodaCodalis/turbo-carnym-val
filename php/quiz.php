@@ -53,6 +53,7 @@ include("init.inc.php");
             else{
                 echo "Quizende";
                 $_SESSION['frageCount']=0;
+                unset ($_SESSION['selectedQuestions']);
             }
             
             ?>
