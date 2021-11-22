@@ -1,0 +1,3 @@
+﻿DROP TABLE user_rolle;
+ALTER TABLE user ADD role_id integer;
+ALTER TABLE user ADD FOREIGN KEY (role_id) REFERENCES rollen(id);

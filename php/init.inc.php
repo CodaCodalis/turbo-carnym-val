@@ -1,6 +1,7 @@
 <?php
 include ("class/dbaccess.php");
 include ("class/user.php");
+include ("class/validate.php");
 // Diese Datei kann auf jeder Seite eingebunden werden und enthält Variablen und Kommandos, die auf jeder Seite benötigt werden:
 
 session_start();

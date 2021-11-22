@@ -18,12 +18,20 @@ class Database{
         $this->mysqli->close();
     }
 
+    public function close_database(){
+        $this->mysqli->close();
+    }
+
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        $this->host = 'db5005383230.hosting-data.io';
+        /*$this->host = 'db5005383230.hosting-data.io';
         $this->user = 'dbu2117629';
         $this->pass = 'Gr4hsvSbdDbSmKH';
-        $this->db = 'dbs4516370';
+        $this->db = 'dbs4516370';*/
+        $this->host = 'localhost';
+        $this->user = 'Spieler';
+        $this->pass = 'spieler';
+        $this->db = 'carnymQuiz';
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
@@ -216,10 +224,17 @@ class Database{
         $result = $this->mysqli->query($sql);
         $cnt = $this->mysqli->affected_rows;
         if($cnt){
-            echo "<br>Login ist bereits vorhanden!<br>";
+            $error = "Login ist bereits vorhanden!";
+            return $error;
         }else{
-            $sql = "INSERT INTO user (name, passwort) VALUES('".$userObj->get_username()."', '".crypt(trim($userObj->get_password()), 'salt')."');";
+            $sql = "INSERT INTO user (name, passwort, role_id) 
+                VALUES(
+                    '".$userObj->get_username()."',
+                    '".crypt(trim($userObj->get_password()), 'salt')."',
+                    ".$userObj->get_role_id()."
+                );";
             $result = $this->mysqli->query($sql);
+            return NULL;
         }
     }
 
@@ -232,7 +247,7 @@ class Database{
         // Der ermittelte Datensatz wird in Form eines Objektes geholt
         $userObjectDB=$result->fetch_all()[0];
         // neues Userobjekt anlegen (nicht in der Datenbank)
-        $userObject = new User($userObjectDB[1], $userObjectDB[2]);
+        $userObject = new User($userObjectDB[1], $userObjectDB[2], $userObjectDB[3]);
         $userObject->set_user_ID($userObjectDB[0]);
         // das Objekt wird zurückgegeben
         return $userObject;
@@ -325,6 +340,16 @@ class Database{
             echo "<td><a href='' id=".$userArray['id']."'><img src='' alt='User anpassen'></a></td>";
             echo "<td><a href='' id=".$userArray['id']."'><img src='' alt='User löschen'></a></td>";
             echo "</tr>";
+        }
+    }
+
+    public function radiobutton_all_roles(){
+        
+        $sql="SELECT * FROM rollen ORDER BY id";
+        $result = $this->mysqli->query($sql);
+        while($role = $result->fetch_assoc()){
+            echo "<input type='radio' name='role_id' value='".$role['id']."'";
+            echo ">".$role['name']."<br>"; 
         }
     }
 }
