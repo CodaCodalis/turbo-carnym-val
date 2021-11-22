@@ -94,7 +94,7 @@
                     echo "<label>Benutzername</label><input type='text' name='username'><br>";
                     echo "<label>Passwort</label><input type='password' name='password'><br>";
                     echo "<input type='submit' name='aktion' value='anmelden'></form>";
-                    echo "<button onClick=\"window.location.href='php/user_new.php'; return false;\">Registrieren</button>";
+                    echo "<button onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
                 }
             ?>
         </div>
@@ -113,3 +113,7 @@
     </footer>
 </body>
 </html>
+
+<?php
+    $DB_CONNECTION->close_database();
+?>
