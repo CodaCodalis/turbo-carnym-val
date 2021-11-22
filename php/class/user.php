@@ -35,8 +35,8 @@ class User{
         $this->password = $password;
     }
 
-    function set_user_ID(){
-        $this->userid;//Abfrage aus DB
+    function set_user_ID($userID){
+        $this->userid = $userID;
     }
 }
 
