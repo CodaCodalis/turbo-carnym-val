@@ -22,26 +22,27 @@
         // Wird das Formular abgeschickt, ruft es sich selber wieder auf. 
         // Der Referer ist dann auch das Formular und wird nicht gespeichert.
         $_SESSION['referer']=$referer;
+    }
 
-        // Wenn es Login und Passwort gibt, wird versucht, den User in der Datenbank zu ermitteln:
-        if(isset($_POST['username']) and isset($_POST['password'])){
-            // über Database-Objekt auf die Funktion zugreifen 
-            $userObj=$DB_CONNECTION->create_userobject_from_database($_POST['username'], $_POST['password']);
-            //$userObj=$DB_CONNECTION->create_userobject_from_database("test4", "test");
-    
-            // User wurde ermittelt
-            if($userObj){
-                // aktuelle User-ID und -Name in der Session speichern
-                $_SESSION['userID']=$userObj->get_user_ID();
-                $_SESSION['userName']=$userObj->get_username();
-                // Umleitung zur quizauswahl:
-                $ziel="php/quizauswahl.php";
-                
-                // Hier wird die eigentliche Umleitung veranlasst (. für denselben Ordner):
-                header("Location: $ziel");
-            }
+    // Wenn es Login und Passwort gibt, wird versucht, den User in der Datenbank zu ermitteln:
+    if(isset($_POST['username']) and isset($_POST['password'])){
+        // über Database-Objekt auf die Funktion zugreifen 
+        $userObj=$DB_CONNECTION->create_userobject_from_database($_POST['username'], $_POST['password']);
+        //$userObj=$DB_CONNECTION->create_userobject_from_database("test4", "test");
+
+        // User wurde ermittelt
+        if($userObj){
+            // aktuelle User-ID und -Name in der Session speichern
+            $_SESSION['userID']=$userObj->get_user_ID();
+            $_SESSION['userName']=$userObj->get_username();
+            // Umleitung zur quizauswahl:
+            $ziel="php/quizauswahl.php";
+            
+            // Hier wird die eigentliche Umleitung veranlasst (. für denselben Ordner):
+            header("Location: $ziel");
         }
     }
+    
 ?>
 <!DOCTYPE html>
 <html>
