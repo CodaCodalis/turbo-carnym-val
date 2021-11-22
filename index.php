@@ -87,16 +87,16 @@
                 }
             ?>
             <?php
-                /* Hier wird bei angemeldetem User (Session enthält einen Username) ein Logout- und je nach Rolle 
-                weitere Buttons angezeigt, ansonsten ein Login-Button: */
+                /* Wenn nicht eingeloggt (Session enthält keinen UserName) werden das Anmeldeformular
+                und der Registrieren-Button eingebledet */
                 if(!isset($_SESSION['userName'])){                
                     echo "<form action='index.php' method='POST'>";
                     echo "<label>Benutzername</label><input type='text' name='username'><br>";
                     echo "<label>Passwort</label><input type='password' name='password'><br>";
                     echo "<input type='submit' name='aktion' value='anmelden'></form>";
+                    echo "<button onClick=\"window.location.href='php/user_new.php'; return false;\">Registrieren</button>";
                 }
             ?>
-            <button onClick="window.location.href='php/user_new.php'; return false;">Registrieren</button>
         </div>
     </div>
     <footer>
