@@ -28,10 +28,10 @@ class Database{
         $this->user = 'dbu2117629';
         $this->pass = 'Gr4hsvSbdDbSmKH';
         $this->db = 'dbs4516370';*/
-        $this->host = 'localhost';
-        $this->user = 'Spieler';
-        $this->pass = 'spieler';
-        $this->db = 'carnymQuiz';
+        $this->host = 'localhost'; //'db5005383230.hosting-data.io';
+        $this->user = 'quizubi'; //'dbu2117629';
+        $this->pass = 'quizubi'; //'Gr4hsvSbdDbSmKH';
+        $this->db = 'quizubi'; //'dbs4516370';
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
@@ -227,11 +227,12 @@ class Database{
             $error = "Login ist bereits vorhanden!";
             return $error;
         }else{
-            $sql = "INSERT INTO user (name, passwort, role_id) 
+            $sql = "INSERT INTO user (name, passwort, role_id, is_deleted) 
                 VALUES(
                     '".$userObj->get_username()."',
                     '".crypt(trim($userObj->get_password()), 'salt')."',
-                    ".$userObj->get_role_id()."
+                    ".$userObj->get_role_id().",
+                    0
                 );";
             $result = $this->mysqli->query($sql);
             return NULL;
@@ -242,6 +243,7 @@ class Database{
     function create_userobject_from_database($username, $password){
         // Userdaten werden abgefragt
         // Passwort liegt verschlüsselt in der DB vor und muss hier ebenfalls verschlüsselt eingegeben werden
+        error_reporting(0);
         $sql="SELECT * FROM user WHERE name='$username' AND passwort='".crypt(trim($password), 'salt')."';";
         $result=$this->mysqli->query($sql);
         // Der ermittelte Datensatz wird in Form eines Objektes geholt
@@ -249,31 +251,29 @@ class Database{
         // neues Userobjekt anlegen (nicht in der Datenbank)
         $userObject = new User($userObjectDB[1], $userObjectDB[2], $userObjectDB[3]);
         $userObject->set_user_ID($userObjectDB[0]);
-        // das Objekt wird zurückgegeben
         return $userObject;
     }
 
+    // $selctedInput ist die Anzahl der Fragen die bei der Quizauswahl (von quizauswahl.php) übergebn wird (Radio Button oder Direkteingabe)
+    public function get_random_IDs($selectedInput)
+    {   $_SESSION ['frageCount']=0;
+        $_SESSION ['selectedQuestions']=array();
+        $i = 0;
+        while ($i < $selectedInput) {
+            $min = 0;
+            $maxQuery = "SELECT id FROM fragen;";
+            $result = $this->mysqli->query($maxQuery);
+            $max = $this->mysqli->affected_rows;
+            $zufallszahl = rand($min, $max - 1);
 
-      //$selctedInput ist die Anzahl der Fragen die bei der Quizauswahl (von quizauswahl.php) übergebn wird (Radio Button oder Direkteingabe)
-      public function get_random_IDs($selectedInput)
-      {   $_SESSION ['frageCount']=0;
-          $_SESSION ['selectedQuestions']=array();
-          $i = 0;
-          while ($i < $selectedInput) {
-              $min = 0;
-              $maxQuery = "SELECT id FROM fragen;";
-              $result = $this->mysqli->query($maxQuery);
-              $max = $this->mysqli->affected_rows;
-              $zufallszahl = rand($min, $max - 1);
-
-              $zufallsfrageId = $result->fetch_all()[$zufallszahl][0];
-              if (!in_array($zufallsfrageId, $_SESSION ['selectedQuestions'])) {
-                  $_SESSION ['selectedQuestions'][$i] = $zufallsfrageId;
-                  $i++;
-              }
-          }
-         // var_dump($_SESSION ['selectedQuestions']);
-          return $_SESSION ['selectedQuestions'];
+            $zufallsfrageId = $result->fetch_all()[$zufallszahl][0];
+            if (!in_array($zufallsfrageId, $_SESSION ['selectedQuestions'])) {
+                $_SESSION ['selectedQuestions'][$i] = $zufallsfrageId;
+                $i++;
+            }
+        }
+        // var_dump($_SESSION ['selectedQuestions']);
+        return $_SESSION ['selectedQuestions'];
           
 
 
@@ -281,7 +281,6 @@ class Database{
           //       var_dump($selectedQuestions);
           
       }
-
 
       //$selectedQuestions ist ein Array aus zufällig ausgewählten Frage IDs aus der Funktion getRandomIds()
       //$questionNr spricht die jeweilige Position im Array an
@@ -295,8 +294,6 @@ class Database{
           $row = $Frage->fetch_array(MYSQLI_ASSOC);
           
           printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
-          
-      
       }
 
 
@@ -322,35 +319,57 @@ class Database{
           // echo "<div id="frage">$Frage</div>"."<div id="a1">$Antwort</div>" ."<div id="a2">$Antwort2</div>"."<div id="a3">$Antwort3</div>"."<div id="a4">$Antwort4</div>"
       }
 
-    //alle User in einer Tabelle ausgeben
+    //alle User ausgeben
     public function get_all_user(){
-
-        // Daten aus Tabellen user und user_role auslesen, nach user_id gruppieren
-        $sql="SELECT name, id FROM user;";
-
+        $sql="SELECT name, role_id, id FROM user WHERE is_deleted=0;";
         $result = $this->mysqli -> query($sql);
-
-        while ($userArray=$result->fetch_assoc()){
-            //var_dump($userArray);
-            echo "<tr>";
-            echo "<td>".$userArray['id']."</td>";
-            echo "<td>".$userArray['name']."</td>";
-            //echo "<td>".$userArray['roles']."</td>";
-            echo "<td>Rollenplatzhalter</td>";
-            echo "<td><a href='' id=".$userArray['id']."'><img src='' alt='User anpassen'></a></td>";
-            echo "<td><a href='' id=".$userArray['id']."'><img src='' alt='User löschen'></a></td>";
-            echo "</tr>";
-        }
+        return $result;
     }
 
     public function radiobutton_all_roles(){
-        
         $sql="SELECT * FROM rollen ORDER BY id";
         $result = $this->mysqli->query($sql);
         while($role = $result->fetch_assoc()){
             echo "<input type='radio' name='role_id' value='".$role['id']."'";
             echo ">".$role['name']."<br>"; 
         }
+    }
+
+    // ausgewählten User in user_anpassen.php auslesen
+    public function get_selected_user($user_id){
+        $sql= "SELECT * FROM user WHERE id =".$user_id.";";
+        $result = $this->mysqli -> query($sql);
+        return $result;
+    }
+
+    public function get_role_selected_user($role_id){
+        $sql="SELECT * FROM rollen ORDER BY id";
+        $result = $this->mysqli->query($sql);
+        while($role = $result->fetch_assoc()){
+            echo "<input type='radio' name='role_id' value='".$role['id']."'";
+            if($role['id']==$role_id){
+                echo " checked=checked";
+            }
+            echo ">".$role['name']."<br>"; 
+        }
+    }
+
+    public function save_updated_user($updated_user, $password_checked){
+        $sql="UPDATE user SET name = '".$updated_user->get_username()."'";
+        //falls sich das Passwort geändert hat, neues Passwort speichern
+        if ($updated_user->get_password()!=$password_checked){
+            $sql.=", passwort = '".crypt($updated_user->get_password(),'salt')."'";
+        }
+        $sql.=", role_id = '".$updated_user->get_role_ID()."'";
+        $sql.=" WHERE id = ".$updated_user->get_user_ID().";";
+        
+        $result = $this->mysqli -> query($sql); 
+    }
+
+    public function delete_selected_user($deleted_user){
+        $sql="UPDATE user SET is_deleted = 1, name='', passwort='', role_id=NULL";
+        $sql.=" WHERE id=$deleted_user;";
+        $this->mysqli -> query($sql); 
     }
 }
 
