@@ -344,7 +344,7 @@
                 echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
                 $valide = FALSE;
             } else{
-                echo "<br>Eingabe der Frage valide!";
+                echo "<br>Eingabe der Kategoie valide!";
                 $db->insert_neue_kategorie($neueKategorie);
                 $kategorienPost[] = $neueKategorie;
             }

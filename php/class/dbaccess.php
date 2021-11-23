@@ -13,7 +13,7 @@ class Database{
         $this->db_connect();
     }
 
-    public function __deconstruct()
+    public function __destruct()
     {
         $this->mysqli->close();
     }
@@ -165,6 +165,8 @@ class Database{
                 wahrheit=".$korrekt_array[$i]." WHERE frage_id=$frageId AND antworttext='".$answers_old[$i]->get_antworttext()."' AND wahrheit=".$answers_old[$i]->get_wahr();
             $result = $this->mysqli->query($query_answer);
         }
+
+        $query_cat = "SELECT name FROM kategorien WHERE id=(SELECT kategorie_id FROM frage_kategorie WHERE frage_id=$frageId)";
 
 
         
