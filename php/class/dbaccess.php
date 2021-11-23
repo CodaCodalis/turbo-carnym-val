@@ -81,7 +81,7 @@ class Database{
         
     }
 
-    public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien)       
+    public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien, $userId)       
     {
         
         $antworten[] = $antwort1;
@@ -91,14 +91,15 @@ class Database{
         
         $korrekt_array = array(0, 0, 0, 0);
         
-        $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', 1);"; #user_id 1 ist erstmal ein filler
+        $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', $userId);"; #user_id 1 ist erstmal ein filler
         $this->mysqli->query($queryFrage);
         
         $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
         $result = $this->mysqli->query($queryFrageId);
         $frageId = $result->fetch_array();
         
-    
+        
+
         if($korrekt === "korrekt1")
         {
             $korrekt_array[0] = 1;
@@ -123,6 +124,41 @@ class Database{
         }
 
         $this->insert_frage_kategorie($frageId[0], $kategorien);
+        
+    }
+
+    public function update_question($frage, $frageId, $answers_old, $answers_new, $korrekt, $kategorienPost, $userId)
+    {
+        $query_question = "UPDATE fragen SET fragetext=\"$frage\" WHERE id=$frageId";
+        $result = $this->mysqli->query($query_question);
+
+        $korrekt_array = array(0, 0, 0, 0);
+        if($korrekt === "korrekt1")
+        {
+            $korrekt_array[0] = 1;
+        } 
+        else if($korrekt === "korrekt2")
+        {
+            $korrekt_array[1] = 1;
+        }
+        else if($korrekt === "korrekt3")
+        {
+            $korrekt_array[2] = 1;
+        }
+        else if($korrekt === "korrekt4")
+        {
+            $korrekt_array[3] = 1;
+        }
+
+        for ($i = 0; $i < count($answers_old); $i++)
+        {
+            $query_answer = "UPDATE antworten SET 
+                antworttext='".$answers_new[$i]."',
+                wahrheit=".$korrekt_array[$i]." WHERE frage_id=$frageId AND antworttext='".$answers_old[$i]->get_antworttext()."' AND wahrheit=".$answers_old[$i]->get_wahr();
+            $result = $this->mysqli->query($query_answer);
+        }
+
+
         
     }
 
@@ -156,19 +192,67 @@ class Database{
     public function get_alle_fragen() {
         $alleFragenQuery = "SELECT fragetext FROM fragen;";
         $result = $this->mysqli->query($alleFragenQuery);
-        while($zeile = $result->fetch_assoc()) {
-            $resultArray[] = $zeile;
+        if($this->mysqli->affected_rows > 0)
+        {
+            while($zeile = $result->fetch_assoc()) {
+                $resultArray[] = $zeile;
+            }
+            return $resultArray;
         }
-        return $resultArray;
+        else
+        {
+            return 0;
+        }
     }
 
     public function get_user_fragen($user) {
         $userFragenQuery = "SELECT fragetext FROM fragen WHERE user_id=(SELECT id FROM user WHERE name='$user');";
         $result = $this->mysqli->query($userFragenQuery);
-        while($zeile = $result->fetch_assoc()) {
-            $resultArray[] = $zeile;
+        if($this->mysqli->affected_rows > 0)
+        {
+            while($zeile = $result->fetch_assoc()) {
+                $resultArray[] = $zeile;
+            }
+            return $resultArray;
         }
-        return $resultArray;
+        else
+        {
+            return 0;
+        }
+        
+    }
+
+    public function get_frage_id($frage)
+    {
+        $query="SELECT id FROM fragen WHERE fragetext=\"$frage\"";
+        $result = $this->mysqli->query($query);
+        if($this->mysqli->affected_rows > 0)
+        {
+            $frageId = $result->fetch_array();
+            return $frageId[0];
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function get_antworten_zu_frage($frageId)
+    {
+        $query = "SELECT * FROM antworten WHERE frage_id=$frageId";
+        $result = $this->mysqli->query($query);
+        if($this->mysqli->affected_rows > 0)
+        {
+            while($zeile = $result->fetch_assoc())
+            {
+                $antwortenArray[] = $zeile;
+            }
+            return $antwortenArray;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public function get_kategorie_fragen($kategorie) {
@@ -177,10 +261,17 @@ class Database{
                             JOIN kategorien ON kategorien.id = frage_kategorie.kategorie_id
                             WHERE name LIKE '$kategorie';";
         $result = $this->mysqli->query($kategorieFragenQuery);
-        while($zeile = $result->fetch_assoc()) {
-            $resultArray[] = $zeile;
+        if($this->mysqli->affected_rows > 0)
+        {
+            while($zeile = $result->fetch_assoc()) {
+                $resultArray[] = $zeile;
+            }
+            return $resultArray;
         }
-        return $resultArray;
+        else
+        {
+            return 0;
+        }
     }
 
     public function check_ob_frage_existiert($frage) {

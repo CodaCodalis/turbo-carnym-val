@@ -18,27 +18,27 @@ class Frage {
         $this->antwort4=$antwort4;
     }
 
-    function getFragetext(){
+    function get_fragetext(){
         return $this->fragetext;
     }
 
-    function getFrageId(){
+    function get_frageId(){
         return $this->frageId;
     }
 
-    function getAntwort1(){
+    function get_antwort1(){
         return $this->antwort1;
     }
 
-    function getAntwort2(){
+    function get_antwort2(){
         return $this->antwort2;
     }
 
-    function getAntwort3(){
+    function get_antwort3(){
         return $this->antwort3;
     }
 
-    function getAntwort4(){
+    function get_antwort4(){
         return $this->antwort4;
     }
 
