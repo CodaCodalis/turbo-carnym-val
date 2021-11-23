@@ -7,10 +7,11 @@ class User{
     private $password;
 
     // Konstruktor
-    public function __construct($username, $password){
+    public function __construct($username, $password, $role_id){
         $this->username = $username;
         $this->password = $password;
         $this->userid = NULL;
+        $this->roleid = $role_id;
     }
 
     //Getter
@@ -26,6 +27,10 @@ class User{
         return $this->password;
     }
 
+    function get_role_ID(){
+        return $this->roleid;
+    }
+
     //Setter
     function set_username($username){
         $this->username = $username;
@@ -37,6 +42,10 @@ class User{
 
     function set_user_ID($userID){
         $this->userid = $userID;
+    }
+
+    function set_role_ID($role_id){
+        $this->roleid = $role_id;
     }
 }
 
