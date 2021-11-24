@@ -1,5 +1,5 @@
 <?php
-    require_once "class/validate.php";
+   
     require_once "class/antwort.php";
     require_once "class/frage.php";
     require_once "init.inc.php";
@@ -142,24 +142,29 @@
 
             <?php
                 $kategorien = $db->get_kategorien();
+                if(isset($frageObj))
+                {
+                    $cat_of_question = $db->get_cat_from_question($frageObj->get_frageId());
+                }
+                
                 for ($i = 0; $i < count($kategorien); $i++) {
-                    echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\""
-                    if(isset($frageObj))
+                    echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\" ";
+                    
+                    if(isset($cat_of_question))
                     {
-                        $cat_from_question = $db->get_cat_from_question($frageObj->get_frageId());
-                        if(count($cat_from_question) > 0)
+
+                        if(in_array($kategorien[$i]['name'], $cat_of_question))
                         {
-                            foreach ($cat_from_question as $cat) {
-                                if (in_array($kategorien[$i], $cat_from_question))
-                                {
-                                    echo "checked";
-                                }
-                            }
+                            
+                            echo "checked";
                         }
                     }
                     
                     echo "><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
+                    
                 }
+                
+                
             ?>
             <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie"><br>
             
@@ -176,6 +181,17 @@
             ?>
             >
             <input type="reset" name="reset" id="reset" value="Reset">
+            <?php
+
+            if(isset($frageObj))
+            {
+                echo "<input type=\"submit\" id=\"delete\" name=\"delete\" value=\"Löschen\">";
+                echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
+            }
+
+            
+
+            ?>
             
                     
         </form>
@@ -216,9 +232,17 @@
                             for ($i=0; $i < count($alleFragenArray); $i++) 
                             {
                                 echo "<tr>
-                                    <td>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>
-                                    <td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>
-                                    </tr>";
+                                    <td>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>";
+                                if($alleFragenArray[$i]['user_id'] == $_SESSION['userID'])
+                                {
+                                    echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                }
+                                else
+                                {
+                                    echo "<td></td>";
+                                }
+                                    
+                                    echo "</tr>";
                             }
                         }
                         echo "</table>";
@@ -239,9 +263,17 @@
                             for ($i=0; $i < count($userFragenArray); $i++) 
                             {
                                 echo "<tr>
-                                    <td>".$userFragenArray[$i]['fragetext']."</td>
-                                    <td><a href=\"\">edit</a></td>
-                                    </tr>";
+                                    <td>".$userFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$userFragenArray[$i]['fragetext']."\"></td>";
+                                
+                                if($userFragenArray[$i]['user_id'] == $_SESSION['userID'])
+                                {
+                                    echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                }
+                                else
+                                {
+                                    echo "<td></td>";
+                                }
+                                echo "</tr>";
                             }
                         }
                         
@@ -262,9 +294,16 @@
                             for ($i=0; $i < count($kategorieFragenArray); $i++) 
                             {
                                 echo "<tr>
-                                    <td>".$kategorieFragenArray[$i]['fragetext']."</td>
-                                    <td><a href=\"\">edit</a></td>
-                                    </tr>";
+                                        <td>".$kategorieFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$kategorieFragenArray[$i]['fragetext']."\"></td>";
+                                    if($kategorieFragenArray[$i]['user_id'] == $_SESSION['userID'])
+                                    {
+                                        echo    "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                    }
+                                    else
+                                    {
+                                        echo "<td></td>";
+                                    }
+                                    echo "</tr>";
                             }
                         }
                         
@@ -272,7 +311,7 @@
                     }
                     ?>
                 <br>
-                <a href="quizauswahl.html" id="btn">Abbrechen</a>
+                <a href="quizauswahl.php" id="btn">Abbrechen</a>
 
         </form>
 
@@ -294,7 +333,7 @@
 </html>
 
 <?php
-    if (isset($_REQUEST['send']) OR isset($_POST['editQuestion'])) {
+    if (isset($_REQUEST['send']) OR isset($_POST['editQuestion']) OR isset($_POST['delete'])) {
         //    echo $_POST['send'];
 
         $frage = $_POST['frage'];
@@ -424,10 +463,24 @@
 
             if($db->update_question($frage, $frage_id, $antworten_old, $antworten, $korrekt, $kategorienPost, $userId))
             {
+                unset($_SESSION['frage']);
+                unset($_SESSION['antworten']);
                 echo "<script>alert(\"Frage editiert\");</script>";
-            }
-            
+            }   
         }
     }
+
+    if(isset($_POST['delete']))
+    {
+        $frage_id = $_SESSION['frage']->get_frageId();
+        if($db->delete_question($frage_id))
+        {
+            unset($_SESSION['frage']);
+            unset($_SESSION['antworten']);
+            echo "<script>alert(\"Frage und Antworten gelöscht\");</script>";
+        }
+    }
+
+    $db->close_database();
 
 ?>

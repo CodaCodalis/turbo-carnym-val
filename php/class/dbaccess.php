@@ -165,13 +165,47 @@ class Database{
             $query_answer = "UPDATE antworten SET 
                 antworttext='".$answers_new[$i]."',
                 wahrheit=".$korrekt_array[$i]." WHERE frage_id=$frageId AND antworttext='".$answers_old[$i]->get_antworttext()."' AND wahrheit=".$answers_old[$i]->get_wahr();
-            $result = $this->mysqli->query($query_answer);
+            if (!$this->mysqli->query($query_answer))
+            {
+                return FALSE;
+            }
         }
-
-        $query_delete_cat_question = "DELETE FROM frage_kategorie WHERE frage_id=$frageId;";
-        $this->mysql->query($query_delete_cat_question);
-        $this->insert_frage_kategorie($frageId, $kategorienPost);
         
+        $query_delete_cat_question = "DELETE FROM frage_kategorie WHERE frage_id=$frageId;";
+        $this->mysqli->query($query_delete_cat_question);
+        if($this->mysqli->affected_rows <= 0)
+        {
+            return FALSE;
+        }
+        $this->insert_frage_kategorie($frageId, $kategorienPost);
+        if($this->mysqli->affected_rows <= 0)
+        {
+            return FALSE;
+        }
+        return TRUE;      
+    }
+
+    public function delete_answer($question_id)
+    {
+        $query_delete = "DELETE FROM antworten WHERE frage_id=$question_id";
+        $this->mysqli->query($query_delete);
+        return ($this->mysqli->affected_rows > 0);
+    }
+
+    public function delete_cat_question($question_id)
+    {
+        $query_delete = "DELETE FROM frage_kategorie WHERE frage_id=$question_id";
+        $this->mysqli->query($query_delete);
+        return ($this->mysqli->affected_rows > 0);
+    }
+
+    public function delete_question($question_id)
+    {
+        $this->delete_answer($question_id);
+        $this->delete_cat_question($question_id);
+        $query_delete = "DELETE FROM fragen WHERE id=$question_id";
+        $this->mysqli->query($query_delete);
+        return ($this->mysqli->affected_rows > 0);
     }
 
     public function check_ob_kategorie_existiert($kategorie) {
@@ -202,7 +236,7 @@ class Database{
     }
 
     public function get_alle_fragen() {
-        $alleFragenQuery = "SELECT fragetext FROM fragen;";
+        $alleFragenQuery = "SELECT * FROM fragen;";
         $result = $this->mysqli->query($alleFragenQuery);
         if($this->mysqli->affected_rows > 0)
         {
@@ -218,7 +252,7 @@ class Database{
     }
 
     public function get_user_fragen($user) {
-        $userFragenQuery = "SELECT fragetext FROM fragen WHERE user_id=(SELECT id FROM user WHERE name='$user');";
+        $userFragenQuery = "SELECT * FROM fragen WHERE user_id=(SELECT id FROM user WHERE name='$user');";
         $result = $this->mysqli->query($userFragenQuery);
         if($this->mysqli->affected_rows > 0)
         {
@@ -269,12 +303,16 @@ class Database{
 
     public function get_cat_from_question($questionId)
     {
-        $query = "SELECT name FROM kategorien WHERE id=(SELECT kategorie_id FROM frage_kategorie WHERE frage_id=$questionId";
+        $query = "SELECT name FROM kategorien WHERE id IN (SELECT kategorie_id FROM frage_kategorie WHERE frage_id=$questionId)";
         $result = $this->mysqli->query($query);
         if($this->mysqli->affected_rows > 0)
         {
-            return $result->fetch_all();
-
+            while ($row = $result->fetch_array())
+            {
+                $cat_array[] = $row[0];
+            }
+            
+            return $cat_array;
         }
         else
         {
@@ -283,7 +321,7 @@ class Database{
     }
 
     public function get_kategorie_fragen($kategorie) {
-        $kategorieFragenQuery = "SELECT fragen.fragetext, kategorien.name FROM frage_kategorie
+        $kategorieFragenQuery = "SELECT fragen.*, kategorien.name FROM frage_kategorie
                             JOIN fragen ON fragen.id = frage_kategorie.frage_id 
                             JOIN kategorien ON kategorien.id = frage_kategorie.kategorie_id
                             WHERE name LIKE '$kategorie';";
