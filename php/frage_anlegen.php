@@ -143,7 +143,22 @@
             <?php
                 $kategorien = $db->get_kategorien();
                 for ($i = 0; $i < count($kategorien); $i++) {
-                    echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\"><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
+                    echo "<input type=\"checkbox\" name=\"kategorien[]\" value=\"".$kategorien[$i]['name']."\""
+                    if(isset($frageObj))
+                    {
+                        $cat_from_question = $db->get_cat_from_question($frageObj->get_frageId());
+                        if(count($cat_from_question) > 0)
+                        {
+                            foreach ($cat_from_question as $cat) {
+                                if (in_array($kategorien[$i], $cat_from_question))
+                                {
+                                    echo "checked";
+                                }
+                            }
+                        }
+                    }
+                    
+                    echo "><label for='".$kategorien[$i]['name']."'>".$kategorien[$i]['name']."</label><br>";
                 }
             ?>
             <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie"><br>

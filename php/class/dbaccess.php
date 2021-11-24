@@ -24,14 +24,16 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        /*$this->host = 'db5005383230.hosting-data.io';
+        $this->host = 'db5005383230.hosting-data.io';
         $this->user = 'dbu2117629';
         $this->pass = 'Gr4hsvSbdDbSmKH';
-        $this->db = 'dbs4516370';*/
+        $this->db = 'dbs4516370';
+        /*
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
+        */
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
@@ -166,9 +168,9 @@ class Database{
             $result = $this->mysqli->query($query_answer);
         }
 
-        $query_cat = "SELECT name FROM kategorien WHERE id=(SELECT kategorie_id FROM frage_kategorie WHERE frage_id=$frageId)";
-
-
+        $query_delete_cat_question = "DELETE FROM frage_kategorie WHERE frage_id=$frageId;";
+        $this->mysql->query($query_delete_cat_question);
+        $this->insert_frage_kategorie($frageId, $kategorienPost);
         
     }
 
@@ -258,6 +260,21 @@ class Database{
                 $antwortenArray[] = $zeile;
             }
             return $antwortenArray;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public function get_cat_from_question($questionId)
+    {
+        $query = "SELECT name FROM kategorien WHERE id=(SELECT kategorie_id FROM frage_kategorie WHERE frage_id=$questionId";
+        $result = $this->mysqli->query($query);
+        if($this->mysqli->affected_rows > 0)
+        {
+            return $result->fetch_all();
+
         }
         else
         {
