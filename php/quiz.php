@@ -37,23 +37,27 @@ include("init.inc.php");
 
             if(isset($_POST['anzahl'])){
                 $_SESSION['anzahlAuswahlFragen']=$_POST['anzahl'];
+
+
+              
             }
 
             $nrQuestion=$_SESSION['anzahlAuswahlFragen'];
             $DB_CONNECTION = new Database();
-            if(!isset($_SESSION ['selectedQuestions'])){
-            $randomIDs = $DB_CONNECTION->get_random_IDs($nrQuestion);
+            if(!isset($_SESSION['selectedQuestions'])){
+                $randomIDs = $DB_CONNECTION->get_random_IDs($nrQuestion);
+               
             }
            // var_dump($_SESSION ['selectedQuestions']);
             if($_SESSION['frageCount']<$nrQuestion){
-            $DB_CONNECTION->show_questions($_SESSION ['selectedQuestions'],$_SESSION['frageCount']);
-            $DB_CONNECTION->show_answers($_SESSION ['selectedQuestions'],$_SESSION['frageCount']);
-            echo '<input type="submit" value="Nächste Frage">';
+                $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
+                $DB_CONNECTION->show_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
+                echo '<input type="submit" value="Nächste Frage">';
             }
             else{
                 echo "Quizende";
                 $_SESSION['frageCount']=0;
-                unset ($_SESSION['selectedQuestions']);
+                unset ($_SESSION['selectedQuestions']);         //rücksetzen der selected Questions und der gezähletn Fragen (frageCount) 
             }
             
             ?>
@@ -79,3 +83,9 @@ include("init.inc.php");
 </body>
 
 </html>
+
+<?php
+
+// $DB_CONNECTION->close_database();
+
+?>

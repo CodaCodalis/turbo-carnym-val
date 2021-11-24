@@ -348,8 +348,8 @@ class Database{
     }
 
     // $selctedInput ist die Anzahl der Fragen die bei der Quizauswahl (von quizauswahl.php) übergebn wird (Radio Button oder Direkteingabe)
-    public function get_random_IDs($selectedInput)
-    {   $_SESSION ['frageCount']=0;
+    public function get_random_IDs($selectedInput){
+        $_SESSION ['frageCount']=0;
         $_SESSION ['selectedQuestions']=array();
         $i = 0;
         while ($i < $selectedInput) {
@@ -364,53 +364,71 @@ class Database{
                 $_SESSION ['selectedQuestions'][$i] = $zufallsfrageId;
                 $i++;
             }
-        }
-        // var_dump($_SESSION ['selectedQuestions']);
-        return $_SESSION ['selectedQuestions'];
-          
-
-
-          //      echo "Zufallszahlen: <br>";
-          //       var_dump($selectedQuestions);
-          
+        }                                           //$selectedQuestions ist ein Array aus zufällig ausgewählten Frage IDs aus der Funktion getRandomIds()
+        return $_SESSION ['selectedQuestions'];     //$questionNr spricht die jeweilige Position im Array an
       }
 
-      //$selectedQuestions ist ein Array aus zufällig ausgewählten Frage IDs aus der Funktion getRandomIds()
-      //$questionNr spricht die jeweilige Position im Array an
 
-      public function show_questions($selectedQuestions, $questionNr)
-      {   
+    //fragen per kategorie (id) zeigen
+    public function get_questions_by_category($category){
+        $_SESSION['categoryQuestion'] = array();
+        $i = 0;
+
+        $query = "SELECT frage_kategorie.frage_id FROM frage_kategorie JOIN kategorien ON frage_kategorie.kategorie_id = kategorien.id WHERE kategorien.name='$category'";        //Kategorie anhand der Vorauswahl raussuchen, 
+        $Fragen = $this->mysqli->query($query);                                                                                                                                   //fragt alle frage_id ab, di zur übergebenden Kategorie gehören 
+
+        $check = mysqli_num_rows($Fragen);                                          //überprüft die Anzahl der abgefragten Datenreihen
+        if ($check > 0) {
+            while ($data = mysqli_fetch_assoc($Fragen)) {                           // Ergebnis wird in assoz. Array umgeandelt und in $data gespeichert
+                $_SESSION['categoryQuestion'][$i] = $data['frage_id'];              //es wird auf den Wert 'frage_id' des assoz. Array zugegriffen und dies in der Session gespeichert
+                $i++;
+            }
+        }
+        return $_SESSION['categoryQuestion'];
+    }
+
+    //Liefert aus dem in SESSION['categoryQuestion'] gespeicherten Array von Fragen einer Kategorie eine Anzahl zufälliger Fragen
+    public function get_random_questionIDs_by_category($anzahlFragen){
+        $i = 0;
+        $_SESSION['selectedCategoryQuestions'] = array();
+        $min = 0;
+        $max = count($_SESSION['categoryQuestion']);
+        while ($i < $anzahlFragen) {
+
+            $zufallsIndex = rand($min, $max - 1);
+
+            if (!in_array($_SESSION['categoryQuestion'] [$zufallsIndex], $_SESSION['selectedCategoryQuestions'])) {
+                $_SESSION['selectedCategoryQuestions'][$i] = $_SESSION['categoryQuestion'] [$zufallsIndex];
+                $i++;
+            }
+        }
+        return $_SESSION['selectedCategoryQuestions'];
+    }
+
+      public function show_questions($selectedQuestions, $questionNr){   
           $query = "SELECT fragetext FROM fragen WHERE id=$selectedQuestions[$questionNr];";
           $Frage = $this->mysqli->query($query);
-
-          //      echo "<br> Frage <br>";
           $row = $Frage->fetch_array(MYSQLI_ASSOC);
-          
           printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
       }
 
 
-      public function get_answer_IDs($selectedQuestions, $questionNr)
-      {   
+      public function get_answer_IDs($selectedQuestions, $questionNr){   
           $answerID = "SELECT id FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
           $answer = $this->mysqli->query($answerID);
           $resultAnswer = $answer->fetch_all()[$answerID][0];
       }
 
 
-      public function show_answers($selectedQuestions, $questionNr)
-      {   
+      public function show_answers($selectedQuestions, $questionNr){   
           $queryAnswer = "SELECT antworttext FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
           $answer = $this->mysqli->query($queryAnswer);
 
-          //       echo "<br> Antwort <br>";
-
           while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
-              printf("<div id='antwort'>%s</div><br>", $row["antworttext"]);
+            printf("<input type = 'radio' name='wahrheit' value='X' required> <div id='antwort'>%s</div><br>", $row["antworttext"]);
           }
           $_SESSION['frageCount']+=1;
-          // echo "<div id="frage">$Frage</div>"."<div id="a1">$Antwort</div>" ."<div id="a2">$Antwort2</div>"."<div id="a3">$Antwort3</div>"."<div id="a4">$Antwort4</div>"
-      }
+        }
 
     //alle User ausgeben
     public function get_all_user(){
