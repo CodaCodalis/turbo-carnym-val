@@ -24,14 +24,15 @@
     <div class="clearfix"></div>
     <div class="content">
 
-        <h2>Hier kann man das Quiz starten!</h2>
+        <h2>QuiZubi - Quizauswahl</h2>
+
         <div id="randomquestion">
             <h3>Zufallsquiz starten mit</h3>
             <?php
                 $_SESSION['frageCount']=0;
             ?>
             <form action="quiz.php" method="POST">
-                <input type="radio" id="anzahl10" name="anzahl" value="10">
+                <input type="radio" id="anzahl10" name="anzahl" value="10" required>
                 <label for="anzahl10">10 Fragen</label>
                 <input type="radio" id="anzahl20" name="anzahl" value="20">
                 <label for="anzahl20">20 Fragen</label>
@@ -42,23 +43,27 @@
             </form>
 
             <h3>Kategorie auswählen</h3>
-            <form action="quiz.php" method="POST">
-                <select name="categories" id="categories">
-                    <option>--- Bitte auswählen ---</option>
-                    <option value="">Netzwerk</option>
-                    <option value="">Wirtschaft</option>
-                    <option value="">Java</option>
+            <form action="kategoriequiz.php" method="POST">
+                <select name="category" id="category">
+                    <?php                                                                                                                       /** new content */
+                    $DB_CONNECTION = new Database();                                                                                            /** new content */
+                    $kategorien=$DB_CONNECTION->get_kategorien();                                                                               /** new content */
+                     foreach( $kategorien as $element ) {                                                                                       /** new content */
+                        echo "<option value=".$element['name']." name='category'> ".$element['name']." </option>";                              /** new content */
+                    }                                                                                                                           /** new content */
+                    ?>                                                                                                                         
+                    
                 </select>
 
-                <h4>Anzahl der Fragen</h4>
-                <input type="radio" id="cat10" name="cat" value="10">
+                <h4>Anzahl der Fragen in der Kategorie</h4>
+                <input type="radio" id="cat10" name="cat" value="10" required>
                 <label for="cat10">10 Fragen</label>
-                <input type="radio" id="cat20" name="cat" value="20">
+                <input type="radio" id="cat20" name="cat" value="20" >
                 <label for="cat20">20 Fragen</label>
-                <input type="radio" id="catAll" name="cat" value="COUNT aus DB">
+                <input type="radio" id="catAll" name="cat" value="ALL" >
                 <label for="catAll">Alle Fragen</label><br>
              
-                <input type="submit" name="quiz_kategorie" value="Quiz starten">
+                <input type="submit" name="quiz_kategorie" value="Kategoriequiz starten">
             </form>
         </div>
 
@@ -77,3 +82,9 @@
     </footer>
 </body>
 </html>
+
+<?php
+
+// $DB_CONNECTION->close_database();
+
+?>

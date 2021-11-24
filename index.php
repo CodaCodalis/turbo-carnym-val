@@ -8,22 +8,22 @@
     if(isset($_POST['username']) and isset($_POST['password'])){
         // über Database-Objekt auf die Funktion zugreifen 
         $userObj=$DB_CONNECTION->create_userobject_from_database($_POST['username'], $_POST['password']);
-
-        // User wurde ermittelt
-        if($userObj){
+        if($userObj->get_username()==NULL){
+            echo '<script>alert("Bei der Anmeldung ist ein Fehler aufgetreten. Bitte Benutzername und Passwort prüfen."); window.location.href=\'index.php\';</script>';
+        }
+        else {
             // aktuelle User-ID und -Name in der Session speichern
             $_SESSION['userID']=$userObj->get_user_ID();
             $_SESSION['userName']=$userObj->get_username();
             $_SESSION['userRoleID']=$userObj->get_role_ID();
             // Umleitung zur quizauswahl:
             $ziel="php/quizauswahl.php";
-            
-            // Hier wird die eigentliche Umleitung veranlasst (. für denselben Ordner):
             header("Location: $ziel");
         }
     }
     
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,12 +60,13 @@
         <div id="login">
             <?php
                 if(isset($_SESSION['userName'])){
-                    echo "<h3>Hallo ".$_SESSION['userName']."</h3>";
+                    echo "<h3>Hallo ".$_SESSION['userName']."!</h3>";
                 }
                 else{
                     echo "<h3>Hallo, bitte anmelden oder Registrieren.</h3>";
                 }
             ?>
+            
             <?php
                 /* Wenn nicht eingeloggt (Session enthält keinen UserName) werden das Anmeldeformular
                 und der Registrieren-Button eingebledet */
@@ -74,6 +75,7 @@
                     echo "<label>Benutzername</label><input type='text' name='username'><br>";
                     echo "<label>Passwort</label><input type='password' name='password'><br>";
                     echo "<input type='submit' name='aktion' value='anmelden'></form>";
+                    echo "<b>Den Button zum Release entfernen:</b>";
                     echo "<button onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
                 }
             ?>

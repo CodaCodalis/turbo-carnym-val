@@ -9,8 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-
-<title>Userverwaltung</title>
+    <title>Userverwaltung</title>
 </head>
 <body>
     <header>
@@ -25,21 +24,39 @@
     </header>
     <div class="clearfix"></div>
     <div class="content">
-
         <h2>Userverwaltung</h2>
-        <div id="">
+        <div>
             <table>
                 <tr>
                     <th>User-ID</th>
                     <th>Username</th>
                     <th>Rollen</th>
                 </tr>
-                <?php $DB_CONNECT->get_all_user(); ?>
+                <?php 
+                    $result=$DB_CONNECT->get_all_user(); 
+                    while ($userArray=$result->fetch_assoc()){
+                        //var_dump($userArray);
+                        echo "<tr>";
+                        echo "<td>".$userArray['id']."</td>";
+                        echo "<td>".$userArray['name']."</td>";
+                        echo "<td>".$userArray['role_id']."</td>";
+                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='' alt='User anpassen'></a></td>";
+                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img src='' alt='User l&ouml;schen'></a></td>";
+                        echo "</tr>";
+                    }
+                ?>
             </table>     
+            <!-- Funktion zur Bestätigung vor dem endgültigen Löschen -->
+            <script type="text/javascript">
+                function confDelete() {
+                    msg = "User endgültig löschen?";
+                    return confirm(msg);
+                }
+            </script>
         </div>
 
         <div>
-            <form action="user_new.php" method="POST">
+            <form action="../registrieren.php" method="POST">
                 <input type="submit" value="User anlegen">
             </form>
         </div>
@@ -59,3 +76,7 @@
     </footer>
 </body>
 </html>
+
+<?php
+    $DB_CONNECT->close_database();
+?>
