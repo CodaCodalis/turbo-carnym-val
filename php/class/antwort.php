@@ -10,11 +10,11 @@ class Antwort{
         $this->wahr=$wahr;
     }
 
-    function getAntworttext(){
+    function get_antworttext(){
         return $this->antworttext;
     }
 
-    function getWahr(){
+    function get_wahr(){
         return $this->wahr;
     }
 }
