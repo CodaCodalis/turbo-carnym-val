@@ -25,19 +25,16 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-<<<<<<< HEAD
-=======
-        $this->host = '93.90.203.205'; //'db5005383230.hosting-data.io';
+        $this->host = 'localhost'; //'db5005383230.hosting-data.io';
         $this->user = 'grp4_user'; //'dbu2117629';
         $this->pass = ''; //'Gr4hsvSbdDbSmKH';
         $this->db = 'Gruppe4DB'; //'dbs4516370';
         /*
->>>>>>> 4eaa7262596160a53038bed22e6a2284f42eff52
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-        
+        */
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
