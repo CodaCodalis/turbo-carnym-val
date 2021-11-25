@@ -40,8 +40,8 @@
                         echo "<td>".$userArray['id']."</td>";
                         echo "<td>".$userArray['name']."</td>";
                         echo "<td>".$userArray['role_id']."</td>";
-                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='' alt='User anpassen'></a></td>";
-                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img src='' alt='User l&ouml;schen'></a></td>";
+                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/pencil.png' alt='User anpassen' width='30' height='30'></a></td>";
+                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/x.png' alt='User l&ouml;schen' width='30' height='30'></a></td>";
                         echo "</tr>";
                     }
                 ?>
@@ -70,7 +70,3 @@
     </footer>
 </body>
 </html>
-
-<?php
-    $DB_CONNECT->close_database();
-?>

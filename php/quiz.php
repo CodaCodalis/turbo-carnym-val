@@ -38,6 +38,7 @@ include("init.inc.php");
                     $y = $_SESSION['anzahlAuswahlFragen'];
                 }
                 echo "<h3>Frage ".$x." von ".$y;
+
             ?>
         </div>
         <div id="quizwindow">
@@ -71,9 +72,15 @@ include("init.inc.php");
             }
            // var_dump($_SESSION ['selectedQuestions']);
             if($_SESSION['frageCount']<$nrQuestion){
+                $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']];
+                $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
+                echo "<br>Kategorie: ".$kategorie[0];
+                
+
                 $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                 $DB_CONNECTION->show_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                 echo '<input type="submit" value="Nächste Frage">';
+                echo "<button onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
             }
             else{
                 header("Location: auswertung.php");

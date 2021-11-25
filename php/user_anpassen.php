@@ -60,6 +60,7 @@
                         $DB_CONNECTION->get_role_selected_user($userArray['role_id']);
                         
                         echo "<input type='submit' name='aktion' value='speichern'>";
+                        echo "<button onClick=\"window.location.href='userverwaltung.php'; return false;\">Abbrechen</button>";
                     ?>
                 </div>
             </form>

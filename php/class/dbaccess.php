@@ -25,16 +25,17 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
+        /*
         $this->host = 'localhost'; //'db5005383230.hosting-data.io';
         $this->user = 'grp4_user'; //'dbu2117629';
         $this->pass = ''; //'Gr4hsvSbdDbSmKH';
         $this->db = 'Gruppe4DB'; //'dbs4516370';
-        /*
+        */
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-        */
+        
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
@@ -471,19 +472,19 @@ class Database{
         return $_SESSION['selectedCategoryQuestions'];
     }
 
-      public function show_questions($selectedQuestions, $questionNr){   
-          $query = "SELECT fragetext FROM fragen WHERE id=$selectedQuestions[$questionNr];";
-          $Frage = $this->mysqli->query($query);
-          $row = $Frage->fetch_array(MYSQLI_ASSOC);
-          printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
-      }
+    public function show_questions($selectedQuestions, $questionNr){   
+        $query = "SELECT fragetext FROM fragen WHERE id=$selectedQuestions[$questionNr];";
+        $Frage = $this->mysqli->query($query);
+        $row = $Frage->fetch_array(MYSQLI_ASSOC);
+        printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
+    }
 
 
-      public function get_answer_IDs($selectedQuestions, $questionNr){   
-          $answerID = "SELECT id FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
-          $answer = $this->mysqli->query($answerID);
-          $resultAnswer = $answer->fetch_all()[$answerID][0];
-      }
+    public function get_answer_IDs($selectedQuestions, $questionNr){   
+        $answerID = "SELECT id FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
+        $answer = $this->mysqli->query($answerID);
+        $resultAnswer = $answer->fetch_all()[$answerID][0];
+    }
 
 
     public function show_answers($selectedQuestions, $questionNr){   
