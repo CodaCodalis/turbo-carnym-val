@@ -17,7 +17,7 @@ INSERT INTO `kategorien` (`name`) VALUES
 ('Datenschutz und Datensicherheit');
 
 INSERT INTO `fragen` (`fragetext`, `user_id`) VALUES
-('Wann stellte Linus Torvalds die erste Version seines Kernels online?', 1);
+('Wann stellte Linus Torvalds die erste Version seines Kernels online?', 1),
 ('Wofür steht die Abkürzung ".pdf"?', 1),
 ('Wie heißt der Ethernet-Steckverbinder?', 1),
 ('Wofür steht GNU GPL?', 1),
