@@ -25,14 +25,8 @@
     </div>
     <footer>
         <div class="footer">
-            <ul>
-                <li>
-                    <a href="impressum.html">Impressum</a>
-                </li>
-                <li>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </li>
-            </ul>
+            <a href="php/impressum.php">Impressum</a>
+            <a href="php/datenschutz.php">Datenschutz</a>
         </div>
     </footer>
 </body>

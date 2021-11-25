@@ -72,14 +72,8 @@ $DB_CONNECTION = new Database();
 
     <footer>
         <div class="footer">
-            <ul>
-                <li>
-                    <a href="impressum.html">Impressum</a>
-                </li>
-                <li>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </li>
-            </ul>
+            <a href="impressum.php">Impressum</a>
+            <a href="datenschutz.php">Datenschutz</a>
         </div>
     </footer>
 </body>

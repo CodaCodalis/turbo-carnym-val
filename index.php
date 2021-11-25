@@ -83,14 +83,8 @@
     </div>
     <footer>
         <div class="footer">
-            <ul>
-                <li>
                     <a href="php/impressum.php">Impressum</a>
-                </li>
-                <li>
                     <a href="php/datenschutz.php">Datenschutz</a>
-                </li>
-            </ul>
         </div>
     </footer>
 </body>
