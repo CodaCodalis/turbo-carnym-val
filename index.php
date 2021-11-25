@@ -85,10 +85,10 @@
         <div class="footer">
             <ul>
                 <li>
-                    <a href="impressum.php">Impressum</a>
+                    <a href="php/impressum.php">Impressum</a>
                 </li>
                 <li>
-                    <a href="datenschutz.php">Datenschutz</a>
+                    <a href="php/datenschutz.php">Datenschutz</a>
                 </li>
             </ul>
         </div>
