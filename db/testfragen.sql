@@ -44,7 +44,7 @@ INSERT INTO `antworten` (`antworttext`, `wahrheit`, `frage_id`) VALUES
 ('GNU General Public License', 1, 4),
 ('GNU Grams Per Liter', 0, 4),
 ('GNU Gas Petroleum Liquids', 0, 4),
-('GNU Glycerophospholipid', 0, 4);
+('GNU Glycerophospholipid', 0, 4),
 ('Autor von Windows 3.11', 0, 5),
 ('Mitglied der Band O-Zone', 0, 5),
 ('Begründer der GNU GPL', 1, 5),
