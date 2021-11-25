@@ -1,3 +1,8 @@
+CREATE TABLE `rollen` (
+  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  	`name` varchar(32) UNIQUE NOT NULL
+);
+
 CREATE TABLE `user` (
  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
  	`name` varchar(32) NOT NULL,
@@ -26,12 +31,6 @@ CREATE TABLE `kategorien` (
   	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   	`name` varchar(32) NOT NULL
 );
-
-CREATE TABLE `rollen` (
-  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  	`name` varchar(32) UNIQUE NOT NULL
-);
-
 
 CREATE TABLE `frage_kategorie` (
   	`frage_id` int NOT NULL,
