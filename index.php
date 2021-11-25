@@ -95,7 +95,3 @@
     </footer>
 </body>
 </html>
-
-<?php
-    $DB_CONNECTION->close_database();
-?>

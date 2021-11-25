@@ -21,7 +21,7 @@
         <div id="">
             &nbsp;Zugriff verweigert! Keine Berechtigung.
         </div>
-        <button onClick="window.location.href='/';return false;">Startseite</button>
+        <button onClick="window.location.href='./';return false;">Startseite</button>
     </div>
     <footer>
         <div class="footer">

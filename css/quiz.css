@@ -102,3 +102,27 @@ footer li{
     width: 500px;
     margin: auto;
 }
+
+#korrekte_Antwort{
+    border:2px solid yellow;
+    color: white;
+    font-size: 20px;
+    width: 500px;
+    margin: auto;
+}
+
+#antwort_gewaehlt_richtig{
+    border:2px solid lightgreen;
+    color: white;
+    font-size: 20px;
+    width: 500px;
+    margin: auto;
+}
+
+#antwort_gewaehlt_falsch{
+    border:2px solid tomato;
+    color: white;
+    font-size: 20px;
+    width: 500px;
+    margin: auto;
+}

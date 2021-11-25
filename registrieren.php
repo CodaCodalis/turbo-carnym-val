@@ -6,8 +6,8 @@
     $DB_CONNECTION = new Database();
 
     // Bei bereits ausgefülltem Formular: Wenn etwas eingetragen, wird der neue User in der Datenbank angelegt:
-    if(isset($_POST['login']) AND isset($_POST['password']) AND isset($_POST['role_id'])){
-        $new_user = new User($_POST['login'], $_POST['password'], $_POST['role_id']);
+    if(isset($_POST['name']) AND isset($_POST['password']) AND isset($_POST['role_id'])){
+        $new_user = new User($_POST['name'], $_POST['password'], $_POST['role_id']);
         $error = $DB_CONNECTION->write_User_to_database($new_user);
 
         if($error == NULL){
@@ -30,7 +30,11 @@
         <header>
             <nav>
                 <ul>
+                    <li><a href="php/logout.php">Abmelden</a></li>
+                    <li><a href="php/frage_anlegen.php">Frage erstellen</a></li>
+                    <li><a href="php/quizauswahl.php">Quizauswahl</a></li>
                     <li><a href="index.php">Startseite</a></li>
+                    <li><a href="php/userverwaltung.php">Userverwaltung</a></li>
                 </ul>
             </nav>
         </header>
@@ -42,8 +46,8 @@
                 <label>Benutzername</label>
                 <input type="text" name="name" value="">
                 <?php
-                    if(isset($_POST['login']) AND $_POST['login']){
-                        $text = $_POST['login'];
+                    if(isset($_POST['name']) AND $_POST['name']){
+                        $text = $_POST['name'];
 
                         $validate = new Validate();
                         if(!$validate->validateText($text)){
@@ -66,7 +70,7 @@
                         if(!$validate->validateText($text)){
                             echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
                         }else{
-                            echo "<br>Eingabe der Frage valide!";
+                            echo "<br>Eingabe des Passworts valide!";
                         }
                     }else if(isset($_POST['aktion'])){
                         echo "<p id='validate'><br>Bitte Passwort-Feld ausfüllen.</p>";
@@ -86,6 +90,7 @@
                 ?>
                 <!--Formular abschicken -->
                 <input type="submit" name="aktion" value="registrieren">
+                <?php echo "<button onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
             </form>
         </div>
         <footer>
@@ -102,7 +107,3 @@
         </footer>
     </body>
 </html>
-
-<?php
-    $DB_CONNECTION->close_database();
-?>

@@ -18,16 +18,17 @@ class Database{
         $this->mysqli->close();
     }
 
+    //ggf löschen
     public function close_database(){
         $this->mysqli->close();
     }
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        $this->host = 'db5005383230.hosting-data.io';
-        $this->user = 'dbu2117629';
-        $this->pass = 'Gr4hsvSbdDbSmKH';
-        $this->db = 'dbs4516370';
+        $this->host = 'localhost';//'db5005383230.hosting-data.io';
+        $this->user = 'Spieler';//'dbu2117629';
+        $this->pass = 'spieler';//'Gr4hsvSbdDbSmKH';
+        $this->db = 'carnymQuiz';//'dbs4516370';
         /*
         $this->host = 'localhost';
         $this->user = 'Spieler';
@@ -475,15 +476,47 @@ class Database{
       }
 
 
-      public function show_answers($selectedQuestions, $questionNr){   
-          $queryAnswer = "SELECT antworttext FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
-          $answer = $this->mysqli->query($queryAnswer);
+    public function show_answers($selectedQuestions, $questionNr){   
+        $queryAnswer = "SELECT antworttext, id, wahrheit FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
+        $answer = $this->mysqli->query($queryAnswer);
 
-          while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
-            printf("<input type = 'radio' name='wahrheit' value='X' required> <div id='antwort'>%s</div><br>", $row["antworttext"]);
-          }
-          $_SESSION['frageCount']+=1;
+        while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
+                echo "<input type = 'radio' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div><br>";
         }
+        $_SESSION['frageCount']+=1;
+    }
+
+    public function show_checked_answers($selectedQuestions, $questionNr, $answerArray, $anzahl_richtige_antwort){   
+        $queryAnswer = "SELECT antworttext, id, wahrheit FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
+        $answer = $this->mysqli->query($queryAnswer);
+
+        while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
+            $div_id = 'antwort';
+            $ausgabe = false;
+            
+            if ($row['wahrheit']==1){
+                $div_id = 'korrekte_Antwort';
+                $ausgabe = true;
+            }
+
+            if($answerArray['antwort_id'] == $row['id'] AND $row['wahrheit']==1){
+                $div_id = 'antwort_gewaehlt_richtig';
+                $anzahl_richtige_antwort++;
+                $ausgabe = true;
+            }
+            else if ($answerArray['antwort_id'] == $row['id'] AND $row['wahrheit']==0){
+                $div_id = 'antwort_gewaehlt_falsch';
+                $ausgabe = true;
+            }
+            
+            if($ausgabe){
+                echo "<div id='$div_id'>".$row['antworttext']."</div><br>";
+            }
+        }
+        $_SESSION['frageCount']+=1;
+
+        return $anzahl_richtige_antwort;
+    }
 
     //alle User ausgeben
     public function get_all_user(){

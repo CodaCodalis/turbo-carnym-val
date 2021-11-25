@@ -30,8 +30,12 @@
             <h3>Zufallsquiz starten mit</h3>
             <?php
                 $_SESSION['frageCount']=0;
+                unset ($_SESSION['selectedQuestions']);          
+                unset ($_SESSION['anzahlAuswahlFragen']);
             ?>
             <form action="quiz.php" method="POST">
+                <input type="radio" id="anzahl3" name="anzahl" value="3" required>
+                <label for="anzahl3">3 Fragen</label>
                 <input type="radio" id="anzahl10" name="anzahl" value="10" required>
                 <label for="anzahl10">10 Fragen</label>
                 <input type="radio" id="anzahl20" name="anzahl" value="20">

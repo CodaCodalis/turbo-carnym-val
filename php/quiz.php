@@ -27,6 +27,19 @@ include("init.inc.php");
 
     <div class="content">
         <h2>QUIZ</h2>
+        <div>
+            <?php
+                if(!isset($_SESSION['anzahlAuswahlFragen'])){
+                    $x = 1;
+                    $y = $_POST['anzahl'];
+                }
+                else if(isset($_SESSION['frageCount'])){
+                    $x = $_SESSION['frageCount']+1;
+                    $y = $_SESSION['anzahlAuswahlFragen'];
+                }
+                echo "<h3>Frage ".$x." von ".$y;
+            ?>
+        </div>
         <div id="quizwindow">
 
         <form action="quiz.php" method="POST">
@@ -35,11 +48,19 @@ include("init.inc.php");
               //  echo $_SESSION['frageCount'];
               //  }
 
+            // Antwort von vorheriger Frage speichern
+            if(isset($_POST['wahrheit'])){
+                //$_POST['wahrheit'] enthält Antwort_id
+                $antwort_id = $_POST['wahrheit'];
+                $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']-1];
+                $_SESSION['frage_antwort_wahl'][]=array("frage_id"=>$frage_id, "antwort_id"=>$antwort_id);
+            }
+            else{
+                $_SESSION['frage_antwort_wahl']= array();
+            }
+
             if(isset($_POST['anzahl'])){
                 $_SESSION['anzahlAuswahlFragen']=$_POST['anzahl'];
-
-
-              
             }
 
             $nrQuestion=$_SESSION['anzahlAuswahlFragen'];
@@ -55,9 +76,12 @@ include("init.inc.php");
                 echo '<input type="submit" value="Nächste Frage">';
             }
             else{
+                header("Location: auswertung.php");
+                /*
                 echo "Quizende";
                 $_SESSION['frageCount']=0;
                 unset ($_SESSION['selectedQuestions']);         //rücksetzen der selected Questions und der gezähletn Fragen (frageCount) 
+                */
             }
             
             ?>
