@@ -10,13 +10,15 @@
     <body>
         <header>
             <?php
+                echo "Test";
+                var_dump($_SESSION['userName']);
                 if(isset($_SESSION['userName'])) {
                     echo '<nav>';
                     echo '<ul>';    
-                    echo '<li><a href="php/logout.php">Abmelden</a></li>';       
-                    echo '<li><a href="php/frage_anlegen.php">Frage erstellen</a></li>';
-                    echo '<li><a href="php/quizauswahl.php">Quizauswahl</a></li>';
-                    echo '<li><a href="php/userverwaltung.php">Userverwaltung</a></li>';
+                    echo '<li><a href="logout.php">Abmelden</a></li>';       
+                    echo '<li><a href="frage_anlegen.php">Frage erstellen</a></li>';
+                    echo '<li><a href="quizauswahl.php">Quizauswahl</a></li>';
+                    echo '<li><a href="userverwaltung.php">Userverwaltung</a></li>';
                     echo '</ul>';
                     echo '</nav>';
                 }
