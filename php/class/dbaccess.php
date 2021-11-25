@@ -25,10 +25,10 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        $this->host = '93.90.203.205' //'db5005383230.hosting-data.io';
-        $this->user = 'grp4_user' //'dbu2117629';
-        $this->pass = '' //'Gr4hsvSbdDbSmKH';
-        $this->db = 'Gruppe4DB' //'dbs4516370';
+        $this->host = '93.90.203.205'; //'db5005383230.hosting-data.io';
+        $this->user = 'grp4_user'; //'dbu2117629';
+        $this->pass = ''; //'Gr4hsvSbdDbSmKH';
+        $this->db = 'Gruppe4DB'; //'dbs4516370';
         /*
         $this->host = 'localhost';
         $this->user = 'Spieler';
