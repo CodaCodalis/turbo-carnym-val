@@ -1,9 +1,15 @@
-CREATE DATABASE `pruefungsquiz`;
+CREATE TABLE `rollen` (
+  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  	`name` varchar(32) UNIQUE NOT NULL
+);
 
 CREATE TABLE `user` (
  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
  	`name` varchar(32) NOT NULL,
-  	`passwort` varchar(32) NOT NULL
+  	`passwort` varchar(32) NOT NULL,
+	`role_id` int NOT NULL,
+	FOREIGN KEY (`role_id`) REFERENCES `rollen` (`id`),
+	`is_deleted` boolean
 );
 
 CREATE TABLE `fragen` (
@@ -26,23 +32,9 @@ CREATE TABLE `kategorien` (
   	`name` varchar(32) NOT NULL
 );
 
-CREATE TABLE `rollen` (
-  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  	`name` varchar(32) UNIQUE NOT NULL
-);
-
-
 CREATE TABLE `frage_kategorie` (
   	`frage_id` int NOT NULL,
   	`kategorie_id` int NOT NULL,
 	FOREIGN KEY (`frage_id`) REFERENCES `fragen` (`id`),
 	FOREIGN KEY (`kategorie_id`) REFERENCES `kategorien` (`id`)
 );
-
-CREATE TABLE `user_rolle` (
-  	`user_id` int NOT NULL,
- 	 `rolle_id` int NOT NULL,
-	FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-	FOREIGN KEY (`rolle_id`) REFERENCES `rollen` (`id`)
-);
-

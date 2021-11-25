@@ -17,7 +17,7 @@ INSERT INTO `kategorien` (`name`) VALUES
 ('Datenschutz und Datensicherheit');
 
 INSERT INTO `fragen` (`fragetext`, `user_id`) VALUES
-('Wann stellte Linus Torvalds die erste Version seines Kernels online?', 1);
+('Wann stellte Linus Torvalds die erste Version seines Kernels online?', 1),
 ('Wofür steht die Abkürzung ".pdf"?', 1),
 ('Wie heißt der Ethernet-Steckverbinder?', 1),
 ('Wofür steht GNU GPL?', 1),
@@ -44,7 +44,7 @@ INSERT INTO `antworten` (`antworttext`, `wahrheit`, `frage_id`) VALUES
 ('GNU General Public License', 1, 4),
 ('GNU Grams Per Liter', 0, 4),
 ('GNU Gas Petroleum Liquids', 0, 4),
-('GNU Glycerophospholipid', 0, 4);
+('GNU Glycerophospholipid', 0, 4),
 ('Autor von Windows 3.11', 0, 5),
 ('Mitglied der Band O-Zone', 0, 5),
 ('Begründer der GNU GPL', 1, 5),
