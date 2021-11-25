@@ -1,5 +1,3 @@
-CREATE DATABASE `pruefungsquiz`;
-
 CREATE TABLE `user` (
  	`id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
  	`name` varchar(32) NOT NULL,
