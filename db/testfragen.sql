@@ -1,10 +1,10 @@
 INSERT INTO `rollen` (`name`) VALUES
-(`Administrator`),
-(`Frageersteller`),
-(`Spieler`);
+('Administrator'),
+('Frageersteller'),
+('Spieler');
 
 INSERT INTO `user` (`name`, `passwort`, `role_id`) VALUES
-(`admin`, `qwerty`, 1);
+('admin', 'qwerty', 1);
 
 INSERT INTO `kategorien` (`name`) VALUES
 ('Programmierung'),
