@@ -48,7 +48,6 @@
         ?>
     </header>
     <div class="content">
-        <h1>Quizubi</h1>
         <img src="images/logo.png"  id="logo">
         <div><h2>Das Prüfungsfragen Quiz für Azubis!</h2></div>
         <div id="randomquestion">
@@ -76,9 +75,8 @@
                 if(!isset($_SESSION['userName'])){                
                     echo "<form action='index.php' method='POST' id='Registrierungsform'>";
                     echo "<input type='text' placeholder='Benutzername' name='username' class='Textfeld'><br>";
-                    echo "<label>Passwort</label><input type='password' placeholder='Passwort' name='password' class='Textfeld'><br>";
+                    echo "<input type='password' placeholder='Passwort' name='password' class='Textfeld'><br>";
                     echo "<input type='submit' class='Button' name='aktion' value='anmelden'></form>";
-                    echo "<b>Den Button zum Release entfernen:</b>";
                     echo "<button class='Button' id='RegBTN' onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
                 }
             ?>

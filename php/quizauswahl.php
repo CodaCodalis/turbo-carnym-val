@@ -26,7 +26,7 @@
 
         <h1>Quizauswahl</h1>
         <div id='flexbox'>
-        <div id="randomqquiz">
+        <div id="randomquiz">
             <h3>Zufallsquiz</h3>
             <p>
             Bei diesen Quiz erwarten dich zuf&auml;llige Fragen aus allen Kategorien. <br>
@@ -50,7 +50,7 @@
                 <label for="anzahl30">30 Fragen</label><br><br>
                 
                 <div id="startRandom">
-                    <input type="submit" name="quiz_zufall" class="Button" value="Zufallsquiz starten">
+                    <input type="submit" name="quiz_zufall" class="Button" value="START">
                 </div>
             </form>
         </div>
@@ -83,7 +83,7 @@
                 <label for="catAll">Alle Fragen</label><br><br>
                 
                 <div id=startCategory>
-                <input type="submit" class="Button" name="quiz_kategorie" value="Kategoriequiz starten">
+                <input type="submit" class="Button" name="quiz_kategorie" value="START">
                 </div>
             </form>
         </div>
