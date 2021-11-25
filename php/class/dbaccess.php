@@ -106,6 +106,18 @@ class Database{
         $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', $userId);"; #user_id 1 ist erstmal ein filler
         $this->mysqli->query($queryFrage);
         
+        if($this->mysqli->affected_rows <= 0)
+        {
+            return FALSE;
+        }
+        
+        $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
+        $result = $this->mysqli->query($queryFrageId);
+        if($this->mysqli->affected_rows <= 0)
+        {
+            return FALSE;
+        }
+        
         $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
         $result = $this->mysqli->query($queryFrageId);
         $frageId = $result->fetch_array();
@@ -133,6 +145,17 @@ class Database{
         { 
             $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (\"".$antworten[$i]."\", ".$korrekt_array[$i].", ".$frageId[0].");";
             $this->mysqli->query($queryAntwort);
+            if($this->mysqli->affected_rows <= 0)
+            {
+                return FALSE;
+            }
+            
+            if($this->mysqli->affected_rows <= 0)
+        {
+            return FALSE;
+        }
+
+        return TRUE;
         }
 
         $this->insert_frage_kategorie($frageId[0], $kategorien);

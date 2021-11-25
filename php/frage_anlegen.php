@@ -4,6 +4,134 @@
     require_once "class/frage.php";
     require_once "init.inc.php";
     $db = new Database();
+    $validate = new Validate();
+    
+
+    if (isset($_REQUEST['send']) OR isset($_POST['editQuestion']) OR isset($_POST['delete'])) {
+        //    echo $_POST['send'];
+        $updated = FALSE;
+        $frage = $_POST['frage'];
+        $antwort1 = $_POST['antwort1'];
+        $antwort2 = $_POST['antwort2'];
+        $antwort3 = $_POST['antwort3'];
+        $antwort4 = $_POST['antwort4'];
+
+        
+        $valid_question = $validate->validateText($frage);
+        $valid_answer1 = $validate->validateText($antwort1);
+        $valid_answer2 = $validate->validateText($antwort2);
+        $valid_answer3 = $validate->validateText($antwort3);
+        $valid_answer4 = $validate->validateText($antwort4);
+        $valide = $valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4; 
+        
+        $antworten[] = $antwort1;
+        $antworten[] = $antwort2;
+        $antworten[] = $antwort3;
+        $antworten[] = $antwort4;
+
+        if(isset($_POST['kategorien'])) {
+            $kategorienPost = $_POST['kategorien'];
+        }
+
+        if(isset($_POST['neueKategorieCheck']))
+        {
+            $neueKategorie = $_POST['neueKategorie'];
+            if(!$validate->validateText($neueKategorie)){
+                echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
+                $valide = FALSE;
+            } else{
+                echo "<br>Eingabe der Kategoie valide!";
+                $db->insert_neue_kategorie($neueKategorie);
+                $kategorienPost[] = $neueKategorie;
+            }    
+        }
+
+        if(!isset($kategorienPost))
+        {
+            echo "<br>Mindestens eine Kategorie muss ausgewählt sein oder eine neue erstellt worden <br>";
+            $valide = FALSE;
+        }
+
+        if(isset($_POST['korrekt'])){
+            $korrekt = $_POST['korrekt'];
+        }
+        else
+        {
+            $valide = FALSE;
+        }
+        /*
+        $korrekt2 = $_POST['korrekt2'];
+        $korrekt3 = $_POST['korrekt3'];
+        $korrekt4 = $_POST['korrekt4']; 
+        */
+
+        
+        if(isset($_SESSION['userID']))
+        {
+            $userId = $_SESSION['userID'];
+        }
+        else
+        {
+            $valide = FALSE;
+        }
+    }
+
+    if (isset($_REQUEST['send']))
+    {
+        if($valide)
+        {
+            if(!$db->check_ob_frage_existiert($frage)) 
+            {
+                if($db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost, $userId))
+                {
+                    header("Location: ./unset_question.php");
+                }
+                
+
+            } 
+            else 
+            {
+                echo "<script>alert(\"Frage existiert bereits\");</script>";
+            }
+        }
+        
+    }
+
+    if(isset($_POST['editQuestion']))
+    {
+
+        $frageObj = $_SESSION['frage'];
+
+        $antwort1Obj = $_SESSION['antworten'][0];
+        $antwort2Obj = $_SESSION['antworten'][1];
+        $antwort3Obj = $_SESSION['antworten'][2];
+        $antwort4Obj = $_SESSION['antworten'][3];
+        $updated = FALSE;
+        if($valide)
+        {
+            
+            $frage_id = $_SESSION['frage']->get_frageId();
+            $antworten_old = $_SESSION['antworten'];
+
+            if($db->update_question($frage, $frage_id, $antworten_old, $antworten, $korrekt, $kategorienPost, $userId))
+            {
+                $updated = TRUE;
+                echo "<script>alert(\"Frage editiert\");</script>";
+                header("Location: ./unset_question.php");
+            }   
+        }
+    }
+
+    if(isset($_POST['delete']))
+    {
+        $frage_id = $_SESSION['frage']->get_frageId();
+        if($db->delete_question($frage_id))
+        {
+            echo "<script>alert(\"Frage und Antworten gelöscht\");</script>";
+            header("Location: ./unset_question.php");
+
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,6 +166,7 @@
                 {
                     if (isset($_POST['frageBearbeiten'.$j]))
                     {
+                        $updated = FALSE;
                         $fragetext = $_POST['frage'.$j];
                         echo "value=\"$fragetext\"";
                         $frageId = $db->get_frage_id($fragetext);
@@ -59,84 +188,154 @@
                     }
                     $j++;
                 }
+                if (isset($frage))
+                {
+                    if(!$valid_question OR !$valide){
+                        echo "value=\"$frage\"";
+                    } 
+                
                 
             ?>
             >
+            <?php    
+                    if(!$valid_question)
+                    {
+                        echo "<div id='validate'><br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.</div>";
+                    }
+                    
+                }
+                else
+                {
+                    echo "<br>";
+                }    
+            ?>
             <br>
             
             <label for="antwort">Antwort 1</label>
             <input type="text" name="antwort1" id="antwort1" class="eingabe" 
             <?php
-                if (isset($antwort1Obj))
+                if (isset($antwort1Obj) AND !$updated)
                 {
                     echo "value=\"".$antwort1Obj->get_antworttext()."\"";
+                }
+                else if (isset($antwort1))
+                {
+                    if(!$valid_answer1 OR !$valide){
+                        echo "value=\"$antwort1\"";
+                    }
                 }
             ?>
             >
             <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check" 
             <?php
-                if(isset($antwort1Obj) and $antwort1Obj->get_wahr() == 1)
+                if(isset($antwort1Obj) and $antwort1Obj->get_wahr() == 1 AND !$updated)
                 {
                     echo "checked";
                 }
             ?>
             ><a>Diese Antwort ist richtig.</a>
+            <?php
+            if (isset($antwort1)) {
+                    if(!$valid_answer1){
+                        echo "<div id='validate'><br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.</div>";
+                    }
+                }
+            ?>
             <br>
             
             <label for="antwort">Antwort 2</label>
             <input type="text" name="antwort2" id="antwort2" class="eingabe"
             <?php
-                if (isset($antwort2Obj))
+                if (isset($antwort2Obj) AND !$updated)
                 {
                     echo "value=\"".$antwort2Obj->get_antworttext()."\"";
+                }
+                else if (isset($antwort2))
+                {
+                    if(!$valid_answer2 OR !$valide){
+                        echo "value=\"$antwort2\"";
+                    }
                 }
             ?>
             >
             <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check"
             <?php
-                if(isset($antwort2Obj) and $antwort2Obj->get_wahr() == 1)
+                if(isset($antwort2Obj) and $antwort2Obj->get_wahr() == 1 AND !$updated)
                 {
                     echo "checked";
                 }
             ?>><a>Diese Antwort ist richtig.</a>
+            <?php
+            if (isset($antwort2)) {
+                    if(!$valid_answer2){
+                        echo "<div id='validate'><br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.</div>";
+                    }
+                }
+            ?>
             <br>
             
             <label for="antwort">Antwort 3</label>
             <input type="text" name="antwort3" id="antwort3" class="eingabe"
             <?php
-                if (isset($antwort3Obj))
+                if (isset($antwort3Obj) AND !$updated)
                 {
                     echo "value=\"".$antwort3Obj->get_antworttext()."\"";
+                }
+                else if (isset($antwort3))
+                {
+                    if(!$valid_answer3 OR !$valide){
+                        echo "value=\"$antwort3\"";
+                    }
                 }
             ?>
             >
             <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check"
             <?php
-                if(isset($antwort3Obj) and $antwort3Obj->get_wahr() == 1)
+                if(isset($antwort3Obj) and $antwort3Obj->get_wahr() == 1 AND !$updated)
                 {
                     echo "checked";
                 }
             ?>
             ><a>Diese Antwort ist richtig.</a>
+            <?php
+            if (isset($antwort3)) {
+                    if(!$valid_answer3){
+                        echo "<div id='validate'><br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.</div>";
+                    }
+                }
+            ?>
             <br>
             
             <label for="antwort">Antwort 4</label>
             <input type="text" name="antwort4" id="antwort4" class="eingabe"
             <?php
-                if (isset($antwort4Obj))
+                if (isset($antwort4Obj) AND !$updated)
                 {
                     echo "value=\"".$antwort4Obj->get_antworttext()."\"";
+                }
+                else if (isset($antwort4))
+                {
+                    if(!$valid_answer4 OR !$valide){
+                        echo "value=\"$antwort4\"";
+                    }
                 }
             ?>
             >
             <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check"
             <?php
-                if(isset($antwort4Obj) and $antwort4Obj->get_wahr() == 1)
+                if(isset($antwort4Obj) and $antwort4Obj->get_wahr() == 1 AND !$updated)
                 {
                     echo "checked";
                 }
             ?>
             ><a>Diese Antwort ist richtig.</a>
+            <?php
+            if (isset($antwort4)) {
+                    if(!$valid_answer4){
+                        echo "<div id='validate'><br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.</div>";
+                    }
+                }
+            ?>
             <br>
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
 
@@ -153,7 +352,7 @@
                     if(isset($cat_of_question))
                     {
 
-                        if(in_array($kategorien[$i]['name'], $cat_of_question))
+                        if(in_array($kategorien[$i]['name'], $cat_of_question) AND !$updated)
                         {
                             
                             echo "checked";
@@ -170,7 +369,7 @@
             
             <input onclick="inputCheck();" type="submit"  id="send" value="Speichern" 
             <?php
-                if (isset($_POST['frageBearbeiten'.$j]))
+                if (isset($_POST['frageBearbeiten'.$j]) OR (isset($_POST['editQuestion']) AND !$updated))
                 {
                     echo "name=\"editQuestion\"";
                 }
@@ -183,10 +382,11 @@
             <input type="reset" name="reset" id="reset" value="Reset">
             <?php
 
-            if(isset($frageObj))
+            if(isset($frageObj) OR (isset($updated) AND !$updated))
             {
                 echo "<input type=\"submit\" id=\"delete\" name=\"delete\" value=\"Löschen\">";
-                echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
+                echo "<button><a href=\"./unset_question.php\">Abbrechen</a></button>";
+                //echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
             }
 
             
@@ -203,7 +403,15 @@
                     <?php
                         $userNamen = $db->get_user();
                         for ($i = 0; $i < count($userNamen); $i++) {
-                            echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
+                            if($userNamen[$i]['name'] === "admin")
+                            {
+                                echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
+                            }
+                            else
+                            {
+                                echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
+                            }
+                            
                         }
                     ?>
                 </select><input type="submit" name="userFragen" id="userFragen" value="anzeigen"><br>
@@ -319,161 +527,21 @@
 
     <footer>
         <div class="footer">
-            <a href="impressum.php">Impressum</a>
-            <a href="datenschutz.php">Datenschutz</a>
+            <ul>
+                <li>
+                    <a href="impressum.html">Impressum</a>
+                </li>
+                <li>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </li>
+            </ul>
         </div>
     </footer>
 </body>
 </html>
 
 <?php
-    if (isset($_REQUEST['send']) OR isset($_POST['editQuestion']) OR isset($_POST['delete'])) {
-        //    echo $_POST['send'];
-
-        $frage = $_POST['frage'];
-        $valide = TRUE;
-        $validate = new Validate();
-        if(!$validate->validateText($frage)){
-            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-            $valide = FALSE;
-        } else{
-            echo "<br>Eingabe der Frage valide!";
-        }
-
-        $antwort1 = $_POST['antwort1'];
-
-        if(!$validate->validateText($antwort1)){
-            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-            $valide = FALSE;
-        } else{
-            echo "<br>Eingabe der Frage valide!";
-        }
-
-        $antwort2 = $_POST['antwort2'];
-
-        if(!$validate->validateText($antwort2)){
-            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-            $valide = FALSE;
-        } else{
-            echo "<br>Eingabe der Frage valide!";
-        }
-
-        $antwort3 = $_POST['antwort3'];
-
-        if(!$validate->validateText($antwort3)){
-            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-            $valide = FALSE;
-        } else{
-            echo "<br>Eingabe der Frage valide!";
-        }
-
-        $antwort4 = $_POST['antwort4'];
-
-        if(!$validate->validateText($antwort4)){
-            echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-            $valide = FALSE;
-        } else{
-            echo "<br>Eingabe der Frage valide!";
-        }
-
-        $antworten[] = $antwort1;
-        $antworten[] = $antwort2;
-        $antworten[] = $antwort3;
-        $antworten[] = $antwort4;
-
-        if(isset($_POST['kategorien'])) {
-            $kategorienPost = $_POST['kategorien'];
-        }
-
-        if(isset($_POST['neueKategorieCheck']))
-        {
-            $neueKategorie = $_POST['neueKategorie'];
-            if(!$validate->validateText($neueKategorie)){
-                echo "<br>Falsche Eingabe, nur Buchstaben, Zahlen sowie die Zeichen (?.,-_) sind erlaubt.";
-                $valide = FALSE;
-            } else{
-                echo "<br>Eingabe der Kategoie valide!";
-                $db->insert_neue_kategorie($neueKategorie);
-                $kategorienPost[] = $neueKategorie;
-            }
-            
-
-            
-            
-        }
-
-        if(!$kategorienPost)
-        {
-            echo "<br>Mindestens eine Kategorie muss ausgewählt sein oder eine neue erstellt worden <br>";
-            $valide = FALSE;
-        }
-
-        if(isset($_POST['korrekt'])){
-            $korrekt = $_POST['korrekt'];
-        }
-        else
-        {
-            $valide = FALSE;
-        }
-        /*
-        $korrekt2 = $_POST['korrekt2'];
-        $korrekt3 = $_POST['korrekt3'];
-        $korrekt4 = $_POST['korrekt4']; 
-        */
-
-        
-        if(isset($_SESSION['userID']))
-        {
-            $userId = $_SESSION['userID'];
-        }
-        else
-        {
-            $valide = FALSE;
-        }
-    }
-
-    if (isset($_REQUEST['send']))
-    {
-        if($valide)
-        {
-            if(!$db->check_ob_frage_existiert($frage)) 
-            {
-                $db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost, $userId);
-            } 
-            else 
-            {
-                echo "<script>alert(\"Frage existiert bereits\");</script>";
-            }
-        }
-        
-    }
-
-    if(isset($_POST['editQuestion']))
-    {
-        if($valide)
-        {
-            $frage_id = $_SESSION['frage']->get_frageId();
-            $antworten_old = $_SESSION['antworten'];
-
-            if($db->update_question($frage, $frage_id, $antworten_old, $antworten, $korrekt, $kategorienPost, $userId))
-            {
-                unset($_SESSION['frage']);
-                unset($_SESSION['antworten']);
-                echo "<script>alert(\"Frage editiert\");</script>";
-            }   
-        }
-    }
-
-    if(isset($_POST['delete']))
-    {
-        $frage_id = $_SESSION['frage']->get_frageId();
-        if($db->delete_question($frage_id))
-        {
-            unset($_SESSION['frage']);
-            unset($_SESSION['antworten']);
-            echo "<script>alert(\"Frage und Antworten gelöscht\");</script>";
-        }
-    }
+    
 
     $db->close_database();
 

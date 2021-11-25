@@ -3,8 +3,10 @@ INSERT INTO `rollen` (`name`) VALUES
 ('Frageersteller'),
 ('Spieler');
 
-INSERT INTO `user` (`name`, `passwort`, `role_id`) VALUES
-('admin', 'qwerty', 1);
+INSERT INTO `user` (`name`, `passwort`, `role_id`, `is_deleted`) VALUES
+('admin', 'saxPWqsMENTI.', 1, 1),
+('testfrageersteller', 'saWCAXKLp5XV.', 1, 0),
+('testspieler', 'saW3TIV1j5yHw', 1, 0);
 
 INSERT INTO `kategorien` (`name`) VALUES
 ('Programmierung'),
