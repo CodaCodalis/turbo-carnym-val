@@ -10,8 +10,6 @@
     <body>
         <header>
             <?php
-                echo "Test";
-                var_dump($_SESSION['userName']);
                 if(isset($_SESSION['userName'])) {
                     echo '<nav>';
                     echo '<ul>';    
@@ -23,6 +21,7 @@
                     echo '</nav>';
                 }
             ?>  
+            <a href="../index.php">Startseite</a>
         </header>
         
         <div>
