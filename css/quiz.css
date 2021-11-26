@@ -139,6 +139,9 @@ h3{
     border-radius: 10px;
 }
 
+#radioAntwort{
+    display: none;
+}
 
 #frage{
     color: #555;
@@ -152,7 +155,6 @@ h3{
     border-radius: 5px;
     background-color: #163BA8;
     font-size: 20px;
-    width: 500px;
     margin: auto;
 }
 
@@ -160,22 +162,16 @@ h3{
     border:2px solid yellow;
     color: white;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
 }
 
 #antwort_gewaehlt_richtig{
     border:2px solid lightgreen;
     color: white;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
 }
 
 #antwort_gewaehlt_falsch{
     border:2px solid tomato;
     color: white;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
 }

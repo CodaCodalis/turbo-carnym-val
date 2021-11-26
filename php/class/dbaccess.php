@@ -524,7 +524,7 @@ class Database{
         $answer = $this->mysqli->query($queryAnswer);
 
         while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
-                echo "<input type = 'radio' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div><br>";
+                echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div></label>";
         }
         $_SESSION['frageCount']+=1;
     }
