@@ -5,6 +5,21 @@
     require_once "init.inc.php";
     $db = new Database();
     $validate = new Validate();
+    $user_role_id = $_SESSION['userRoleID'];
+    $role_name = $db->get_rolename_of_id($user_role_id);
+    
+    switch ($role_name[0]) 
+    {
+        case 'Administrator':
+            $is_admin = TRUE;
+            break;
+        case 'Frageersteller':
+            $is_admin = FALSE;
+            break;
+        default:
+            header("Location: ../access_denied.php");
+            break;
+    }
     
 
     if (isset($_REQUEST['send']) OR isset($_POST['editQuestion']) OR isset($_POST['delete'])) {
@@ -82,12 +97,12 @@
         {
             if(!$db->check_ob_frage_existiert($frage)) 
             {
-                if($db->insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorienPost, $userId))
+                
+                if($db->insert_ant_fragen($frage, $antworten, $korrekt, $kategorienPost, $userId))
                 {
                     header("Location: ./unset_question.php");
                 }
                 
-
             } 
             else 
             {
@@ -148,21 +163,29 @@
             <ul>
             <li><a href="logout.php">Abmelden</a></li>
                 <li><a href="quizauswahl.php">Quizauswahl</a></li>
-                <li><a href="userverwaltung.php">Userverwaltung</a></li>
+                <?php
+                    if($is_admin)
+                    {
+                        echo "<li><a href=\"userverwaltung.php\">Userverwaltung</a></li>";
+                    }
+                ?>
+                
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
     </header>
     <div class="clearfix"></div>
     <div id="formular">
-
+       
+    
+    
     <h3>Füge eine Prüfungsfrage hinzu:</h3>
         <form action="frage_anlegen.php" method="POST">
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
             <label for="frage">Frage</label>
             <input type="text" name="frage" id="frage" class="eingabe" <?php 
                 $j = 0;
-                while($j < count($db->get_alle_fragen()))
+                while($j < count($db->get_all_from_table("fragen")))
                 {
                     if (isset($_POST['frageBearbeiten'.$j]))
                     {
@@ -428,7 +451,7 @@
                     <?php
                     if(isset($_REQUEST['alleFragen']))
                     {
-                        $alleFragenArray = $db->get_alle_fragen();
+                        $alleFragenArray = $db->get_all_from_table("fragen");
                         echo "<br>
                             <table>
                                 <tr>
@@ -441,7 +464,7 @@
                             {
                                 echo "<tr>
                                     <td>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>";
-                                if($alleFragenArray[$i]['user_id'] == $_SESSION['userID'])
+                                if($alleFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
                                     echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                 }
@@ -473,7 +496,7 @@
                                 echo "<tr>
                                     <td>".$userFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$userFragenArray[$i]['fragetext']."\"></td>";
                                 
-                                if($userFragenArray[$i]['user_id'] == $_SESSION['userID'])
+                                if($userFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
                                     echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                 }
@@ -503,7 +526,7 @@
                             {
                                 echo "<tr>
                                         <td>".$kategorieFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$kategorieFragenArray[$i]['fragetext']."\"></td>";
-                                    if($kategorieFragenArray[$i]['user_id'] == $_SESSION['userID'])
+                                    if($kategorieFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                     {
                                         echo    "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                     }
@@ -519,7 +542,6 @@
                     }
                     ?>
                 <br>
-                <a href="quizauswahl.php" id="btn">Abbrechen</a>
 
         </form>
 
@@ -539,10 +561,3 @@
     </footer>
 </body>
 </html>
-
-<?php
-    
-
-    $db->close_database();
-
-?>
