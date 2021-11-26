@@ -56,7 +56,6 @@ header a {
 /*-------------Footer--------------*/
 footer{
     width: 99%;
-    position: absolute;
     bottom: 15px;
     display: block;
     border: 1px   #fff;
@@ -94,7 +93,7 @@ h1{
 }
 
 h2{
-    font-size: 20px;
+    font-size: 24px;
     color: #fff; 
     text-align: center;
 }
