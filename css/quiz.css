@@ -1,21 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
 /*Font family*/
 *{
     font-family: 'Poppins', sans-serif;
+    
 }
 
 .clearfix{
     clear: both;
 }
 
+/*-------------Nav-Menü--------------*/
+header{
+    margin: 0;
+    height: 50px;
+    border: 1px  #fff;
+}
+
+header nav li{
+    text-align: center;
+    float: right;
+    display: inline;
+    list-style: none;
+    padding: 10px;
+}
+
+header a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: white;
+    display: block;
+    margin: auto;
+    /*Effektdauer*/
+    transition: 0.5s;
+}
+
+/*Unterstriche einblenden bei mouse Hover*/
+header a:hover::after{
+    width: 100%;
+}
+
+header a {
+    color:#fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#validate {
+    color: darkred;
+    font-weight: bold;
+}
+
+/*-------------Footer--------------*/
+footer{
+    position: sticky;
+    width: 300px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 15px;
+    display: block;
+    border: 1px   #fff;
+    text-align: center;
+}
+
+footer a{
+    text-transform: uppercase;
+    text-align: center;
+    display: inline;
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+}
+
+/*-------------Body--------------*/
 body{
-    background-color: royalblue ;
+    height: 100vh;
+    display: block;
+    text-align: center;
+    background-image: url(../images/quiz\ BG.jpg) ;
 }
 
 .content{
     min-height: 615px;
-    background-color: royalblue ;
 }
 
 h1{
@@ -23,81 +95,60 @@ h1{
     color: #fff;
     text-align: center;
 }
+
 h2{
-    font-size: 28px;
+    font-size: 24px;
     color: #fff; 
     text-align: center;
 }
 
-#login{
-    padding-top: 100px;
-    color: #fff;
-    width: 300px;
-    margin: auto;
+h3{
+    font-size: 22px;
+    font-weight: 700;
 }
 
-#login label{
-    width: 300px;
+.Button{
+    cursor:pointer;
+    width: 100px;
+    height: 40px;
+    background-color:white;
+    color: #555;
+    border-radius: 30px;
+    border-color: #163BA8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    font-weight: 600;
+   
 }
 
-#randomquestion{
-    color: #fff;
-    width: 500px;
-    margin: auto;
+.Button:hover{
+    border: 1px solid white;
+    background-color: #163BA8;
+    color: white;
+    transition: 1s;
 }
-
-/*-------------Nav-Menü--------------*/
-header{
-    height: 50px;
-    border: 1px solid #fff;
-}
-
-header nav li{
-    float: right;
-    display: inline;
-    list-style: none;
-}
-
-header a {
-    padding-left:10px;
-    color:#fff;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-
-/*-------------Footer--------------*/
-footer{
-    border-top: 1px solid #fff;
-   text-align: center;
-}
-
-footer li a{
-    display: inline;
-    text-decoration: none;
-    color: #fff;
-}
-
-footer li{
-    padding:10px;
-    display: inline;
-    list-style: none;
-}
-
 
 /*---------------QUIZ-----------------------*/
 
+#fragekarte{
+    background-color: #fff;
+    width: 700px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
 #frage{
-    border:1px solid white;
-    color: white;
+    color: #555;
     font-size: 24px;
     width: 500px;
     margin: auto;
 }
 
 #antwort{
-    border:1px solid white;
-    color: white;
+    color: #fff;
+    background-color: #163BA8;
     font-size: 20px;
     width: 500px;
     margin: auto;
