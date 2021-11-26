@@ -32,6 +32,8 @@
                 $_SESSION['frageCount']=0;
                 unset ($_SESSION['selectedQuestions']);          
                 unset ($_SESSION['anzahlAuswahlFragen']);
+                unset ($_SESSION['frageCatAnzahl']);
+                unset($_SESSION['selectedCategoryQuestions']); 
             ?>
             <form action="quiz.php" method="POST">
                 <input type="radio" id="anzahl3" name="anzahl" value="3" required>

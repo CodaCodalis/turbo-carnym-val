@@ -65,6 +65,7 @@ include("init.inc.php");
 
             $nrQuestion=$_SESSION['anzahlAuswahlFragen'];
             $DB_CONNECTION = new Database();
+            
             if(!isset($_SESSION['selectedQuestions'])){
                 $randomIDs = $DB_CONNECTION->get_random_IDs($nrQuestion);
                

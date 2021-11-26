@@ -40,17 +40,35 @@ $DB_CONNECTION = new Database();
 
             $_SESSION['frageCount']=0;
             $anzahl_richtige_antwort=0;
-            while($_SESSION['frageCount'] < $_SESSION['anzahlAuswahlFragen']){
-                $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
-                $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+            if(isset($_SESSION['anzahlAuswahlFragen'])){
+                while($_SESSION['frageCount'] < $_SESSION['anzahlAuswahlFragen']){
+                    $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
+                    $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+                }
             }
+
+            elseif(isset($_SESSION['frageCatAnzahl'])){
+                while($_SESSION['frageCount'] < $_SESSION['frageCatAnzahl']){
+                    $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
+                    $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+                }
+            }
+            
             ?>
         </div>
         <div>
             <?php
-                echo "<h2>Du hast ".$anzahl_richtige_antwort." von ".$_SESSION['anzahlAuswahlFragen']." Antworten richtig.</h2>";
-                $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['anzahlAuswahlFragen'];
-
+                if(isset($_SESSION['anzahlAuswahlFragen'])){
+                    echo "<h2>Du hast ".$anzahl_richtige_antwort." von ".$_SESSION['anzahlAuswahlFragen']." Antworten richtig.</h2>";
+                    $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['anzahlAuswahlFragen'];
+                }
+                
+                elseif(isset($_SESSION['frageCatAnzahl'])){
+                    var_dump($anzahl_richtige_antwort);
+                    echo "<h2>Du hast ".$anzahl_richtige_antwort." von ".$_SESSION['frageCatAnzahl']." Antworten richtig.</h2>";
+                    var_dump($prozent_richtig);
+                    $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['frageCatAnzahl'];
+                }
                 if($prozent_richtig < 25){
                     echo "<div>Ein Satz mit X ...</div>";
                 }
