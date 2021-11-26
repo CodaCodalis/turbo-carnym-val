@@ -25,26 +25,35 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        /*
+        
         $this->host = 'localhost';
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
+<<<<<<< HEAD
         */
 
+=======
+        
+>>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
         /*
         $this->host = 'localhost';
         $this->user = 'quizubi'; 
         $this->pass = 'quizubi'; 
         $this->db = 'quizubi';
         */
+<<<<<<< HEAD
 
         
+=======
+        
+        /*
+>>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-        
+	 */ 
 
 
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
@@ -52,89 +61,84 @@ class Database{
         return $this->mysqli;
     }
 
-
-    // Datensätze zählen
-    public function db_num($sql){
-        $result = $this->mysqli->query($sql);
-        return $result->num_rows;
-    //$result->num_rows; gibt die Anzahl der DS zurück
-    }
-
-    // db_num aufrufen und Anzahl DS anzeigen
-    public function show_num($table){
-        $wert = $this->db_num("SELECT * FROM $table");
-        echo $wert;
-        if ($wert > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }  
-            
-    public function show_content($table){        
+    public function get_all_from_table($table)
+    {        
         $query = "SELECT * from $table";
         $result = $this->mysqli->query($query);
-        /* numeric array */
-        while($row = $result->fetch_array(MYSQLI_NUM)){
-            printf("%s (%s)<br>", $row[0], $row[1]);
+        if($this->mysqli->affected_rows > 0)
+        {
+            while($zeile = $result->fetch_assoc()) {
+                $resultArray[] = $zeile;
+            }
+            return $resultArray;
         }
-        echo "Assoziatives Array: <br>";
-        $result = $this->mysqli->query($query);
-        /* associative array */
-        while($row = $result->fetch_array(MYSQLI_ASSOC)){
-            printf("%s<br>", $row["name"]); 
+        else
+        {
+            return 0;
         }
     }
+            
 
     public function insert_frage_kategorie($frageId, $kategorien) {
         if(is_array($kategorien)){
             
-
             for($i = 0; $i < count($kategorien); $i++) {
-                
                 $query = "INSERT INTO frage_kategorie(frage_id, kategorie_id) VALUES ($frageId, (SELECT id FROM kategorien WHERE name=\"".$kategorien[$i]."\"));";
                 $this->mysqli->query($query);
+                if($this->mysqli->affected_rows <= 0)
+                {
+                    return FALSE;
+                }
             }
+            return TRUE;
         }
         else
         {
             $query = "INSERT INTO frage_kategorie(frage_id, kategorie_id) VALUES ($frageId, (SELECT id FROM kategorien WHERE name=\"".$kategorien."\"));";
             $this->mysqli->query($query);
-        }
-        
+            if($this->mysqli->affected_rows <= 0)
+                {
+                    return FALSE;
+                }
+            return TRUE;
+        } 
     }
 
-    public function insert_ant_fragen($frage, $antwort1, $antwort2, $antwort3, $antwort4, $korrekt, $kategorien, $userId)       
+    public function insert_question($frage, $user_id)
     {
-        
-        $antworten[] = $antwort1;
-        $antworten[] = $antwort2;
-        $antworten[] = $antwort3;
-        $antworten[] = $antwort4;
-        
-        $korrekt_array = array(0, 0, 0, 0);
-        
-        $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', $userId);"; #user_id 1 ist erstmal ein filler
+        $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', $user_id);"; #user_id 1 ist erstmal ein filler
         $this->mysqli->query($queryFrage);
         
         if($this->mysqli->affected_rows <= 0)
         {
             return FALSE;
         }
+        else return TRUE;
+    }
+
+    public function insert_answers($answers, $correct_array, $frage_id)
+    {
+        for ($i=0; $i < count($answers); $i++) 
+        {  
+            $query_answers = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (\"".$answers[$i]."\", ".$correct_array[$i].", ".$frage_id.");";
+            $this->mysqli->query($query_answers);
+            if($this->mysqli->affected_rows <= 0)
+            {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
+    public function insert_ant_fragen($frage, $antworten, $korrekt, $kategorien, $userId)       
+    {
+        $korrekt_array = array(0, 0, 0, 0);
         
-        $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
-        $result = $this->mysqli->query($queryFrageId);
-        if($this->mysqli->affected_rows <= 0)
+        if(!$this->insert_question($frage, $userId))
         {
             return FALSE;
-        }
-        
-        $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
-        $result = $this->mysqli->query($queryFrageId);
-        $frageId = $result->fetch_array();
-        
-        
-
+        } 
+        $frage_id = $this->get_frage_id($frage);
         if($korrekt === "korrekt1")
         {
             $korrekt_array[0] = 1;
@@ -151,26 +155,16 @@ class Database{
         {
             $korrekt_array[3] = 1;
         }
-
-        for ($i=0; $i < count($antworten); $i++) 
-        { 
-            $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (\"".$antworten[$i]."\", ".$korrekt_array[$i].", ".$frageId[0].");";
-            $this->mysqli->query($queryAntwort);
-            if($this->mysqli->affected_rows <= 0)
-            {
-                return FALSE;
-            }
-            
-            if($this->mysqli->affected_rows <= 0)
+        
+        if(!$this->insert_answers($antworten, $korrekt_array, $frage_id))
         {
             return FALSE;
-        }
-
+        } 
+        if(!$this->insert_frage_kategorie($frage_id, $kategorien))
+        {
+            return FALSE;
+        } 
         return TRUE;
-        }
-
-        $this->insert_frage_kategorie($frageId[0], $kategorien);
-        
     }
 
     public function update_question($frage, $frageId, $answers_old, $answers_new, $korrekt, $kategorienPost, $userId)
@@ -525,7 +519,7 @@ class Database{
         $answer = $this->mysqli->query($queryAnswer);
 
         while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
-                echo "<input type = 'radio' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div><br>";
+                echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div></label>";
         }
         $_SESSION['frageCount']+=1;
     }
@@ -614,6 +608,7 @@ class Database{
         $sql.=" WHERE id=$deleted_user;";
         $this->mysqli -> query($sql); 
     }
+<<<<<<< HEAD
 
     public function get_count_questions_category()
     {
@@ -622,6 +617,26 @@ class Database{
         $anzahl = $result->fetch_array();
 
         return $anzahl[0];
+	
+    }=======
+    
+    public function get_rolename_of_id($role_id)
+    {
+        if ((!$role_id)) 
+        {
+            return False;
+        }
+        $query = "SELECT name FROM rollen WHERE id=$role_id";
+        $result = $this->mysqli->query($query);
+        if ($this->mysqli->affected_rows > 0)
+        {
+            return $result->fetch_all()[0];
+        }
+        else
+        {
+            return FALSE;
+        }
+>>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
     }
 }
 

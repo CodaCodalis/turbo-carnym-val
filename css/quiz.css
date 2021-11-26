@@ -139,6 +139,19 @@ h3{
     border-radius: 10px;
 }
 
+#radioAntwort{
+    display: none;
+}
+
+#radioAntwort:hover + #antwort{
+    cursor: pointer;
+    background-color: #2653db;
+}
+
+#radioAntwort:checked + #antwort{
+    background-color: #2653db;
+    border: 3px solid #7b97ec;
+}
 
 #frage{
     color: #555;
@@ -152,30 +165,26 @@ h3{
     border-radius: 5px;
     background-color: #163BA8;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
+    padding: 10px;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #korrekte_Antwort{
     border:2px solid yellow;
     color: white;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
 }
 
 #antwort_gewaehlt_richtig{
     border:2px solid lightgreen;
     color: white;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
 }
 
 #antwort_gewaehlt_falsch{
     border:2px solid tomato;
     color: white;
     font-size: 20px;
-    width: 500px;
-    margin: auto;
 }
