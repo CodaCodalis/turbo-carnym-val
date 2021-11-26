@@ -1,5 +1,5 @@
 <?php
-    include("init.inc.php");
+    include("php/init.inc.php");
 ?>
 
 <!DOCTYPE html>
