@@ -145,11 +145,11 @@ h3{
 
 #radioAntwort:hover + #antwort{
     cursor: pointer;
-    background-color: #1f45b5;
+    background-color: #2653db;
 }
 
 #radioAntwort:checked + #antwort{
-    background-color: #1f45b5;
+    background-color: #2653db;
     border: 3px solid #7b97ec;
 }
 
