@@ -30,30 +30,21 @@ class Database{
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
-<<<<<<< HEAD
-        */
-
-=======
         
->>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
+
         /*
         $this->host = 'localhost';
         $this->user = 'quizubi'; 
         $this->pass = 'quizubi'; 
         $this->db = 'quizubi';
         */
-<<<<<<< HEAD
 
-        
-=======
-        
         /*
->>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-	 */ 
+        */
 
 
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
@@ -608,17 +599,16 @@ class Database{
         $sql.=" WHERE id=$deleted_user;";
         $this->mysqli -> query($sql); 
     }
-<<<<<<< HEAD
 
     public function get_count_questions_category()
     {
-        $sql = "SELECT COUNT(*) FROM frage_kategorie WHERE kategorie_id = (SELECT id FROM kategorien WHERE name = 'Test');";
+        $sql = "SELECT COUNT(*) FROM frage_kategorie WHERE kategorie_id = (SELECT id FROM kategorien WHERE name = '".$_SESSION['category']."');";
         $result = $this->mysqli->query($sql);
         $anzahl = $result->fetch_array();
 
         return $anzahl[0];
 	
-    }=======
+    }
     
     public function get_rolename_of_id($role_id)
     {
@@ -636,7 +626,6 @@ class Database{
         {
             return FALSE;
         }
->>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
     }
 }
 
