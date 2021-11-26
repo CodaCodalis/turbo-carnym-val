@@ -143,7 +143,7 @@ h3{
     display: none;
 }
 
-#radioAntwort:hover{
+#radioAntwort:hover + #antwort{
     cursor: pointer;
     box-shadow: 1px #7b97ec;
 }
