@@ -143,6 +143,15 @@ h3{
     display: none;
 }
 
+#radioAntwort:hover{
+    cursor: pointer;
+    box-shadow: 1px #7b97ec;
+}
+
+#radioAntwort:checked + #antwort{
+    background-color: #1f45b5;
+}
+
 #frage{
     color: #555;
     font-size: 24px;
@@ -155,7 +164,10 @@ h3{
     border-radius: 5px;
     background-color: #163BA8;
     font-size: 20px;
-    margin: auto;
+    padding: 10px;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #korrekte_Antwort{

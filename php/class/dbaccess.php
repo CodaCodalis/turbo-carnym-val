@@ -25,18 +25,19 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        /*
+        
         $this->host = 'localhost';
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
-        */
-
+        
+        /*
         $this->host = 'localhost';
         $this->user = 'quizubi'; 
         $this->pass = 'quizubi'; 
         $this->db = 'quizubi';
-
+        */
+        
         /*
         $this->host = 'localhost';
         $this->user = 'Spieler';
