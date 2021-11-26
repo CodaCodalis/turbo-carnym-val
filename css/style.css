@@ -63,13 +63,14 @@ footer{
 }
 
 footer a{
+    text-transform: uppercase;
     text-align: center;
     display: inline;
     list-style: none;
     text-decoration: none;
     color: #fff;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: px;
+    padding-right: 20px;
     padding-bottom: 5px;
 }
 
