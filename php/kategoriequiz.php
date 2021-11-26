@@ -31,7 +31,12 @@ include("init.inc.php");
             <?php
                 if(!isset($_SESSION['frageCatAnzahl'])){
                     $x = 1;
-                    $y = $_POST['cat'];
+                    if($_POST['cat']=='ALL'){
+                        $y = "hier einbauen, dass alle Fragen aus der Kategorie gezählt werden -> in dbaccess";
+                    }
+                    else {
+                        $y = $_POST['cat'];
+                    }
                 }
                 else if(isset($_SESSION['frageCount'])){
                     $x = $_SESSION['frageCount']+1;
@@ -71,9 +76,13 @@ include("init.inc.php");
 
                     if ($nrQuestion == 'ALL') {
                         if ($_SESSION['frageCount'] < count($_SESSION['categoryQuestion'])) {
+                            $kategorie = $_SESSION['category'];
+                            echo "<br>Kategorie: ".$kategorie;
+
                             $DB_CONNECTION->show_questions($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
                             $DB_CONNECTION->show_answers($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
                             echo '<input type="submit" value="Nächste Frage">';
+                            echo "<button onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
                         } else {
                             header("Location: auswertung.php");
                         }

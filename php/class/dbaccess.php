@@ -25,14 +25,17 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-<<<<<<< HEAD
+        /*
         $this->host = 'localhost';
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
+        */
 
-
-
+        $this->host = 'localhost';
+        $this->user = 'quizubi'; 
+        $this->pass = 'quizubi'; 
+        $this->db = 'quizubi';
 
         /*
         $this->host = 'localhost';
@@ -40,24 +43,8 @@ class Database{
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
         */
-||||||| 6b4cee9
-        $this->host = 'localhost'; //'db5005383230.hosting-data.io';
-        $this->user = 'grp4_user'; //'dbu2117629';
-        $this->pass = ''; //'Gr4hsvSbdDbSmKH';
-        $this->db = 'Gruppe4DB'; //'dbs4516370';
-        /*
-        $this->host = 'localhost';
-        $this->user = 'Spieler';
-        $this->pass = 'spieler';
-        $this->db = 'carnymQuiz';
-        */
-=======
-        $this->host = 'localhost'; //'db5005383230.hosting-data.io';
-        $this->user = 'grp4_user'; //'dbu2117629';
-        $this->pass = ''; //'Gr4hsvSbdDbSmKH';
-        $this->db = 'Gruppe4DB'; //'dbs4516370';
 
->>>>>>> 16fa174297707d6d3660a0a980e1101308ba8ac1
+
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
