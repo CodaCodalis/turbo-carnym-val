@@ -145,8 +145,8 @@ h3{
 
 #radioAntwort:hover + #antwort{
     cursor: pointer;
-    transform: scale(1.05);
-    box-shadow: 2px 2px 2px 2px #7b97ec;
+    transform: scale(1.01);
+    border: 1px solid #7b97ec;
 }
 
 #radioAntwort:checked + #antwort{
