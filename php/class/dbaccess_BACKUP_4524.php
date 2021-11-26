@@ -27,13 +27,13 @@ class Database{
     private function db_connect(){
 <<<<<<< HEAD
         $this->host = 'localhost';
-        $this->user = 'grp4_user'; 
-        $this->pass = ''; 
-        $this->db = 'Gruppe4DB';
+        $this->user = 'quizubi'; //'grp4_user'; 
+        $this->pass = 'quizubi'; //''; 
+        $this->db = 'quizubi'; //'Gruppe4DB';
 
+        /*
 
-
-
+        */
         /*
         $this->host = 'localhost';
         $this->user = 'Spieler';

@@ -25,22 +25,6 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-<<<<<<< HEAD
-        $this->host = 'localhost';
-        $this->user = 'grp4_user'; 
-        $this->pass = ''; 
-        $this->db = 'Gruppe4DB';
-
-
-
-
-        /*
-        $this->host = 'localhost';
-        $this->user = 'Spieler';
-        $this->pass = 'spieler';
-        $this->db = 'carnymQuiz';
-        */
-||||||| 6b4cee9
         $this->host = 'localhost'; //'db5005383230.hosting-data.io';
         $this->user = 'grp4_user'; //'dbu2117629';
         $this->pass = ''; //'Gr4hsvSbdDbSmKH';
@@ -51,13 +35,6 @@ class Database{
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
         */
-=======
-        $this->host = 'localhost'; //'db5005383230.hosting-data.io';
-        $this->user = 'grp4_user'; //'dbu2117629';
-        $this->pass = ''; //'Gr4hsvSbdDbSmKH';
-        $this->db = 'Gruppe4DB'; //'dbs4516370';
-
->>>>>>> 16fa174297707d6d3660a0a980e1101308ba8ac1
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         return $this->mysqli;
@@ -128,18 +105,6 @@ class Database{
         $queryFrage = "INSERT INTO fragen(fragetext, user_id) VALUES ('$frage', $userId);"; #user_id 1 ist erstmal ein filler
         $this->mysqli->query($queryFrage);
         
-        if($this->mysqli->affected_rows <= 0)
-        {
-            return FALSE;
-        }
-        
-        $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
-        $result = $this->mysqli->query($queryFrageId);
-        if($this->mysqli->affected_rows <= 0)
-        {
-            return FALSE;
-        }
-        
         $queryFrageId = "SELECT id FROM fragen WHERE fragetext = '$frage'";
         $result = $this->mysqli->query($queryFrageId);
         $frageId = $result->fetch_array();
@@ -167,17 +132,6 @@ class Database{
         { 
             $queryAntwort = "INSERT INTO antworten(antworttext, wahrheit, frage_id) VALUES (\"".$antworten[$i]."\", ".$korrekt_array[$i].", ".$frageId[0].");";
             $this->mysqli->query($queryAntwort);
-            if($this->mysqli->affected_rows <= 0)
-            {
-                return FALSE;
-            }
-            
-            if($this->mysqli->affected_rows <= 0)
-        {
-            return FALSE;
-        }
-
-        return TRUE;
         }
 
         $this->insert_frage_kategorie($frageId[0], $kategorien);
@@ -287,7 +241,7 @@ class Database{
         $antwort_query = "SELECT antworttext FROM antworten WHERE frage_id=$frage_id;";
         $result = $this->mysqli->query($antwort_query);
         while($zeile = $result->fetch_assoc()) {
-            echo "<div id='antwort'>".$zeile['antworttext']."</div>";
+            echo "<div id='antwort'>".$zeile['antworttext']."</div><br>";
             
         }
     }
@@ -517,19 +471,19 @@ class Database{
         return $_SESSION['selectedCategoryQuestions'];
     }
 
-    public function show_questions($selectedQuestions, $questionNr){   
-        $query = "SELECT fragetext FROM fragen WHERE id=$selectedQuestions[$questionNr];";
-        $Frage = $this->mysqli->query($query);
-        $row = $Frage->fetch_array(MYSQLI_ASSOC);
-        printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
-    }
+      public function show_questions($selectedQuestions, $questionNr){   
+          $query = "SELECT fragetext FROM fragen WHERE id=$selectedQuestions[$questionNr];";
+          $Frage = $this->mysqli->query($query);
+          $row = $Frage->fetch_array(MYSQLI_ASSOC);
+          printf("<div id ='frage'> %s</div>\n", $row["fragetext"]);
+      }
 
 
-    public function get_answer_IDs($selectedQuestions, $questionNr){   
-        $answerID = "SELECT id FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
-        $answer = $this->mysqli->query($answerID);
-        $resultAnswer = $answer->fetch_all()[$answerID][0];
-    }
+      public function get_answer_IDs($selectedQuestions, $questionNr){   
+          $answerID = "SELECT id FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
+          $answer = $this->mysqli->query($answerID);
+          $resultAnswer = $answer->fetch_all()[$answerID][0];
+      }
 
 
     public function show_answers($selectedQuestions, $questionNr){   

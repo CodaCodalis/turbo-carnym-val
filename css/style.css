@@ -1,21 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
 /*Font family*/
 *{
     font-family: 'Poppins', sans-serif;
+    
 }
 
 .clearfix{
     clear: both;
 }
 
+/*-------------Nav-Menü--------------*/
+header{
+    margin: 0;
+    height: 50px;
+    border: 1px  #fff;
+}
+
+header nav li{
+    text-align: center;
+    float: right;
+    display: inline;
+    list-style: none;
+    padding: 10px;
+}
+
+header a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: white;
+    display: block;
+    margin: auto;
+    /*Effektdauer*/
+    transition: 0.5s;
+}
+
+/*Unterstriche einblenden bei mouse Hover*/
+header a:hover::after{
+    width: 100%;
+}
+
+header a {
+    color:#fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#validate {
+    color: darkred;
+    font-weight: bold;
+}
+
+/*-------------Footer--------------*/
+footer{
+    width: 99%;
+    bottom: 15px;
+    display: block;
+    border: 1px   #fff;
+    text-align: center;
+}
+
+footer a{
+    text-align: center;
+    display: inline;
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+}
+
+/*-------------Body--------------*/
 body{
+    height: 100%;
+    display: block;
+    text-align: center;
     background-color: royalblue ;
+    background-image: url(../images/quiz\ BG.jpg) ;
 }
 
 .content{
     min-height: 615px;
-    background-color: royalblue ;
 }
 
 h1{
@@ -23,16 +91,47 @@ h1{
     color: #fff;
     text-align: center;
 }
+
 h2{
-    font-size: 28px;
+    font-size: 24px;
     color: #fff; 
     text-align: center;
 }
 
+h3{
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.Button{
+    cursor:pointer;
+    width: 100px;
+    height: 40px;
+    background-color:white;
+    color: #555;
+    border-radius: 30px;
+    border-color: royalblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    font-weight: 600;
+   
+}
+
+.Button:hover{
+    border: 1px solid white;
+    background-color: #163BA8;
+    color: white;
+    transition: 1s;
+}
+
+/*-------------Startseite--------------*/
 #login{
-    padding-top: 100px;
+    
+    text-align: center;
+    padding-top: 50px;
     color: #fff;
-    width: 300px;
+    width: 400px;
     margin: auto;
 }
 
@@ -40,51 +139,100 @@ h2{
     width: 300px;
 }
 
+#Registrierungsform{
+    color: royalblue;
+}
+
+.Textfeld{
+    width: 250px;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: none;
+    color: #555;
+}
+
+#QuizauswahlBTN{
+    margin-right: 10px;  
+}
+
+#RegBTN{
+    margin-left: 10px;
+}
+
+/*-------------Quizauswahlseite--------------*/
+/*#startRandom, #startCategory{
+}*/
+
 #randomquestion{
+    width: 700px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#frage{
+    font-size: 20px;
+    font-weight: 700;
+    color: #555;
+}
+
+#antwort{
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    background-color: #163ba8;
+    border-radius: 5px;
+}
+
+img{
+    display: block;
+    height: 180px;
+    margin-top: 25px ;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#flexbox{
+    display: flex; 
+}
+
+#randomquiz{
+    border: 1px solid white;
+    border-radius: 5px;
     color: #fff;
     width: 500px;
-    margin: auto;
+    max-height: 350px;
+    margin: 30px;
+    margin-left: 22%;
 }
 
-/*-------------Nav-Menü--------------*/
-header{
-    height: 50px;
-    border: 1px solid #fff;
-}
-
-header nav li{
-    float: right;
-    display: inline;
-    list-style: none;
-}
-
-header a {
-    padding-left:10px;
-    color:#fff;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-
-/*-------------Footer--------------*/
-footer{
-    border-top: 1px solid #fff;
-   text-align: center;
-}
-
-footer li a{
-    display: inline;
-    text-decoration: none;
+#kategoriequiz{
+    border: 1px solid white;
+    border-radius: 5px;
     color: #fff;
+    width: 500px;
+    max-height: 350px;
+    margin: 30px; 
 }
 
-footer li{
-    padding:10px;
-    display: inline;
-    list-style: none;
+.auswahl{
+    width: 40%;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #555;
+    background-color:whitesmoke;
 }
 
-#validate {
-    color: darkred;
-    font-weight: bold;
-}

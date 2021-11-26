@@ -48,10 +48,10 @@
         ?>
     </header>
     <div class="content">
-        <h1>Quizubi</h1>
-        <h2>Das Prüfungsfragen Quiz für Azubis!</h2>
+        <img src="images/logo.png"  id="logo">
+        <div><h2>Das Prüfungsfragen Quiz für Azubis!</h2></div>
         <div id="randomquestion">
-            <h3>Zufallsfrage</h3>
+           <!-- <h3>Zufallsfrage</h3> -->
             <?php
                 $DB_CONNECTION->get_zufallsfrage();
             ?>
@@ -60,7 +60,9 @@
         <div id="login">
             <?php
                 if(isset($_SESSION['userName'])){
-                    echo "<h3>Hallo ".$_SESSION['userName']."!</h3>";
+                    echo "<h3>Hallo " . $_SESSION['userName'] . ", hier kannst du ein Quiz wählen.</h3>";
+                    //   echo "<button onclick='location.href='php/quizauswahl.php'>Quizauswahl</button>";
+                       echo " <a href='php/quizauswahl.php'><button class='Button' id='QuizauswahlBTN'>Quizauswahl</button></a>";
                 }
                 else{
                     echo "<h3>Hallo, bitte anmelden oder Registrieren.</h3>";
@@ -71,20 +73,19 @@
                 /* Wenn nicht eingeloggt (Session enthält keinen UserName) werden das Anmeldeformular
                 und der Registrieren-Button eingebledet */
                 if(!isset($_SESSION['userName'])){                
-                    echo "<form action='index.php' method='POST'>";
-                    echo "<label>Benutzername</label><input type='text' name='username'><br>";
-                    echo "<label>Passwort</label><input type='password' name='password'><br>";
-                    echo "<input type='submit' name='aktion' value='anmelden'></form>";
-                    echo "<b>Den Button zum Release entfernen:</b>";
-                    echo "<button onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
+                    echo "<form action='index.php' method='POST' id='Registrierungsform'>";
+                    echo "<input type='text' placeholder='Benutzername' name='username' class='Textfeld'><br>";
+                    echo "<input type='password' placeholder='Passwort' name='password' class='Textfeld'><br>";
+                    echo "<input type='submit' class='Button' name='aktion' value='anmelden'></form>";
+                    echo "<button class='Button' id='RegBTN' onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
                 }
             ?>
         </div>
     </div>
     <footer>
         <div class="footer">
-                    <a href="php/impressum.php">Impressum</a>
-                    <a href="php/datenschutz.php">Datenschutz</a>
+            <a href="php/impressum.php">Impressum</a>
+            <a href="php/datenschutz.php">Datenschutz</a>
         </div>
     </footer>
 </body>
