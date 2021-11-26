@@ -145,12 +145,12 @@ h3{
 
 #radioAntwort:hover + #antwort{
     cursor: pointer;
-    transform: scale(1.01);
-    border: 3px solid #7b97ec;
+    background-color: #1f45b5;
 }
 
 #radioAntwort:checked + #antwort{
     background-color: #1f45b5;
+    border: 3px solid #7b97ec;
 }
 
 #frage{
