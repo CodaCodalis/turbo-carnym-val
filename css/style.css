@@ -168,6 +168,8 @@ h3{
 }*/
 
 #randomquestion{
+    width: 700px;
+    padding: 20px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -182,6 +184,8 @@ h3{
 }
 
 #antwort{
+    margin-top: 5px;
+    margin-bottom: 5px;
     text-align: left;
     background-color: #163ba8;
     border-radius: 5px;

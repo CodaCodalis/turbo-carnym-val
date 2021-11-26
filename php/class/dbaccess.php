@@ -259,7 +259,7 @@ class Database{
         $antwort_query = "SELECT antworttext FROM antworten WHERE frage_id=$frage_id;";
         $result = $this->mysqli->query($antwort_query);
         while($zeile = $result->fetch_assoc()) {
-            echo "<div id='antwort'>".$zeile['antworttext']."</div><br>";
+            echo "<div id='antwort'>".$zeile['antworttext']."</div>";
             
         }
     }
