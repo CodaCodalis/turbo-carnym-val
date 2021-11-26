@@ -75,7 +75,7 @@ include("init.inc.php");
                 $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']];
                 $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
                 echo "<p id='frageYvonX'>Frage ".$x." von ".$y."</p>";
-                echo "<br><p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
+                echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
                 
 
                 $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
