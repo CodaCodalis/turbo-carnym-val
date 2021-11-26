@@ -39,6 +39,7 @@
                 unset ($_SESSION['selectedQuestions']);          
                 unset ($_SESSION['anzahlAuswahlFragen']);
                 unset ($_SESSION['frageCatAnzahl']);
+                unset($_SESSION['categoryQuestion']);
                 unset($_SESSION['selectedCategoryQuestions']); 
             ?>
             <form action="quiz.php" method="POST">

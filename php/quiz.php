@@ -1,5 +1,7 @@
 <?php
 include("init.inc.php");
+
+$DB_CONNECTION = new Database();
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +33,9 @@ include("init.inc.php");
             <?php
                 if(!isset($_SESSION['anzahlAuswahlFragen'])){
                     $x = 1;
-                    $y = $_POST['anzahl'];
                 }
                 else if(isset($_SESSION['frageCount'])){
                     $x = $_SESSION['frageCount']+1;
-                    $y = $_SESSION['anzahlAuswahlFragen'];
                 }
             ?>
         </div>
@@ -59,11 +59,16 @@ include("init.inc.php");
             }
 
             if(isset($_POST['anzahl'])){
-                $_SESSION['anzahlAuswahlFragen']=$_POST['anzahl'];
+                $vorhandene_anzahl = count($DB_CONNECTION->get_alle_fragen());
+                if($vorhandene_anzahl >= $_POST['anzahl']){
+                    $_SESSION['anzahlAuswahlFragen'] = $_POST['anzahl'];
+                }
+                else{
+                    $_SESSION['anzahlAuswahlFragen'] = $vorhandene_anzahl;
+                }
             }
 
             $nrQuestion=$_SESSION['anzahlAuswahlFragen'];
-            $DB_CONNECTION = new Database();
             
             if(!isset($_SESSION['selectedQuestions'])){
                 $randomIDs = $DB_CONNECTION->get_random_IDs($nrQuestion);
@@ -74,7 +79,7 @@ include("init.inc.php");
                 echo "<div id='fragekarte'>";
                 $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']];
                 $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
-                echo "<p id='frageYvonX'>Frage ".$x." von ".$y."</p>";
+                echo "<p id='frageYvonX'>Frage ".$x." von ".$_SESSION['anzahlAuswahlFragen']."</p>";
                 echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
                 
 

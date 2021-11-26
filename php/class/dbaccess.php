@@ -32,17 +32,19 @@ class Database{
         $this->db = 'Gruppe4DB';
         */
 
+        /*
         $this->host = 'localhost';
         $this->user = 'quizubi'; 
         $this->pass = 'quizubi'; 
         $this->db = 'quizubi';
+        */
 
-        /*
+        
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-        */
+        
 
 
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
@@ -474,8 +476,7 @@ class Database{
         $i = 0;
 
         $query = "SELECT frage_kategorie.frage_id FROM frage_kategorie JOIN kategorien ON frage_kategorie.kategorie_id = kategorien.id WHERE kategorien.name='$category'";        //Kategorie anhand der Vorauswahl raussuchen, 
-        $Fragen = $this->mysqli->query($query);                                                                                                                                   //fragt alle frage_id ab, di zur übergebenden Kategorie gehören 
-
+        $Fragen = $this->mysqli->query($query);
         $check = mysqli_num_rows($Fragen);                                          //überprüft die Anzahl der abgefragten Datenreihen
         if ($check > 0) {
             while ($data = mysqli_fetch_assoc($Fragen)) {                           // Ergebnis wird in assoz. Array umgeandelt und in $data gespeichert
@@ -483,7 +484,6 @@ class Database{
                 $i++;
             }
         }
-        return $_SESSION['categoryQuestion'];
     }
 
     //Liefert aus dem in SESSION['categoryQuestion'] gespeicherten Array von Fragen einer Kategorie eine Anzahl zufälliger Fragen
@@ -501,6 +501,7 @@ class Database{
                 $i++;
             }
         }
+        // muss returnt werden, weil bei Aufruf Array benötigt
         return $_SESSION['selectedCategoryQuestions'];
     }
 
@@ -612,6 +613,15 @@ class Database{
         $sql="UPDATE user SET is_deleted = 1, name='', passwort='', role_id=NULL";
         $sql.=" WHERE id=$deleted_user;";
         $this->mysqli -> query($sql); 
+    }
+
+    public function get_count_questions_category()
+    {
+        $sql = "SELECT COUNT(*) FROM frage_kategorie WHERE kategorie_id = (SELECT id FROM kategorien WHERE name = 'Test');";
+        $result = $this->mysqli->query($sql);
+        $anzahl = $result->fetch_array();
+
+        return $anzahl[0];
     }
 }
 

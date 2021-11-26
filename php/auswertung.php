@@ -34,7 +34,12 @@ $DB_CONNECTION = new Database();
             if(isset($_POST['wahrheit'])){
                 //$_POST['wahrheit'] enthält Antwort_id
                 $antwort_id = $_POST['wahrheit'];
-                $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']-1];
+                if(isset($_SESSION['selectedQuestions'])){
+                    $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']-1];
+                }
+                else if(isset($_SESSION['selectedCategoryQuestions'])){
+                    $frage_id = $_SESSION['selectedCategoryQuestions'][$_SESSION['frageCount']-1];
+                }
                 $_SESSION['frage_antwort_wahl'][]=array("frage_id"=>$frage_id, "antwort_id"=>$antwort_id);
             }
 
@@ -46,7 +51,6 @@ $DB_CONNECTION = new Database();
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
                 }
             }
-
             elseif(isset($_SESSION['frageCatAnzahl'])){
                 while($_SESSION['frageCount'] < $_SESSION['frageCatAnzahl']){
                     $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
@@ -64,10 +68,7 @@ $DB_CONNECTION = new Database();
                 }
                 
                 elseif(isset($_SESSION['frageCatAnzahl'])){
-                    var_dump($_SESSION['frageCatAnzahl']);
-                    var_dump($anzahl_richtige_antwort);
                     echo "<h2>Du hast ".$anzahl_richtige_antwort." von ".$_SESSION['frageCatAnzahl']." Antworten richtig.</h2>";
-                    var_dump($prozent_richtig);
                     $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['frageCatAnzahl'];
                 }
                 if($prozent_richtig < 25){

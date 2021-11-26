@@ -1,5 +1,8 @@
 <?php
 include("init.inc.php");
+
+
+$DB_CONNECTION = new Database();
 ?>
 
 <!DOCTYPE html>
@@ -31,18 +34,10 @@ include("init.inc.php");
             <?php
                 if(!isset($_SESSION['frageCatAnzahl'])){
                     $x = 1;
-                    if($_POST['cat']=='ALL'){
-                        $y = "hier einbauen, dass alle Fragen aus der Kategorie gezählt werden -> in dbaccess";
-                    }
-                    else {
-                        $y = $_POST['cat'];
-                    }
                 }
                 else if(isset($_SESSION['frageCount'])){
                     $x = $_SESSION['frageCount']+1;
-                    $y = $_SESSION['frageCatAnzahl'];
                 }
-                echo "<h3>Frage ".$x." von ".$y;
             ?>
         </div>
 
@@ -61,75 +56,51 @@ include("init.inc.php");
                         $_SESSION['frage_antwort_wahl']= array();
                     }
 
-                    if (isset($_POST['cat']) && $_POST['category']) {     // $_POST['anzahl'] entspricht $_POST['anzahl']; 
-                        $_SESSION['frageCatAnzahl'] = $_POST['cat'];      //****Anzahl der Fragen aus quizauswahl.php
+                    if (isset($_POST['cat']) && $_POST['category']) {     // $_POST['cat'] entspricht $_POST['anzahl'];
+                        $vorhandene_anzahl = $DB_CONNECTION->get_count_questions_category();
+                        if($_POST['cat']!='ALL'){
+                            if($vorhandene_anzahl >= $_POST['cat']){
+                                $_SESSION['frageCatAnzahl'] = $_POST['cat'];      //****Anzahl der Fragen aus quizauswahl.php
+                            }
+                            else{
+                                $_SESSION['frageCatAnzahl'] = $vorhandene_anzahl;
+                            }
+                        }
+                        else{
+                            $_SESSION['frageCatAnzahl'] = $vorhandene_anzahl;
+                        }
                         $_SESSION['category'] = $_POST['category'];       //****Auswahl der Kategorie aus quizauswahl.php
                     } 
                     
                     $nrQuestion = $_SESSION['frageCatAnzahl'];
                     $category = $_SESSION['category'];
-                    $DB_CONNECTION = new Database();
                     
-
-                    $DB_CONNECTION->get_questions_by_category($category);      //****Methodenaufruf Quizfragen nach Kategorie und Fragenanzahl
-                
-
-                    if ($nrQuestion == 'ALL') {
-                        if ($_SESSION['frageCount'] < count($_SESSION['categoryQuestion'])) {
-                            $kategorie = $_SESSION['category'];
-                            echo "<br>Kategorie: ".$kategorie;
-
-                            $DB_CONNECTION->show_questions($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
-                            $DB_CONNECTION->show_answers($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
-                            echo '<input type="submit" value="Nächste Frage">';
-                            echo "<button onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
-                        } else {
-                            header("Location: auswertung.php");
-                        }
-                    }elseif ($nrQuestion=='10'){
-                        if(count($_SESSION['categoryQuestion']) <= $nrQuestion){
-                            if ($_SESSION['frageCount'] < count($_SESSION['categoryQuestion'])) {
-                                $DB_CONNECTION->show_questions($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
-                                $DB_CONNECTION->show_answers($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
-                                echo '<input type="submit" value="Nächste Frage">';
-                            }else{
-                                header("Location: auswertung.php");
-                            }
-                        }elseif(count($_SESSION['categoryQuestion']) > $nrQuestion){
-                            if ($_SESSION['frageCount'] < $nrQuestion) {
-                                if(!isset($_SESSION['selectedCategoryQuestions'])){
-                                    $DB_CONNECTION->get_random_questionIDs_by_category($nrQuestion);
-                                }
-                                $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'], $_SESSION['frageCount']);
-                                $DB_CONNECTION->show_answers($_SESSION['selectedCategoryQuestions'], $_SESSION['frageCount']);
-                                echo '<input type="submit" value="Nächste Frage">';
-                            }else{
-                                header("Location: auswertung.php");
-                            }
-                        }
-
-                    }elseif ($nrQuestion=='20'){
-                        if(count($_SESSION['categoryQuestion']) <= $nrQuestion){
-                            if ($_SESSION['frageCount'] < count($_SESSION['categoryQuestion'])) {
-                                $DB_CONNECTION->show_questions($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
-                                $DB_CONNECTION->show_answers($_SESSION['categoryQuestion'], $_SESSION['frageCount']);
-                                echo '<input type="submit" value="Nächste Frage">';
-                            }else{
-                                header("Location: auswertung.php");
-                            }
-                        }elseif(count($_SESSION['categoryQuestion']) > $nrQuestion){
-                            if ($_SESSION['frageCount'] < $nrQuestion) {
-                                if(!isset($_SESSION['selectedCategoryQuestions'])){
-                                    $DB_CONNECTION->get_random_questionIDs_by_category($nrQuestion);
-                                }
-                                $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'], $_SESSION['frageCount']);
-                                $DB_CONNECTION->show_answers($_SESSION['selectedCategoryQuestions'], $_SESSION['frageCount']);
-                                echo '<input type="submit" value="Nächste Frage">';
-                            }else{
-                                header("Location: auswertung.php");
-                            }
-                        }
+                    // Methodenaufruf Quizfragen nach Kategorie und Fragenanzahl
+                    // setzt Session-Array mit Frage-IDs der Kat-Fragen
+                    if(!isset($_SESSION['categoryQuestion'])){
+                        $DB_CONNECTION->get_questions_by_category($category);
+                        $randomIDs = $DB_CONNECTION->get_random_questionIDs_by_category($nrQuestion);
                     }
+                    
+                   // var_dump($_SESSION ['categoryQuestion']);
+                    if($_SESSION['frageCount']<$nrQuestion){
+                        echo "<div id='fragekarte'>";
+                        $frage_id = $_SESSION['selectedCategoryQuestions'][$_SESSION['frageCount']];
+                        $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
+                        echo "<p id='frageYvonX'>Frage ".$x." von ".$_SESSION['frageCatAnzahl']."</p>";
+                        echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
+                        
+        
+                        $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
+                        $DB_CONNECTION->show_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
+                        echo "</div>";
+                        echo '<input type="submit" class="Buttton" value="Nächste Frage">';
+                        echo "<button class='Buttton' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
+                    }
+                    else{
+                        header("Location: auswertung.php");
+                    }
+                    
                 ?>
 
             </form>
