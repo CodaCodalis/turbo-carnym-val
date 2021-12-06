@@ -129,15 +129,22 @@ h3{
 }
 
 /*---------------QUIZ-----------------------*/
-#QuizBtn{
+#NextQuestionBtn{
 height:56px;
 width: 140px;
-margin: 10px;
-color: red;
+margin-top: 20px;
+margin-left: 300px;
 }
 
+#AbbrechenBtn{
+    height:56px;
+    width: 140px;
+    margin-top: 20px;
+    margin-right: 300px;
+    }
+
 #fragekarte{
-    background-color:red;
+    background-color: #fff;
     width: 700px;
     margin-left:auto;
     margin-right:auto;
