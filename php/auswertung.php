@@ -27,7 +27,7 @@ $DB_CONNECTION = new Database();
     <div class="clearfix"></div>
 
     <div class="content">
-        <h2>QUIZ - Auswertung</h2>
+        <h1>QUIZ - Auswertung</h1>
         <div id="quizwindow">
             <?php
             // Antwort von letzter Frage speichern
@@ -47,14 +47,18 @@ $DB_CONNECTION = new Database();
             $anzahl_richtige_antwort=0;
             if(isset($_SESSION['anzahlAuswahlFragen'])){
                 while($_SESSION['frageCount'] < $_SESSION['anzahlAuswahlFragen']){
+                    echo "<div id='fragekarte'>";
                     $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+                    echo "</div>";
                 }
             }
             elseif(isset($_SESSION['frageCatAnzahl'])){
                 while($_SESSION['frageCount'] < $_SESSION['frageCatAnzahl']){
+                    echo "<div id='fragekarte'>";
                     $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+                    echo "</div>";
                 }
             }
             
