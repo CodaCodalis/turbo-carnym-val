@@ -250,8 +250,8 @@ img{
 }
 
 #impressum a:link{
-    color: rgb(58, 95, 173);
+    color: #777;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
 }
 #impressum a:hover{color:rgb(155, 130, 210);}
