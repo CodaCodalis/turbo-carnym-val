@@ -144,16 +144,25 @@ margin-left: 225px;
     }
 #FrageInfo{
 display: flex;
+background-color: #999;
+border-bottom:1px solid #555;
 }
 
 #frageYvonX{
+font-size: 14px;
+font-weight: 400;
+color:#555;
 flex-direction: row;
 color:#555;
+text-align: right;
 }
 
 #kategorieAusgabe{
+    font-size: 14px;
+    font-weight: 400;
     color:#555;
     flex-direction: row;
+    text-align: left;
 } 
 
 #fragekarte{
