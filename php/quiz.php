@@ -28,7 +28,7 @@ $DB_CONNECTION = new Database();
     <div class="clearfix"></div>
 
     <div class="content">
-        <h2>QUIZ</h2>
+        <h1>QUIZ</h1>
         <div>
             <?php
                 if(!isset($_SESSION['anzahlAuswahlFragen'])){
