@@ -207,6 +207,7 @@ img{
 
 #flexbox{
     display: flex; 
+    justify-content: center;
 }
 
 #randomquiz{
@@ -216,7 +217,6 @@ img{
     width: 500px;
     max-height: 350px;
     margin: 30px;
-    margin-left: 22%;
 }
 
 #kategoriequiz{
