@@ -175,6 +175,36 @@ text-align: right;
     border-radius: 10px;
 }
 
+/*----------------------Quizauswertung-----------------------*/
+
+#legende{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#legendeRichtig{
+    flex-direction: row;
+    border:1px solid #888;
+    background-color: lightgreen;
+    color: #555;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+#legendeFalsch{
+    flex-direction: row;
+    border:1px solid #888;
+    background-color: rgb(255, 115, 105);
+    color: #555;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
 #auswertungkarte{
     background-color: #fff;
     width: 700px;
