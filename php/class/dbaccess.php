@@ -375,7 +375,7 @@ class Database{
         $result = $this->mysqli->query($checkQuery);
         return ($this->mysqli->affected_rows > 0);
     }
-
+    /*
     public function get_kategorien() {
         $kategorienQuery = "SELECT name FROM kategorien;";
         $result = $this->mysqli->query($kategorienQuery);
@@ -386,7 +386,7 @@ class Database{
        // return $result->fetch_all(MYSQLI_ASSOC);
 
     }
-
+    
     public function get_user() {
         $userQuery = "SELECT name FROM user;";
         $result = $this->mysqli->query($userQuery);
@@ -395,7 +395,7 @@ class Database{
         }
         return $resultArray;
     }
-
+    */
     //neuen User in die DB schreiben
     public function write_User_to_database($userObj){
         // Überprüfen ob Login bereits vorhanden
