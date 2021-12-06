@@ -37,7 +37,7 @@
         $valid_answer2 = $validate->validateText($antwort2);
         $valid_answer3 = $validate->validateText($antwort3);
         $valid_answer4 = $validate->validateText($antwort4);
-        $valide = $valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4; 
+        $valide = ($valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4); 
         
         $antworten[] = $antwort1;
         $antworten[] = $antwort2;
