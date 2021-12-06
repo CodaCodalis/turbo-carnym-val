@@ -129,6 +129,11 @@ h3{
 }
 
 /*---------------QUIZ-----------------------*/
+#QuizBtn{
+height:56px;
+width: 140px;
+margin: 10px;
+}
 
 #fragekarte{
     background-color: #fff;
