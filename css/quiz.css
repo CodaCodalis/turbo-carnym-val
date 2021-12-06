@@ -175,6 +175,39 @@ text-align: right;
     border-radius: 10px;
 }
 
+/*----------------------Quizauswertung-----------------------*/
+
+#legende{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+#legendeRichtig{
+    flex-direction: row;
+    border:1px solid #888;
+    background-color: lightgreen;
+    color: #555;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+    margin-right: 20px;
+}
+
+#legendeFalsch{
+    flex-direction: row;
+    border:1px solid #888;
+    background-color: rgb(255, 115, 105);
+    color: #555;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+    margin-left: 20px;
+}
+
 #auswertungkarte{
     background-color: #fff;
     width: 700px;
@@ -220,7 +253,7 @@ text-align: right;
 
 #korrekte_Antwort{
     border:1px solid #888;
-    background-color: rgb(253, 253, 120);
+    background-color: lightgreen;
     color: #555;
     font-size: 16px;
     border-radius: 5px;

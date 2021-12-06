@@ -29,6 +29,14 @@ $DB_CONNECTION = new Database();
     <div class="content">
         <h1>QUIZ - Auswertung</h1>
         <div id="quizwindow">
+            <div id="legende">
+                <div id="legendeRichtig">
+                    Diese Antwort ist richtig!
+                </div>
+                <div id="legendeFalsch">
+                    Gewählte Antwort war leider falsch.
+                </div>
+            </div>    
             <?php
             // Antwort von letzter Frage speichern
             if(isset($_POST['wahrheit'])){
