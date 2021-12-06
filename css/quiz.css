@@ -181,6 +181,7 @@ text-align: right;
     display: flex;
     justify-content: center;
     margin: auto;
+    margin-bottom: 30px;
 }
 
 #legendeRichtig{
@@ -192,6 +193,7 @@ text-align: right;
     border-radius: 5px;
     margin-bottom: 10px;
     width: 300px;
+    margin-right: 10px;
 }
 
 #legendeFalsch{
@@ -203,6 +205,7 @@ text-align: right;
     border-radius: 5px;
     margin-bottom: 10px;
     width: 300px;
+    margin-left: 10px;
 }
 
 #auswertungkarte{
