@@ -30,22 +30,13 @@ class Database{
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
-<<<<<<< HEAD
-        */
 
-=======
-        
->>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
         /*
         $this->host = 'localhost';
         $this->user = 'quizubi'; 
         $this->pass = 'quizubi'; 
         $this->db = 'quizubi';
         */
-<<<<<<< HEAD
-
-        
-=======
         
         /*
 >>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
@@ -608,7 +599,7 @@ class Database{
         $sql.=" WHERE id=$deleted_user;";
         $this->mysqli -> query($sql); 
     }
-<<<<<<< HEAD
+
 
     public function get_count_questions_category()
     {
@@ -636,7 +627,6 @@ class Database{
         {
             return FALSE;
         }
->>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
     }
 }
 
