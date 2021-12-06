@@ -47,7 +47,7 @@ $DB_CONNECTION = new Database();
             $anzahl_richtige_antwort=0;
             if(isset($_SESSION['anzahlAuswahlFragen'])){
                 while($_SESSION['frageCount'] < $_SESSION['anzahlAuswahlFragen']){
-                    echo "<div id='fragekarte'>";
+                    echo "<div id='auswertungkarte'>";
                     $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
                     echo "</div>";
@@ -55,7 +55,7 @@ $DB_CONNECTION = new Database();
             }
             elseif(isset($_SESSION['frageCatAnzahl'])){
                 while($_SESSION['frageCount'] < $_SESSION['frageCatAnzahl']){
-                    echo "<div id='fragekarte'>";
+                    echo "<div id='auswertungkarte'>";
                     $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
                     echo "</div>";

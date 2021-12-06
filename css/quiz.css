@@ -175,6 +175,16 @@ text-align: right;
     border-radius: 10px;
 }
 
+#auswertungkarte{
+    background-color: #fff;
+    width: 700px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 #radioAntwort{
     display: none;
 }
@@ -209,18 +219,24 @@ text-align: right;
 
 #korrekte_Antwort{
     border:2px solid yellow;
+    background-color: yellow;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 #antwort_gewaehlt_richtig{
     border:2px solid lightgreen;
+    background-color: lightgreen;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 #antwort_gewaehlt_falsch{
     border:2px solid tomato;
+    background-color: tomato;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
+    border-radius: 5px;
 }
