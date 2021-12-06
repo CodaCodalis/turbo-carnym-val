@@ -218,9 +218,9 @@ text-align: right;
 }
 
 #korrekte_Antwort{
-    border:2px solid yellow;
-    background-color: yellow;
-    color: white;
+    border:2px solid rgb(253, 253, 120);
+    background-color: rgb(253, 253, 120);
+    color: #555;
     font-size: 16px;
     border-radius: 5px;
 }
@@ -228,15 +228,21 @@ text-align: right;
 #antwort_gewaehlt_richtig{
     border:2px solid lightgreen;
     background-color: lightgreen;
-    color: white;
+    color: #555;
     font-size: 16px;
     border-radius: 5px;
 }
 
 #antwort_gewaehlt_falsch{
-    border:2px solid tomato;
-    background-color: tomato;
-    color: white;
+    border:2px solid rgb(255, 96, 85);
+    background-color: rgb(255, 96, 85);
+    color: #555;
     font-size: 16px;
     border-radius: 5px;
+}
+
+#feedback{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
 }

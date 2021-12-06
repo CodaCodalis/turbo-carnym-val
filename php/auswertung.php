@@ -76,19 +76,19 @@ $DB_CONNECTION = new Database();
                     $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['frageCatAnzahl'];
                 }
                 if($prozent_richtig < 25){
-                    echo "<div>Ein Satz mit X ...</div>";
+                    echo "<div id='feedback'>Ein Satz mit X ...</div>";
                 }
                 else if($prozent_richtig < 50){
-                    echo "<div>Stets bemüht!</div>";
+                    echo "<div id='feedback'>Stets bemüht!</div>";
                 }
                 else if($prozent_richtig < 75){
-                    echo "<div>Auf dem richtigen Weg.</div>";
+                    echo "<div id='feedback'>Auf dem richtigen Weg.</div>";
                 }
                 else if($prozent_richtig < 100){
-                    echo "<div>Wir sind stolz auf dich!</div>";
+                    echo "<div id='feedback'>Wir sind stolz auf dich!</div>";
                 }
                 else if($prozent_richtig == 100){
-                    echo "<div>STREBER !!!</div>";
+                    echo "<div id='feedback'>STREBER !!!</div>";
                 }
             ?>
         </div>
