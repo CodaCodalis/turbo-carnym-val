@@ -255,3 +255,5 @@ img{
     font-weight: 700;
 }
 #impressum a:hover{color:rgb(155, 130, 210);}
+
+#impressum a:visited{color:#777;}
