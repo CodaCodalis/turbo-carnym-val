@@ -94,8 +94,8 @@ $DB_CONNECTION = new Database();
                         $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                         $DB_CONNECTION->show_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                         echo "</div>";
-                        echo '<input type="submit" class="Buttton" value="Nächste Frage">';
-                        echo "<button class='Buttton' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
+                        echo "<button id='AbbrechenBtn' class='Button' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
+                        echo '<input type="submit" id="NextQuestionBtn"class="Button" value="Nächste Frage">';
                     }
                     else{
                         header("Location: auswertung.php");

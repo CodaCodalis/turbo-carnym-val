@@ -79,8 +79,8 @@ $DB_CONNECTION = new Database();
                 echo "<div id='fragekarte'>";
                 $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']];
                 $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
-                echo "<p id='frageYvonX'>Frage ".$x." von ".$_SESSION['anzahlAuswahlFragen']."</p>";
-                echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
+                echo "<div id='FrageInfo'<p id='frageYvonX'>Frage ".$x." von ".$_SESSION['anzahlAuswahlFragen']."</p>";
+                echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p></div>";
                 
 
                 $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);

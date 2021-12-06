@@ -142,6 +142,17 @@ margin-left: 225px;
     margin-top: 20px;
     margin-right: 225px;
     }
+#FrageInfo{
+flex-direction: column;
+}
+
+#frageYvonX{
+color:#555;
+}
+
+#kategorieAusgabe{
+    color:#555;
+} 
 
 #fragekarte{
     background-color: #fff;
