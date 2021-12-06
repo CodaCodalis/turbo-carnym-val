@@ -539,7 +539,7 @@ class Database{
             }
             
             if($ausgabe){
-                echo "<div id='$div_id'>".$row['antworttext']."</div><br>";
+                echo "<div id='$div_id'>".$row['antworttext']."</div>";
             }
         }
         $_SESSION['frageCount']+=1;
