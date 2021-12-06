@@ -59,7 +59,7 @@ $DB_CONNECTION = new Database();
             }
 
             if(isset($_POST['anzahl'])){
-                $vorhandene_anzahl = count($DB_CONNECTION->get_alle_fragen());
+                $vorhandene_anzahl = count($DB_CONNECTION->get_all_from_table('fragen'));
                 if($vorhandene_anzahl >= $_POST['anzahl']){
                     $_SESSION['anzahlAuswahlFragen'] = $_POST['anzahl'];
                 }
@@ -79,15 +79,15 @@ $DB_CONNECTION = new Database();
                 echo "<div id='fragekarte'>";
                 $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']];
                 $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
-                echo "<p id='frageYvonX'>Frage ".$x." von ".$_SESSION['anzahlAuswahlFragen']."</p>";
-                echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
+                echo "<div id='FrageInfo'><div id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</div>";
+                echo "<div id='frageYvonX'>Frage ".$x." von ".$_SESSION['anzahlAuswahlFragen']."</div></div>";
                 
 
                 $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                 $DB_CONNECTION->show_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                 echo "</div>";
-                echo '<input type="submit" class="Button" value="Nächste Frage">';
-                echo "<button class='Button' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
+                echo "<button class='Button' id='AbbrechenBtn' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
+                echo '<input type="submit" id="NextQuestionBtn" class="Button" value="Nächste Frage">';
             }
             else{
                 header("Location: auswertung.php");

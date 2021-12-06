@@ -30,6 +30,7 @@ class Database{
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
+        
 
         /*
         $this->host = 'localhost';
@@ -37,14 +38,13 @@ class Database{
         $this->pass = 'quizubi'; 
         $this->db = 'quizubi';
         */
-        
+
         /*
->>>>>>> 98ecde786eba976d3a3f8fcded727438642feacf
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-	 */ 
+        */
 
 
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
@@ -600,16 +600,15 @@ class Database{
         $this->mysqli -> query($sql); 
     }
 
-
     public function get_count_questions_category()
     {
-        $sql = "SELECT COUNT(*) FROM frage_kategorie WHERE kategorie_id = (SELECT id FROM kategorien WHERE name = 'Test');";
+        $sql = "SELECT COUNT(*) FROM frage_kategorie WHERE kategorie_id = (SELECT id FROM kategorien WHERE name = '".$_SESSION['category']."');";
         $result = $this->mysqli->query($sql);
         $anzahl = $result->fetch_array();
 
         return $anzahl[0];
 	
-    }=======
+    }
     
     public function get_rolename_of_id($role_id)
     {

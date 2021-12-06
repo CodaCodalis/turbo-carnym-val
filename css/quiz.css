@@ -129,6 +129,42 @@ h3{
 }
 
 /*---------------QUIZ-----------------------*/
+#NextQuestionBtn{
+height:56px;
+width: 140px;
+margin-top: 20px;
+margin-left: 225px;
+}
+
+#AbbrechenBtn{
+    height:56px;
+    width: 140px;
+    margin-top: 20px;
+    margin-right: 225px;
+    }
+#FrageInfo{
+display: flex;
+justify-content: space-between;
+padding-bottom: 5px;
+border-bottom: 1px solid #888;
+margin-bottom: 15px;
+}
+
+#frageYvonX{
+font-size: 14px;
+font-weight: 400;
+flex-direction: row;
+color:#555;
+text-align: right;
+}
+
+#kategorieAusgabe{
+    font-size: 14px;
+    font-weight: 400;
+    color:#555;
+    flex-direction: row;
+    text-align: left;
+} 
 
 #fragekarte{
     background-color: #fff;
@@ -164,7 +200,7 @@ h3{
     color: #fff;
     border-radius: 5px;
     background-color: #163BA8;
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px;
     text-align: left;
     margin-top: 5px;
