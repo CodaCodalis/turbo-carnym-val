@@ -424,13 +424,13 @@
                 <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
                 <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
                     <?php
-                        $userNamen = $db->get_user();
+                        $userNamen = $db->get_all_from_table('user');
                         for ($i = 0; $i < count($userNamen); $i++) {
                             if($userNamen[$i]['name'] === "admin")
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
-                            else
+                            else if ($userNamen[$i]['is_deleted'] != 1)
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }
