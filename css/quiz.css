@@ -143,15 +143,17 @@ margin-left: 225px;
     margin-right: 225px;
     }
 #FrageInfo{
-flex-direction: column;
+display: flex;
 }
 
 #frageYvonX{
+flex-direction: row;
 color:#555;
 }
 
 #kategorieAusgabe{
     color:#555;
+    flex-direction: row;
 } 
 
 #fragekarte{
