@@ -162,10 +162,6 @@ h3{
     margin-right: 10px;  
 }
 
-#RegBTN{
-    margin-left: 10px;
-}
-
 /*-------------Quizauswahlseite--------------*/
 /*#startRandom, #startCategory{
 }*/
@@ -183,8 +179,7 @@ h3{
 }
 
 #frage{
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 24px;
     color: #555;
 }
 
