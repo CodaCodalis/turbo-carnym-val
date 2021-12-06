@@ -4,7 +4,7 @@
 
         function validateText($text){
             $valid = false;
-            if(is_string($text) AND strlen($text)<300 AND preg_match('~^[-a-z0-9_:%? .,!]+$~i',$text)){ //Erlauben: äöüÄÖÜß
+            if(is_string($text) AND strlen($text)<300 AND preg_match('~^[-a-z0-9äöü_:%?ß .,!]+$~i',$text)){ //Erlauben: äöüÄÖÜß
                 $valid = true;
             }
             return $valid;
