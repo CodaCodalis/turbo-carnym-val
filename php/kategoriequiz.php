@@ -57,6 +57,7 @@ $DB_CONNECTION = new Database();
                     }
 
                     if (isset($_POST['cat']) && $_POST['category']) {     // $_POST['cat'] entspricht $_POST['anzahl'];
+                        $_SESSION['category'] = $_POST['category'];       //****Auswahl der Kategorie aus quizauswahl.php
                         $vorhandene_anzahl = $DB_CONNECTION->get_count_questions_category();
                         if($_POST['cat']!='ALL'){
                             if($vorhandene_anzahl >= $_POST['cat']){
