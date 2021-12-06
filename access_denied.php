@@ -18,10 +18,10 @@
     <div class="content">
 
         <h2>Zugriff verweigert</h2>
-        <div id="">
+        <div id="zugriffVerweigert">
             &nbsp;Zugriff verweigert! Keine Berechtigung.
         </div>
-        <button onClick="window.location.href='./';return false;">Startseite</button>
+        <button class="Button" onClick="window.location.href='./';return false;">Startseite</button>
     </div>
     <footer>
         <div class="footer">
