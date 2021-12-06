@@ -179,7 +179,7 @@ h3{
 }
 
 #frage{
-    font-size: 24px;
+    font-size: 20px;
     color: #555;
 }
 
@@ -241,3 +241,19 @@ img{
     color: white;
 }
 
+/*---------------Impressum-Datenschutz---------------*/
+
+#impressum{
+    color: #fff;
+    width: 700px;
+    margin: auto;
+}
+
+#impressum a:link{
+    color: rgb(155, 130, 210);
+    text-decoration: none;
+    font-weight: 700;
+}
+#impressum a:hover{color:rgb(184, 168, 218);}
+
+#impressum a:visited{color: rgb(155, 130, 210);}
