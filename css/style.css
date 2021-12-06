@@ -247,8 +247,11 @@ img{
     color: #fff;
     width: 700px;
     margin: auto;
-    text-decoration: none;
 }
 
-#impressum a:link{color: rgb(134, 9, 165);}
+#impressum a:link{
+    color: rgb(58, 95, 173);
+    text-decoration: none;
+    font-weight: 500;
+}
 #impressum a:hover{color:rgb(155, 130, 210);}
