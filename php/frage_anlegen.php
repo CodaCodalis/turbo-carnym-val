@@ -9,7 +9,7 @@
     $role_name = $db->get_rolename_of_id($user_role_id);
     
 
-    deny_access_to($role_name[0]);
+    $is_admin = deny_access_to($role_name[0]);
     /*
     switch ($role_name[0]) 
     {
