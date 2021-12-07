@@ -33,4 +33,19 @@ function show_button_userverwaltung($ordner){
         echo '<li><a href="'.$ordner.'userverwaltung.php">Userverwaltung</a></li>';
     }
 }
+
+function deny_access_to($role_name){
+    switch ($role_name) 
+    {
+        case 'Administrator':
+            $is_admin = TRUE;
+            break;
+        case 'Frageersteller':
+            $is_admin = FALSE;
+            break;
+        default:
+            header("Location: ../access_denied.php");
+            break;
+    }
+}
 ?>
