@@ -317,7 +317,7 @@ h4, h3{
 }
 
 #faFragen label{
-    width: 100px;
+    min-width: 100px;
 }
 
 #faKategorien{
