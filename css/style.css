@@ -330,7 +330,8 @@ h4, h3{
 }
 
 #links label{
-margin:auto;
+margin-top:auto;
+margin-bottom:auto;
 }
 
 #mitte{
