@@ -187,13 +187,8 @@
         <form action="frage_anlegen.php" method="POST">
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
             <div id="faFragen">
-            <div id="faFlex">
-            <div id="links">
             <label for="frage">Frage</label>
-            </div>
-            <div id="mitte">
-            <textarea name="frage" id="frage" placeholder="Gib hier deinen Fragetext ein." class="eingabe Textfeld faTextarea" 
-            <?php 
+            <input type="text" name="frage" id="frage" class="eingabe Textfeld" ><?php 
                 $j = 0;
                 while($j < count($db->get_all_from_table("fragen")))
                 {
@@ -201,7 +196,7 @@
                     {
                         $updated = FALSE;
                         $fragetext = $_POST['frage'.$j];
-                        echo " value=\"$fragetext\"";
+                        echo "value=\"$fragetext\"";
                         $frageId = $db->get_frage_id($fragetext);
                         $antworten = $db->get_antworten_zu_frage($frageId);
                         if ($antworten != 0)
@@ -224,13 +219,12 @@
                 if (isset($frage))
                 {
                     if(!$valid_question OR !$valide){
-                        echo " value=\"$frage\"";
+                        echo "value=\"$frage\"";
                     } 
                 
                 
             ?>
-            ></textarea>
-            
+            >
             <?php    
                     if(!$valid_question)
                     {
@@ -240,34 +234,26 @@
                 }
                 else
                 {
-                    echo "></textarea><br>";
+                    echo "<br>";
                 }    
             ?>
-            </div>
-            </div>
             <br>
             
-            <div id="faFlex">
-            <div id="links">
             <label for="antwort">Antwort 1</label>
-            </div>
-            <div id="mitte">
-            <textarea name="antwort1" id="antwort1" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
+            <input type="text" name="antwort1" id="antwort1" class="eingabe Textfeld" 
             <?php
                 if (isset($antwort1Obj) AND !$updated)
                 {
-                    echo " value=\"".$antwort1Obj->get_antworttext()."\"";
+                    echo "value=\"".$antwort1Obj->get_antworttext()."\"";
                 }
                 else if (isset($antwort1))
                 {
                     if(!$valid_answer1 OR !$valide){
-                        echo " value=\"$antwort1\"";
+                        echo "value=\"$antwort1\"";
                     }
                 }
             ?>
-            ></textarea>
-            </div>
-            <div id="rechts">
+            >
             <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check" 
             <?php
                 if(isset($antwort1Obj) and $antwort1Obj->get_wahr() == 1 AND !$updated)
@@ -283,12 +269,10 @@
                     }
                 }
             ?>
-            </div>
-            </div>
             <br>
             
             <label for="antwort">Antwort 2</label>
-            <textarea name="antwort2" id="antwort2" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
+            <input type="text" name="antwort2" id="antwort2" class="eingabe Textfeld"
             <?php
                 if (isset($antwort2Obj) AND !$updated)
                 {
@@ -301,7 +285,7 @@
                     }
                 }
             ?>
-            ></textarea>
+            >
             <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check"
             <?php
                 if(isset($antwort2Obj) and $antwort2Obj->get_wahr() == 1 AND !$updated)
@@ -319,7 +303,7 @@
             <br>
             
             <label for="antwort">Antwort 3</label>
-            <textarea name="antwort3" id="antwort3" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
+            <input type="text" name="antwort3" id="antwort3" class="eingabe Textfeld"
             <?php
                 if (isset($antwort3Obj) AND !$updated)
                 {
@@ -332,7 +316,7 @@
                     }
                 }
             ?>
-            ></textarea>
+            >
             <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check"
             <?php
                 if(isset($antwort3Obj) and $antwort3Obj->get_wahr() == 1 AND !$updated)
@@ -351,7 +335,7 @@
             <br>
             
             <label for="antwort">Antwort 4</label>
-            <textarea name="antwort4" id="antwort4" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
+            <input type="text" name="antwort4" id="antwort4" class="eingabe Textfeld"
             <?php
                 if (isset($antwort4Obj) AND !$updated)
                 {
@@ -364,7 +348,7 @@
                     }
                 }
             ?>
-            ></textarea>
+            >
             <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check"
             <?php
                 if(isset($antwort4Obj) and $antwort4Obj->get_wahr() == 1 AND !$updated)
