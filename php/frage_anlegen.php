@@ -273,7 +273,7 @@
             <br>
             
             <label for="antwort">Antwort 2</label>
-            <input type="text" name="antwort2" id="antwort2" class="eingabe Textfeld"
+            <textarea name="antwort2" id="antwort2" class="eingabe Textfeld"
             <?php
                 if (isset($antwort2Obj) AND !$updated)
                 {
@@ -286,7 +286,7 @@
                     }
                 }
             ?>
-            >
+            ></teaxtarea>
             <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check"
             <?php
                 if(isset($antwort2Obj) and $antwort2Obj->get_wahr() == 1 AND !$updated)
@@ -304,7 +304,7 @@
             <br>
             
             <label for="antwort">Antwort 3</label>
-            <input type="text" name="antwort3" id="antwort3" class="eingabe Textfeld"
+            <textarea name="antwort3" id="antwort3" class="eingabe Textfeld"
             <?php
                 if (isset($antwort3Obj) AND !$updated)
                 {
@@ -317,7 +317,7 @@
                     }
                 }
             ?>
-            >
+            ></teaxtarea>
             <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check"
             <?php
                 if(isset($antwort3Obj) and $antwort3Obj->get_wahr() == 1 AND !$updated)
@@ -336,7 +336,7 @@
             <br>
             
             <label for="antwort">Antwort 4</label>
-            <input type="text" name="antwort4" id="antwort4" class="eingabe Textfeld"
+            <textarea name="antwort4" id="antwort4" class="eingabe Textfeld"
             <?php
                 if (isset($antwort4Obj) AND !$updated)
                 {
@@ -349,7 +349,7 @@
                     }
                 }
             ?>
-            >
+            ></teaxtarea>
             <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check"
             <?php
                 if(isset($antwort4Obj) and $antwort4Obj->get_wahr() == 1 AND !$updated)
