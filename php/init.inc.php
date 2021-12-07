@@ -34,12 +34,15 @@ function show_button_userverwaltung($ordner){
     }
 }
 
-function deny_access_to($role_name){
-    switch ($role_name) 
+// Zugriff verweigern, wenn Rolle nicht der Seite entspricht
+function deny_access_to(){
+    switch ($_SESSION['userRoleID']) 
     {
-        case 'Administrator':
+        //Administrator = 1
+        case 1:
             return TRUE;
-        case 'Frageersteller':
+        //Frageersteller = 2
+        case 2:
             return FALSE;
         default:
             header("Location: ../access_denied.php");

@@ -1,6 +1,8 @@
 <?php
     include("init.inc.php");
 
+    $is_admin = deny_access_to();
+
     $DB_CONNECT = new Database();
 ?>
 
@@ -16,7 +18,7 @@
         <nav>
             <ul>
                 <li><a href="logout.php">Abmelden</a></li>
-                <li><a href="frage_anlegen.php">Frage erstellen</a></li>
+                <?php show_button_frage_anlegen(NULL);?>
                 <li><a href="quizauswahl.php">Quizauswahl</a></li>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>

@@ -1,5 +1,6 @@
 <?php
 include("init.inc.php");
+
 $DB_CONNECTION = new Database();
 ?>
 
@@ -18,6 +19,10 @@ $DB_CONNECTION = new Database();
         <nav>
             <ul>
                 <li><a href="logout.php">Abmelden</a></li>
+                <?php
+                    show_button_frage_anlegen(NULL);
+                    show_button_userverwaltung(NULL);
+                ?>
                 <li><a href="quizauswahl.php">Quizauswahl</a></li>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
@@ -38,19 +43,7 @@ $DB_CONNECTION = new Database();
                 </div>
             </div>    
             <?php
-            // Antwort von letzter Frage speichern
-            if(isset($_POST['wahrheit'])){
-                //$_POST['wahrheit'] enthält Antwort_id
-                $antwort_id = $_POST['wahrheit'];
-                if(isset($_SESSION['selectedQuestions'])){
-                    $frage_id = $_SESSION['selectedQuestions'][$_SESSION['frageCount']-1];
-                }
-                else if(isset($_SESSION['selectedCategoryQuestions'])){
-                    $frage_id = $_SESSION['selectedCategoryQuestions'][$_SESSION['frageCount']-1];
-                }
-                $_SESSION['frage_antwort_wahl'][]=array("frage_id"=>$frage_id, "antwort_id"=>$antwort_id);
-            }
-
+            
             $_SESSION['frageCount']=0;
             $anzahl_richtige_antwort=0;
             if(isset($_SESSION['anzahlAuswahlFragen'])){

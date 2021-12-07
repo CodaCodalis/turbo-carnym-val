@@ -1,5 +1,4 @@
 <?php
-
 class Antwort{
 
     private $antworttext;
