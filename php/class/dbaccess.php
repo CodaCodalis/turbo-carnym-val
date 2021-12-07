@@ -265,23 +265,7 @@ class Database{
             
         }
     }
-    /*
-    public function get_alle_fragen() {
-        $alleFragenQuery = "SELECT * FROM fragen;";
-        $result = $this->mysqli->query($alleFragenQuery);
-        if($this->mysqli->affected_rows > 0)
-        {
-            while($zeile = $result->fetch_assoc()) {
-                $resultArray[] = $zeile;
-            }
-            return $resultArray;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    */
+
     public function get_user_fragen($user) {
         $userFragenQuery = "SELECT * FROM fragen WHERE user_id=(SELECT id FROM user WHERE name='$user');";
         $result = $this->mysqli->query($userFragenQuery);
@@ -375,27 +359,7 @@ class Database{
         $result = $this->mysqli->query($checkQuery);
         return ($this->mysqli->affected_rows > 0);
     }
-    /*
-    public function get_kategorien() {
-        $kategorienQuery = "SELECT name FROM kategorien;";
-        $result = $this->mysqli->query($kategorienQuery);
-        while($zeile = $result->fetch_assoc()) {
-            $resultArray[] = $zeile;
-        }
-        return $resultArray;
-       // return $result->fetch_all(MYSQLI_ASSOC);
 
-    }
-    
-    public function get_user() {
-        $userQuery = "SELECT name FROM user;";
-        $result = $this->mysqli->query($userQuery);
-        while($zeile = $result->fetch_assoc()) {
-            $resultArray[] = $zeile;
-        }
-        return $resultArray;
-    }
-    */
     //neuen User in die DB schreiben
     public function write_User_to_database($userObj){
         // Überprüfen ob Login bereits vorhanden

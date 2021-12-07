@@ -434,7 +434,7 @@
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
-                            else
+                            else if ($userNamen[$i]['is_deleted'] != 1)
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }
