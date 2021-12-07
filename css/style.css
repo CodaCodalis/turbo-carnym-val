@@ -328,3 +328,11 @@ h4, h3{
     height: auto;
     margin: auto;
 }
+
+#kategorieName #userName{
+    width:400px;
+}
+
+#kategorieFragen #userFragen{
+    padding-left: 10px;
+}
