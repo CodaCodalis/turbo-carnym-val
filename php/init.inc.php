@@ -38,11 +38,9 @@ function deny_access_to($role_name){
     switch ($role_name) 
     {
         case 'Administrator':
-            $is_admin = TRUE;
-            break;
+            return TRUE;
         case 'Frageersteller':
-            $is_admin = FALSE;
-            break;
+            return FALSE;
         default:
             header("Location: ../access_denied.php");
             break;
