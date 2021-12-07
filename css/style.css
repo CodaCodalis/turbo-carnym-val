@@ -267,12 +267,15 @@ th{
 td{
     color: white;
     font-size: 16px;
+    padding:5px;
 }
 
-.fa-solid .fa-pen-to-square{
+#iconEditUser{
     color: white;
+    size: 30px;
 }
 
-.fa-regular .fa-rectangle-xmark{
+#buttonicon{
+    size: 30px;
     color: red;
 }
