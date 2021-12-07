@@ -183,11 +183,17 @@
        
     
     
-    <h3>Füge eine Prüfungsfrage hinzu:</h3>
+    <h1>Füge eine Prüfungsfrage hinzu:</h1>
         <form action="frage_anlegen.php" method="POST">
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
+            <div id="faFragen">
+            <div id="faFlex">
+            <div id="links">
             <label for="frage">Frage</label>
-            <input type="text" name="frage" id="frage" class="eingabe" <?php 
+            </div>
+            <div id="mitte">
+            <textarea name="frage" id="frage" placeholder="Gib hier deinen Fragetext ein." class="eingabe Textfeld faTextarea" 
+            <?php 
                 $j = 0;
                 while($j < count($db->get_all_from_table("fragen")))
                 {
@@ -195,7 +201,7 @@
                     {
                         $updated = FALSE;
                         $fragetext = $_POST['frage'.$j];
-                        echo "value=\"$fragetext\"";
+                        echo " value=\"$fragetext\"";
                         $frageId = $db->get_frage_id($fragetext);
                         $antworten = $db->get_antworten_zu_frage($frageId);
                         if ($antworten != 0)
@@ -218,12 +224,13 @@
                 if (isset($frage))
                 {
                     if(!$valid_question OR !$valide){
-                        echo "value=\"$frage\"";
+                        echo " value=\"$frage\"";
                     } 
                 
                 
             ?>
-            >
+            ></textarea>
+            
             <?php    
                     if(!$valid_question)
                     {
@@ -233,26 +240,34 @@
                 }
                 else
                 {
-                    echo "<br>";
+                    echo "></textarea><br>";
                 }    
             ?>
+            </div>
+            </div>
             <br>
             
+            <div id="faFlex">
+            <div id="links">
             <label for="antwort">Antwort 1</label>
-            <input type="text" name="antwort1" id="antwort1" class="eingabe" 
+            </div>
+            <div id="mitte">
+            <textarea name="antwort1" id="antwort1" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
             <?php
                 if (isset($antwort1Obj) AND !$updated)
                 {
-                    echo "value=\"".$antwort1Obj->get_antworttext()."\"";
+                    echo " value=\"".$antwort1Obj->get_antworttext()."\"";
                 }
                 else if (isset($antwort1))
                 {
                     if(!$valid_answer1 OR !$valide){
-                        echo "value=\"$antwort1\"";
+                        echo " value=\"$antwort1\"";
                     }
                 }
             ?>
-            >
+            ></textarea>
+            </div>
+            <div id="rechts">
             <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check" 
             <?php
                 if(isset($antwort1Obj) and $antwort1Obj->get_wahr() == 1 AND !$updated)
@@ -268,10 +283,12 @@
                     }
                 }
             ?>
+            </div>
+            </div>
             <br>
             
             <label for="antwort">Antwort 2</label>
-            <input type="text" name="antwort2" id="antwort2" class="eingabe"
+            <textarea name="antwort2" id="antwort2" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
             <?php
                 if (isset($antwort2Obj) AND !$updated)
                 {
@@ -284,7 +301,7 @@
                     }
                 }
             ?>
-            >
+            ></textarea>
             <input type="radio" name="korrekt" id="korrekt2" value="korrekt2" class="check"
             <?php
                 if(isset($antwort2Obj) and $antwort2Obj->get_wahr() == 1 AND !$updated)
@@ -302,7 +319,7 @@
             <br>
             
             <label for="antwort">Antwort 3</label>
-            <input type="text" name="antwort3" id="antwort3" class="eingabe"
+            <textarea name="antwort3" id="antwort3" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
             <?php
                 if (isset($antwort3Obj) AND !$updated)
                 {
@@ -315,7 +332,7 @@
                     }
                 }
             ?>
-            >
+            ></textarea>
             <input type="radio" name="korrekt" id="korrekt3" value="korrekt3" class="check"
             <?php
                 if(isset($antwort3Obj) and $antwort3Obj->get_wahr() == 1 AND !$updated)
@@ -334,7 +351,7 @@
             <br>
             
             <label for="antwort">Antwort 4</label>
-            <input type="text" name="antwort4" id="antwort4" class="eingabe"
+            <textarea name="antwort4" id="antwort4" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
             <?php
                 if (isset($antwort4Obj) AND !$updated)
                 {
@@ -347,7 +364,7 @@
                     }
                 }
             ?>
-            >
+            ></textarea>
             <input type="radio" name="korrekt" id="korrekt4" value="korrekt4" class="check"
             <?php
                 if(isset($antwort4Obj) and $antwort4Obj->get_wahr() == 1 AND !$updated)
@@ -363,9 +380,10 @@
                     }
                 }
             ?>
+            </div>
             <br>
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
-
+            <div id="faKategorien">
             <?php
                 $kategorien = $db->get_all_from_table('kategorien');
                 if(isset($frageObj))
@@ -392,9 +410,9 @@
                 
                 
             ?>
-            <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie"><br>
+            <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie" class="Textfeld"><br>
             
-            <input onclick="inputCheck();" type="submit"  id="send" value="Speichern" 
+            <input onclick="inputCheck();" type="submit" class="Button" id="send" value="Speichern" 
             <?php
                 if (isset($_POST['frageBearbeiten'.$j]) OR (isset($_POST['editQuestion']) AND !$updated))
                 {
@@ -406,51 +424,48 @@
                 }
             ?>
             >
-            <input type="reset" name="reset" id="reset" value="Reset">
+            <input type="reset" name="reset" class="Button" id="reset" value="Reset">
             <?php
 
             if(isset($frageObj) OR (isset($updated) AND !$updated))
             {
-                echo "<input type=\"submit\" id=\"delete\" name=\"delete\" value=\"Löschen\">";
-                echo "<button><a href=\"./unset_question.php\">Abbrechen</a></button>";
+                echo "<input type=\"submit\" id=\"delete\" class=\"Button\" name=\"delete\" value=\"Löschen\">";
+                echo "<button class=\"Button\"><a href=\"./unset_question.php\">Abbrechen</a></button>";
                 //echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
             }
-
-            
-
             ?>
-            
+        </div>
                     
         </form>
         <form action="frage_anlegen.php" method="POST">
         <h3>Bearbeite Prüfungsfragen:</h3>
             <h4>Lass' Dir alle Fragen anzeigen oder nach Benutzer bzw. Kategorien gefiltert:</h4>
-                <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
-                <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
+                <label for="alleFragen">Alle Fragen: </label><input type="submit" class="Button" name="alleFragen" id="alleFragen" value="anzeigen"><br>
+                <label for="userName">nach Benutzer: </label><select class="auswahl" name="userName" id="userName">
                     <?php
                         $userNamen = $db->get_all_from_table('user');
                         for ($i = 0; $i < count($userNamen); $i++) {
                             if($userNamen[$i]['name'] === "admin")
                             {
-                                echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
+                                echo "<option  value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
                             else if ($userNamen[$i]['is_deleted'] != 1)
                             {
-                                echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
+                                echo "<option  value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }
                             
                         }
                     ?>
-                </select><input type="submit" name="userFragen" id="userFragen" value="anzeigen"><br>
+                </select><input type="submit" class="Button" name="userFragen" id="userFragen" value="anzeigen"><br>
                 
-                <label for="kategorieName">nach Kategorie: </label><select name="kategorieName" id="kategorieName">
+                <label for="kategorieName">nach Kategorie: </label><select class="auswahl" name="kategorieName" id="kategorieName">
                     <?php
                         $kategorien = $db->get_all_from_table('kategorien');
                         for ($i = 0; $i < count($kategorien); $i++) {
                             echo "<option value=\"".$kategorien[$i]['name']."\">".$kategorien[$i]['name']."</option>";
                         }
                     ?>
-                </select><input type="submit" name="kategorieFragen" id="kategorieFragen" value="anzeigen"><br>
+                </select><input type="submit" class="Button" name="kategorieFragen" id="kategorieFragen" value="anzeigen"><br>
                 <br>
                     <?php
                     if(isset($_REQUEST['alleFragen']))
@@ -470,7 +485,7 @@
                                     <td>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>";
                                 if($alleFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
-                                    echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                    echo "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                 }
                                 else
                                 {
@@ -502,7 +517,7 @@
                                 
                                 if($userFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
-                                    echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                    echo "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                 }
                                 else
                                 {
@@ -532,7 +547,7 @@
                                         <td>".$kategorieFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$kategorieFragenArray[$i]['fragetext']."\"></td>";
                                     if($kategorieFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                     {
-                                        echo    "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                        echo    "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                     }
                                     else
                                     {
@@ -553,14 +568,8 @@
 
     <footer>
         <div class="footer">
-            <ul>
-                <li>
-                    <a href="impressum.html">Impressum</a>
-                </li>
-                <li>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </li>
-            </ul>
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
         </div>
     </footer>
 </body>

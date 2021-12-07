@@ -279,3 +279,68 @@ td{
     size: 1em;
     color: red;
 }
+
+/*-----------------Frage-Erstellen-----------------*/
+
+label{
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+h4, h3{
+    color: white;
+}
+
+.faTextarea{
+    font-size: 16px;
+    font-weight: 500;
+    width: 300px;
+    height: 50px;
+}
+
+#faFragen{
+    text-align: left;
+    width: fit-content;
+    height: auto;
+    margin: auto;
+}
+
+#faFragen #frage{
+    font-size: 16px;
+}
+
+#faKategorien{
+    text-align: left;
+    width: fit-content;
+    height: auto;
+    margin: auto;
+}
+
+#faFlex{
+    display: flex;
+}
+
+#links{
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+}
+
+#links label{
+margin:auto;
+}
+
+#mitte{
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;   
+}
+
+#rechts{
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;  
+}
