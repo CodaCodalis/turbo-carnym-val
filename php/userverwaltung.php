@@ -34,14 +34,16 @@
                 </tr>
                 <?php 
                     $result=$DB_CONNECT->get_all_user(); 
+                    $role_array=$DB_CONNECT->get_all_from_table("rollen");
                     while ($userArray=$result->fetch_assoc()){
                         //var_dump($userArray);
+                        $role_name=$role_array[$userArray['role_id']-1]['name'];
                         echo "<tr>";
                         echo "<td>".$userArray['id']."</td>";
                         echo "<td>".$userArray['name']."</td>";
-                        echo "<td>".$userArray['role_id']."</td>";
-                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/pencil.png' alt='User anpassen' width='30' height='30'></a></td>";
-                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/x.png' alt='User l&ouml;schen' width='30' height='30'></a></td>";
+                        echo "<td>".$role_name."</td>";
+                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/pencil.png' alt='User anpassen'></a></td>";
+                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/x.png' alt='User l&ouml;schen'></a></td>";
                         echo "</tr>";
                     }
                 ?>

@@ -28,7 +28,7 @@
             <main id="main-area">
 
                 <h1>Impressum</h1>
-                <section id="impressum">
+                <section>
                 Big Bird<br>
                 Sesame Street 123<br>
                 01234 Nestcity<br>
@@ -52,10 +52,14 @@
 
         <footer>
         <div class="footer">
-        <div class="footer">
-                <a href="impressum.php">Impressum</a>
-                <a href="datenschutz.php">Datenschutz</a>
-            </div>
+            <ul>
+                <li>
+                    <a href="impressum.php">Impressum</a>
+                </li>
+                <li>
+                    <a href="datenschutz.php">Datenschutz</a>
+                </li>
+            </ul>
         </div>
         </footer>
     </body>

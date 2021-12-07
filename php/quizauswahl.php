@@ -15,8 +15,10 @@
         <nav>
             <ul>
                 <li><a href="logout.php">Abmelden</a></li>
-                <li><a href="frage_anlegen.php">Frage erstellen</a></li>
-                <li><a href="userverwaltung.php">Userverwaltung</a></li>
+                <?php
+                    show_button_frage_anlegen(NULL);
+                    show_button_userverwaltung(NULL);
+                ?>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
@@ -29,7 +31,7 @@
         <div id="randomquiz">
             <h3>Zufallsquiz</h3>
             <p>
-            Bei diesem Quiz erwarten dich zuf&auml;llige Fragen aus allen Kategorien. <br>
+            Bei diesen Quiz erwarten dich zuf&auml;llige Fragen aus allen Kategorien. <br>
             W&auml;hle die Anzahl der Fragen und leg' los !
             <br><br><br>
             </p>
@@ -41,6 +43,7 @@
                 unset ($_SESSION['frageCatAnzahl']);
                 unset($_SESSION['categoryQuestion']);
                 unset($_SESSION['selectedCategoryQuestions']); 
+                unset($_SESSION['frage_antwort_wahl']);
             ?>
             <form action="quiz.php" method="POST">
             <!--    <input type="radio" id="anzahl3" name="anzahl" value="3" required>

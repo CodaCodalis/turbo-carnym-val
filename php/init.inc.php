@@ -21,4 +21,16 @@ function logout(){
     echo "<button onClick=\"window.location.href='php/logout.php'; return false;\">".$_SESSION['userName']." abmelden</button>";
     echo "</div>";
 }
+
+function show_button_frage_anlegen($ordner){
+    if($_SESSION['userRoleID']==1 OR $_SESSION['userRoleID']== 2){
+        echo '<li><a href="'.$ordner.'frage_anlegen.php">Frage erstellen</a></li>';
+    }
+}
+
+function show_button_userverwaltung($ordner){
+    if($_SESSION['userRoleID']==1){
+        echo '<li><a href="'.$ordner.'userverwaltung.php">Userverwaltung</a></li>';
+    }
+}
 ?>
