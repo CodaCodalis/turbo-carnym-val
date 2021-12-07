@@ -77,7 +77,7 @@
                     echo "<input type='text' placeholder='Benutzername' name='username' class='Textfeld'><br>";
                     echo "<input type='password' placeholder='Passwort' name='password' class='Textfeld'><br>";
                     echo "<input type='submit' class='Button' name='aktion' value='anmelden'></form>";
-                    echo "<button class='Button' id='RegBTN' onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
+                    //echo "<button class='Button' id='RegBTN' onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
                 }
             ?>
         </div>
