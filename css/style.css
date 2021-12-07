@@ -262,6 +262,10 @@ img{
 
 th{
     color: white;
+    font-size: 18px;
+}
+td{
+    color: white;
     font-size: 16px;
 }
 

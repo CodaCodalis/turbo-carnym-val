@@ -25,7 +25,8 @@
     </header>
     <div class="clearfix"></div>
     <div class="content">
-        <h2>Userverwaltung</h2>
+        <h1>Userverwaltung</h1>
+        <i class='fa-solid fa-pen-to-square'></i>
         <div>
             <table>
                 <tr>
