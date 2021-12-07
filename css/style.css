@@ -303,14 +303,14 @@ h4, h3{
 
 #faFragen{
     text-align: left;
-    width: auto;
+    width: fit-content;
     height: auto;
     margin: auto;
 }
 
 #faKategorien{
     text-align: left;
-    width: auto;
+    width: fit-content;
     height: auto;
     margin: auto;
 }

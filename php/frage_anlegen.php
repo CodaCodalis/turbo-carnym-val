@@ -188,7 +188,8 @@
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
             <div id="faFragen">
             <label for="frage">Frage</label>
-            <textarea name="frage" id="frage" placeholder="Gib hier deinen Fragetext ein." class="eingabe Textfeld faTextarea" ></textarea><?php 
+            <textarea name="frage" id="frage" placeholder="Gib hier deinen Fragetext ein." class="eingabe Textfeld faTextarea" 
+            <?php 
                 $j = 0;
                 while($j < count($db->get_all_from_table("fragen")))
                 {
@@ -224,7 +225,7 @@
                 
                 
             ?>
-            >
+            ></textarea>
             <?php    
                     if(!$valid_question)
                     {
@@ -240,20 +241,20 @@
             <br>
             
             <label for="antwort">Antwort 1</label>
-            <textarea name="antwort1" id="antwort1" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"></textarea>
+            <textarea name="antwort1" id="antwort1" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
             <?php
                 if (isset($antwort1Obj) AND !$updated)
                 {
-                    echo "value=\"".$antwort1Obj->get_antworttext()."\"";
+                    echo " value=\"".$antwort1Obj->get_antworttext()."\"";
                 }
                 else if (isset($antwort1))
                 {
                     if(!$valid_answer1 OR !$valide){
-                        echo "value=\"$antwort1\"";
+                        echo " value=\"$antwort1\"";
                     }
                 }
             ?>
-            >
+            ></textarea>
             <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check" 
             <?php
                 if(isset($antwort1Obj) and $antwort1Obj->get_wahr() == 1 AND !$updated)
