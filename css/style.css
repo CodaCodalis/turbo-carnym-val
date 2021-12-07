@@ -321,9 +321,11 @@ h4, h3{
 
 #faFlex{
     display: flex;
+    justify-content: center;
 }
 
 #links #mitte #rechts{
     flex-direction: row;
     align-items: center;
+    vertical-align: middle;
 }
