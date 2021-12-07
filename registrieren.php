@@ -40,11 +40,11 @@
         </header>
         <div class="clearfix"></div>
         <div class="content">
-            <h2>User Registrieren</h2>
+            <h1>User Registrieren</h1>
 
             <form action="registrieren.php" method="POST">
                 <label>Benutzername</label>
-                <input type="text" name="name" value="">
+                <input type="text" name="name" class="Textfeld" value="">
                 <?php
                     if(isset($_POST['name']) AND $_POST['name']){
                         $text = $_POST['name'];
@@ -61,7 +61,7 @@
                 ?>
                 <br>
                 <label>Passwort</label>
-                <input type="password" name="password" value="">
+                <input type="password" name="password" class="Textfeld" value="">
                 <?php
                     if(isset($_POST['password']) AND $_POST['password']){
                         $text = $_POST['password'];
@@ -78,7 +78,8 @@
                 ?>
                 <br>
                 <label>Rolle</label>
-                <br>
+                <br>"
+                <div id="rollenReg">
                 <?php
                     $DB_CONNECTION->radiobutton_all_roles();
                     
@@ -88,9 +89,10 @@
                         echo "<p id='validate'>Bitte eine Rolle wählen.</p>";
                     }
                 ?>
+                </div>
                 <!--Formular abschicken -->
-                <input type="submit" name="aktion" value="registrieren">
-                <?php echo "<button onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
+                <input type="submit" name="aktion" class="Button" value="registrieren">
+                <?php echo "<button class=\"Button\" onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
             </form>
         </div>
         <footer>
