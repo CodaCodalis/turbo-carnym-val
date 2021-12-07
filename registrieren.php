@@ -77,7 +77,7 @@
                     }
                 ?>
                 <br>
-                <h4>Rolle</h4>
+                <h3>Rolle</h3>
                 <div id="rollenReg">
                 <?php
                     $DB_CONNECTION->radiobutton_all_roles();
