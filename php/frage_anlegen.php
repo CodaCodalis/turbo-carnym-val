@@ -8,6 +8,7 @@
     $user_role_id = $_SESSION['userRoleID'];
     $role_name = $db->get_rolename_of_id($user_role_id);
     
+    /*
     switch ($role_name[0]) 
     {
         case 'Administrator':
@@ -20,6 +21,7 @@
             header("Location: ../access_denied.php");
             break;
     }
+    */
     
 
     if (isset($_REQUEST['send']) OR isset($_POST['editQuestion']) OR isset($_POST['delete'])) {
@@ -37,7 +39,7 @@
         $valid_answer2 = $validate->validateText($antwort2);
         $valid_answer3 = $validate->validateText($antwort3);
         $valid_answer4 = $validate->validateText($antwort4);
-        $valide = ($valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4); 
+        $valide = $valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4; 
         
         $antworten[] = $antwort1;
         $antworten[] = $antwort2;
@@ -424,13 +426,13 @@
                 <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
                 <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
                     <?php
-                        $userNamen = $db->get_all_from_table('user');
+                        $userNamen = $db->get_user();
                         for ($i = 0; $i < count($userNamen); $i++) {
                             if($userNamen[$i]['name'] === "admin")
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
-                            else if ($userNamen[$i]['is_deleted'] != 1)
+                            else
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }

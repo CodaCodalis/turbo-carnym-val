@@ -29,7 +29,7 @@ $DB_CONNECTION = new Database();
     <div class="clearfix"></div>
 
     <div class="content">
-        <h1>QUIZ</h1>
+        <h2>QUIZ</h2>
         <div>
             <?php
                 if(!isset($_SESSION['frageCatAnzahl'])){
@@ -43,16 +43,10 @@ $DB_CONNECTION = new Database();
 
         <div id="quizwindow">
 
-            <form action="kategoriequiz.php" method="POST">
+            <form action="plus_count.php" method="POST">
                 <?php
                     // Antwort von vorheriger Frage speichern
                     if(isset($_POST['wahrheit'])){
-                        //$_POST['wahrheit'] enthält Antwort_id
-                        $antwort_id = $_POST['wahrheit'];
-                        $frage_id = $_SESSION['categoryQuestion'][$_SESSION['frageCount']-1];
-                        $_SESSION['frage_antwort_wahl'][]=array("frage_id"=>$frage_id, "antwort_id"=>$antwort_id);
-                    }
-                    else{
                         $_SESSION['frage_antwort_wahl']= array();
                     }
 
@@ -70,7 +64,6 @@ $DB_CONNECTION = new Database();
                         else{
                             $_SESSION['frageCatAnzahl'] = $vorhandene_anzahl;
                         }
-                        $_SESSION['category'] = $_POST['category'];       //****Auswahl der Kategorie aus quizauswahl.php
                     } 
                     
                     $nrQuestion = $_SESSION['frageCatAnzahl'];
@@ -88,15 +81,15 @@ $DB_CONNECTION = new Database();
                         echo "<div id='fragekarte'>";
                         $frage_id = $_SESSION['selectedCategoryQuestions'][$_SESSION['frageCount']];
                         $kategorie = $DB_CONNECTION->get_cat_from_question($frage_id);
-                        echo "<div id='FrageInfo'><div id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</div>";
-                        echo "<div id='frageYvonX'>Frage ".$x." von ".$_SESSION['frageCatAnzahl']."</div></div>";
+                        echo "<p id='frageYvonX'>Frage ".$x." von ".$_SESSION['frageCatAnzahl']."</p>";
+                        echo "<p id='kategorieAusgabe'>Kategorie: ".$kategorie[0]."</p>";
                         
         
                         $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                         $DB_CONNECTION->show_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                         echo "</div>";
-                        echo "<button id='AbbrechenBtn' class='Button' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
-                        echo '<input type="submit" id="NextQuestionBtn"class="Button" value="Nächste Frage">';
+                        echo '<input type="submit" class="Buttton" value="Nächste Frage">';
+                        echo "<button class='Buttton' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
                     }
                     else{
                         header("Location: auswertung.php");
