@@ -197,7 +197,7 @@
                     {
                         $updated = FALSE;
                         $fragetext = $_POST['frage'.$j];
-                        echo "value=\"$fragetext\"";
+                        echo " value=\"$fragetext\"";
                         $frageId = $db->get_frage_id($fragetext);
                         $antworten = $db->get_antworten_zu_frage($frageId);
                         if ($antworten != 0)
@@ -220,7 +220,7 @@
                 if (isset($frage))
                 {
                     if(!$valid_question OR !$valide){
-                        echo "value=\"$frage\"";
+                        echo " value=\"$frage\"";
                     } 
                 
                 
@@ -235,7 +235,7 @@
                 }
                 else
                 {
-                    echo "<br>";
+                    echo "></textarea><br>";
                 }    
             ?>
             <br>
