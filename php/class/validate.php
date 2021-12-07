@@ -7,8 +7,8 @@
             if(is_string($text) 
                 AND strlen($text)<256 
                 AND preg_match('~^[-a-z0-9äöüÄÖÜ_:%?ß .,!]+$~i',$text) 
-                AND !(preg_match('\bunion\b~i',$text) === 1) 
-                AND !(preg_match('\bor\b~i',$text) === 1)){
+                AND !(preg_match('~\bunion\b~i',$text) === 1) 
+                AND !(preg_match('~\bor\b~i',$text) === 1)){
                 $valid = true;
             }
             return $valid;
