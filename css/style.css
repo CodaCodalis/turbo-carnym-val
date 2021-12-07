@@ -330,10 +330,8 @@ h4, h3{
 }
 
 #links label{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+margin-top:20px;
+margin-bottom:20px;
 }
 
 #mitte{
