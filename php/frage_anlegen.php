@@ -37,7 +37,7 @@
         $valid_answer2 = $validate->validateText($antwort2);
         $valid_answer3 = $validate->validateText($antwort3);
         $valid_answer4 = $validate->validateText($antwort4);
-        $valide = $valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4; 
+        $valide = ($valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4); 
         
         $antworten[] = $antwort1;
         $antworten[] = $antwort2;
@@ -363,7 +363,7 @@
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
 
             <?php
-                $kategorien = $db->get_kategorien();
+                $kategorien = $db->get_all_from_table('kategorien');
                 if(isset($frageObj))
                 {
                     $cat_of_question = $db->get_cat_from_question($frageObj->get_frageId());
@@ -424,13 +424,13 @@
                 <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
                 <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
                     <?php
-                        $userNamen = $db->get_user();
+                        $userNamen = $db->get_all_from_table('user');
                         for ($i = 0; $i < count($userNamen); $i++) {
                             if($userNamen[$i]['name'] === "admin")
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
-                            else
+                            else if ($userNamen[$i]['is_deleted'] != 1)
                             {
                                 echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }
@@ -441,7 +441,7 @@
                 
                 <label for="kategorieName">nach Kategorie: </label><select name="kategorieName" id="kategorieName">
                     <?php
-                        $kategorien = $db->get_kategorien();
+                        $kategorien = $db->get_all_from_table('kategorien');
                         for ($i = 0; $i < count($kategorien); $i++) {
                             echo "<option value=\"".$kategorien[$i]['name']."\">".$kategorien[$i]['name']."</option>";
                         }
