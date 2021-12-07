@@ -78,7 +78,8 @@
                 ?>
                 <br>
                 <label>Rolle</label>
-                <br>
+                <br>"
+                <div id="rollenReg">
                 <?php
                     $DB_CONNECTION->radiobutton_all_roles();
                     
@@ -88,6 +89,7 @@
                         echo "<p id='validate'>Bitte eine Rolle wählen.</p>";
                     }
                 ?>
+                </div>
                 <!--Formular abschicken -->
                 <input type="submit" name="aktion" class="Button" value="registrieren">
                 <?php echo "<button class=\"Button\" onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
