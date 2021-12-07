@@ -187,7 +187,11 @@
         <form action="frage_anlegen.php" method="POST">
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
             <div id="faFragen">
+            <div id="faFlex">
+            <div id="links">
             <label for="frage">Frage</label>
+            </div>
+            <div id="mitte">
             <textarea name="frage" id="frage" placeholder="Gib hier deinen Fragetext ein." class="eingabe Textfeld faTextarea" 
             <?php 
                 $j = 0;
@@ -226,6 +230,7 @@
                 
             ?>
             ></textarea>
+            </div>
             <?php    
                     if(!$valid_question)
                     {
@@ -240,7 +245,10 @@
             ?>
             <br>
             
+            <div id="links">
             <label for="antwort">Antwort 1</label>
+            </div>
+            <div id="mitte">
             <textarea name="antwort1" id="antwort1" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"
             <?php
                 if (isset($antwort1Obj) AND !$updated)
@@ -255,6 +263,8 @@
                 }
             ?>
             ></textarea>
+            </div>
+            <div id="rechts">
             <input type="radio" name="korrekt" id="korrekt1" value="korrekt1" class="check" 
             <?php
                 if(isset($antwort1Obj) and $antwort1Obj->get_wahr() == 1 AND !$updated)
@@ -270,6 +280,8 @@
                     }
                 }
             ?>
+            </div>
+            </div>
             <br>
             
             <label for="antwort">Antwort 2</label>
