@@ -472,10 +472,15 @@ class Database{
     public function show_answers($selectedQuestions, $questionNr){   
         $queryAnswer = "SELECT antworttext, id, wahrheit FROM antworten WHERE frage_id=$selectedQuestions[$questionNr];";
         $answer = $this->mysqli->query($queryAnswer);
-
+        /*
         while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
                 echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div></label>";
         }
+        */
+        while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
+            $antworttext = htmlspecialchars($row['antworttext']);
+            echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$antworttext."</div></label>";
+        } 
     }
 
     public function show_checked_answers($selectedQuestions, $questionNr, $answerArray, $anzahl_richtige_antwort){   

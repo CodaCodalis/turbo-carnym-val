@@ -38,10 +38,10 @@
             if(isset($_SESSION['userName'])) {
                 echo '<nav>';
                 echo '<ul>';    
-                echo '<li><a href="php/logout.php">Abmelden</a></li>';       
-                echo '<li><a href="php/frage_anlegen.php">Frage erstellen</a></li>';
+                echo '<li><a href="php/logout.php">Abmelden</a></li>';
+                show_button_frage_anlegen('php/');
+                show_button_userverwaltung('php/');
                 echo '<li><a href="php/quizauswahl.php">Quizauswahl</a></li>';
-                echo '<li><a href="php/userverwaltung.php">Userverwaltung</a></li>';
                 echo '</ul>';
                 echo '</nav>';
             }
