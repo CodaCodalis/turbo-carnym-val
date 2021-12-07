@@ -340,3 +340,16 @@ h4, h3{
 #kategorieFragen, #userFragen{
     margin-left: 10px;
 }
+
+.Button a{
+    color: #555;
+    text-decoration: none;
+}
+
+.Button a:hover{
+    color: #fff;
+}
+
+#abbrechenBtn{
+    margin: 5px;
+}

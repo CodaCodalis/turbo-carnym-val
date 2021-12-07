@@ -414,7 +414,7 @@
             if(isset($frageObj) OR (isset($updated) AND !$updated))
             {
                 echo "<input type=\"submit\" id=\"delete\" class=\"Button\" name=\"delete\" value=\"Löschen\">";
-                echo "<button class=\"Button\"><a href=\"./unset_question.php\">Abbrechen</a></button>";
+                echo "<button class=\"Button\" id=\"abbrechenBtn\"><a href=\"./unset_question.php\">Abbrechen</a></button>";
                 //echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
             }
             ?>
