@@ -330,9 +330,7 @@ h4, h3{
 }
 
 #links label{
-    display: inline-block;
-line-height: normal;
-vertical-align: middle;
+margin:auto;
 }
 
 #mitte{
