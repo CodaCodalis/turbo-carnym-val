@@ -345,3 +345,11 @@ h4, h3{
     color: #555;
     text-decoration: none;
 }
+
+.Button a:hover{
+    color: #fff;
+}
+
+#abbrechenBtn{
+    margin: 5px;
+}
