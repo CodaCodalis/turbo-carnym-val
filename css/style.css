@@ -312,14 +312,14 @@ h4, h3{
     font-size: 14px;
 }
 
-#faFragen input{
+#faFragen .eingabe{
     font-size: 14px;
     width: 500px;
 }
 
 #faFragen label{
     display: inline-block;
-    min-width: 100px;
+    min-width: 85px;
 }
 
 #faKategorien{
@@ -327,4 +327,12 @@ h4, h3{
     width: fit-content;
     height: auto;
     margin: auto;
+}
+
+#kategorieName #userName{
+    width:400px;
+}
+
+#kategorieFragen #userFragen{
+    margin-left: 10px;
 }
