@@ -30,6 +30,7 @@ class Database{
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
+        
 
         /*
         $this->host = 'localhost';
@@ -511,7 +512,6 @@ class Database{
         while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
                 echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div></label>";
         }
-        
     }
 
     public function show_checked_answers($selectedQuestions, $questionNr, $answerArray, $anzahl_richtige_antwort){   
@@ -538,7 +538,7 @@ class Database{
             }
             
             if($ausgabe){
-                echo "<div id='$div_id'>".$row['antworttext']."</div><br>";
+                echo "<div id='$div_id'>".$row['antworttext']."</div>";
             }
         }
         $_SESSION['frageCount']+=1;

@@ -31,7 +31,7 @@
         <div id="randomquiz">
             <h3>Zufallsquiz</h3>
             <p>
-            Bei diesen Quiz erwarten dich zuf&auml;llige Fragen aus allen Kategorien. <br>
+            Bei diesem Quiz erwarten dich zuf&auml;llige Fragen aus allen Kategorien. <br>
             W&auml;hle die Anzahl der Fragen und leg' los !
             <br><br><br>
             </p>
