@@ -265,7 +265,7 @@ class Database{
             
         }
     }
-
+    /*
     public function get_alle_fragen() {
         $alleFragenQuery = "SELECT * FROM fragen;";
         $result = $this->mysqli->query($alleFragenQuery);
@@ -281,7 +281,7 @@ class Database{
             return 0;
         }
     }
-
+    */
     public function get_user_fragen($user) {
         $userFragenQuery = "SELECT * FROM fragen WHERE user_id=(SELECT id FROM user WHERE name='$user');";
         $result = $this->mysqli->query($userFragenQuery);
