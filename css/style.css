@@ -257,3 +257,18 @@ img{
 #impressum a:hover{color:rgb(184, 168, 218);}
 
 #impressum a:visited{color: rgb(155, 130, 210);}
+
+/*--------------------Userverwaltung----------------------*/
+
+th{
+    color: white;
+    font-size: 16px;
+}
+
+.fa-solid .fa-pen-to-square{
+    color: white;
+}
+
+.fa-regular .fa-rectangle-xmark{
+    color: red;
+}

@@ -21,7 +21,11 @@
                     echo '</nav>';
                 }
             ?>
-            <a href="../index.php">Startseite</a>
+        <nav>
+            <ul>
+                <li><a href="../index.php">Startseite</a></li>
+            </ul>
+        </nav>
         </header>
         
         <div> 
