@@ -279,3 +279,17 @@ td{
     size: 1em;
     color: red;
 }
+
+/*-----------------Frage-Erstellen-----------------*/
+
+label{
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+h4, h3{
+    color: white;
+}
