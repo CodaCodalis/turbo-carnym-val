@@ -27,10 +27,17 @@ $DB_CONNECTION = new Database();
     <div class="clearfix"></div>
 
     <div class="content">
-        <h2>QUIZ - Auswertung</h2>
+        <h1>QUIZ - Auswertung</h1>
         <div id="quizwindow">
+            <div id="legende">
+                <div id="legendeRichtig">
+                    Diese Antwort ist richtig!
+                </div>
+                <div id="legendeFalsch">
+                    Gewählte Antwort war leider falsch.
+                </div>
+            </div>    
             <?php
-
             // Antwort von letzter Frage speichern
             if(isset($_POST['wahrheit'])){
                 //$_POST['wahrheit'] enthält Antwort_id
@@ -48,14 +55,18 @@ $DB_CONNECTION = new Database();
             $anzahl_richtige_antwort=0;
             if(isset($_SESSION['anzahlAuswahlFragen'])){
                 while($_SESSION['frageCount'] < $_SESSION['anzahlAuswahlFragen']){
+                    echo "<div id='auswertungkarte'>";
                     $DB_CONNECTION->show_questions($_SESSION['selectedQuestions'],$_SESSION['frageCount']);
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+                    echo "</div>";
                 }
             }
             elseif(isset($_SESSION['frageCatAnzahl'])){
                 while($_SESSION['frageCount'] < $_SESSION['frageCatAnzahl']){
+                    echo "<div id='auswertungkarte'>";
                     $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                     $anzahl_richtige_antwort = $DB_CONNECTION->show_checked_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount'], $_SESSION['frage_antwort_wahl'][$_SESSION['frageCount']], $anzahl_richtige_antwort);
+                    echo "</div>";
                 }
             }
             
@@ -73,19 +84,19 @@ $DB_CONNECTION = new Database();
                     $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['frageCatAnzahl'];
                 }
                 if($prozent_richtig < 25){
-                    echo "<div>Ein Satz mit X ...</div>";
+                    echo "<div id='feedback'>Ein Satz mit X ...</div>";
                 }
                 else if($prozent_richtig < 50){
-                    echo "<div>Stets bemüht!</div>";
+                    echo "<div id='feedback'>Stets bemüht!</div>";
                 }
                 else if($prozent_richtig < 75){
-                    echo "<div>Auf dem richtigen Weg.</div>";
+                    echo "<div id='feedback'>Auf dem richtigen Weg.</div>";
                 }
                 else if($prozent_richtig < 100){
-                    echo "<div>Wir sind stolz auf dich!</div>";
+                    echo "<div id='feedback'>Wir sind stolz auf dich!</div>";
                 }
                 else if($prozent_richtig == 100){
-                    echo "<div>STREBER !!!</div>";
+                    echo "<div id='feedback'>STREBER !!!</div>";
                 }
             ?>
         </div>

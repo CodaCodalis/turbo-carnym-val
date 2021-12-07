@@ -426,7 +426,7 @@
                 <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
                 <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
                     <?php
-                        $userNamen = $db->get_user();
+                        $userNamen = $db->get_all_from_table('user');
                         for ($i = 0; $i < count($userNamen); $i++) {
                             if($userNamen[$i]['name'] === "admin")
                             {
