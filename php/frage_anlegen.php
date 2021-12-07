@@ -186,8 +186,9 @@
     <h1>Füge eine Prüfungsfrage hinzu:</h1>
         <form action="frage_anlegen.php" method="POST">
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
+            <div id="faFragen">
             <label for="frage">Frage</label>
-            <input type="text" name="frage" id="frage" class="eingabe Textfeld" ><?php 
+            <textarea name="frage" id="frage" placeholder="Gib hier deinen Fragetext ein." class="eingabe Textfeld faTextarea" ></textarea><?php 
                 $j = 0;
                 while($j < count($db->get_all_from_table("fragen")))
                 {
@@ -239,7 +240,7 @@
             <br>
             
             <label for="antwort">Antwort 1</label>
-            <input type="text" name="antwort1" id="antwort1" class="eingabe Textfeld" 
+            <textarea name="antwort1" id="antwort1" placeholder="Gib hier eine Antwortmöglichkeit ein." class="eingabe Textfeld faTextarea"></textarea>
             <?php
                 if (isset($antwort1Obj) AND !$updated)
                 {
@@ -363,9 +364,10 @@
                     }
                 }
             ?>
+            </div>
             <br>
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
-
+            <div id="faKategorien">
             <?php
                 $kategorien = $db->get_all_from_table('kategorien');
                 if(isset($frageObj))
@@ -415,11 +417,8 @@
                 echo "<button class=\"Button\"><a href=\"./unset_question.php\">Abbrechen</a></button>";
                 //echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
             }
-
-            
-
             ?>
-            
+        </div>
                     
         </form>
         <form action="frage_anlegen.php" method="POST">

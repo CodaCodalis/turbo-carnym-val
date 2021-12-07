@@ -293,3 +293,20 @@ a{
 h4, h3{
     color: white;
 }
+
+.faTextarea{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#faFragen{
+    text-align: left;
+    width: 800px;
+    margin: auto;
+}
+
+#faKategorien{
+    text-align: left;
+    width: 800px;
+    margin: auto;
+}
