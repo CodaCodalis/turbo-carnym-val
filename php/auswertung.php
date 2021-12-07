@@ -101,7 +101,7 @@ $DB_CONNECTION = new Database();
                     echo "<div id='feedback'>STREBER !!!</div>";
                 }
                 else if($prozent_richtig == 101){
-                    echo "<div id='feedback'>Sie haben kein Quiz durchgeführt. Es gibt hier nichts zu sehen.</div>";
+                    echo "<div id='feedback'>Sie haben keine Fragen beantwortet. Es gibt hier nichts zu sehen.</div>";
                 }
             ?>
         </div>
