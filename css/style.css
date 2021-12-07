@@ -323,8 +323,20 @@ h4, h3{
     display: flex;
 }
 
-#links #mitte #rechts{
+#links{
     flex-direction: row;
     align-items: center;
     vertical-align: middle;
+}
+
+#mitte{
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;   
+}
+
+#rechts{
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;  
 }
