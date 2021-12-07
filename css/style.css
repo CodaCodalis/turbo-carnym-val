@@ -271,11 +271,11 @@ td{
 }
 
 #iconEditUser{
-    color: white;
-    size: 30px;
+    fill: white;
+    size: 1em;
 }
 
 #buttonicon{
-    size: 30px;
+    size: 1em;
     color: red;
 }
