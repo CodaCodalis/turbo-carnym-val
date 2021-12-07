@@ -77,8 +77,6 @@
         </div>
 
         <footer>
-            <ul>
-            <div class="footer">
             <div class="footer">
                 <a href="impressum.php">Impressum</a>
                 <a href="datenschutz.php">Datenschutz</a>

@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/f9178b1b38.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>Userverwaltung</title>
@@ -42,8 +43,8 @@
                         echo "<td>".$userArray['id']."</td>";
                         echo "<td>".$userArray['name']."</td>";
                         echo "<td>".$role_name."</td>";
-                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/pencil.png' alt='User anpassen'></a></td>";
-                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/x.png' alt='User l&ouml;schen'></a></td>";
+                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><i class='fa-solid fa-pen-to-square'></i></a></td>";
+                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><i class='fa-regular fa-rectangle-xmark'></i></a></td>";
                         echo "</tr>";
                     }
                 ?>
@@ -59,7 +60,7 @@
 
         <div>
             <form action="../registrieren.php" method="POST">
-                <input type="submit" value="User anlegen">
+                <input type="submit" class="Button" value="User anlegen">
             </form>
         </div>
 
