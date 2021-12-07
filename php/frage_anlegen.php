@@ -365,7 +365,7 @@
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
 
             <?php
-                $kategorien = $db->get_kategorien();
+                $kategorien = $db->get_all_from_table('kategorien');
                 if(isset($frageObj))
                 {
                     $cat_of_question = $db->get_cat_from_question($frageObj->get_frageId());
@@ -443,7 +443,7 @@
                 
                 <label for="kategorieName">nach Kategorie: </label><select name="kategorieName" id="kategorieName">
                     <?php
-                        $kategorien = $db->get_kategorien();
+                        $kategorien = $db->get_all_from_table('kategorien');
                         for ($i = 0; $i < count($kategorien); $i++) {
                             echo "<option value=\"".$kategorien[$i]['name']."\">".$kategorien[$i]['name']."</option>";
                         }
