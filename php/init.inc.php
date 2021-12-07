@@ -49,4 +49,21 @@ function deny_access_to(){
             break;
     }
 }
+
+function footer(){
+    $myPath = getcwd();
+    if(preg_match("/php/", $myPath)){
+        $path = "php/";
+    }
+    elseif(preg_match("/Gruppe-4/", $myPath)){
+        $path = "";
+    }
+    
+    echo "<footer>";
+        echo "<div class=\"footer\">";
+            echo "<a href=\"".$path."impressum.php\">Impressum</a>";
+            echo "<a href=\"".$path."datenschutz.php\">Datenschutz</a>";
+        echo "</div>";
+    echo "</footer>";
+}
 ?>

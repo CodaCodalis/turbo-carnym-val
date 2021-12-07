@@ -549,11 +549,6 @@
 
     </div>
 
-    <footer>
-        <div class="footer">
-            <a href="impressum.html">Impressum</a>
-            <a href="datenschutz.html">Datenschutz</a>
-        </div>
-    </footer>
+    <?php footer();?>
 </body>
 </html>

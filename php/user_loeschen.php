@@ -36,13 +36,7 @@
 
             <h2>User Löschen</h2>
 
-            
-            </div>
-        <footer>
-            <div class="footer">
-                <a href="impressum.php">Impressum</a>
-                <a href="datenschutz.php">Datenschutz</a>
-            </div>
-        </footer>
+        </div>
+        <?php footer();?>
     </body>
 </html>

@@ -1,10 +1,14 @@
+<?php
+    include("php/init.inc.php");
+?>
+
 <!doctype html>
 <html lang="de">
     <head>
         <meta charset="UTF-8">
         <title>Datenschutz</title>
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <link href="../css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -13,10 +17,10 @@
                 if(isset($_SESSION['userName'])) {
                     echo '<nav>';
                     echo '<ul>';    
-                    echo '<li><a href="logout.php">Abmelden</a></li>';       
-                    echo '<li><a href="frage_anlegen.php">Frage erstellen</a></li>';
-                    echo '<li><a href="quizauswahl.php">Quizauswahl</a></li>';
-                    echo '<li><a href="userverwaltung.php">Userverwaltung</a></li>';
+                    echo '<li><a href="php/logout.php">Abmelden</a></li>';       
+                    show_button_frage_anlegen("php/");
+                    show_button_userverwaltung("php/");
+                    echo '<li><a href="php/quizauswahl.php">Quizauswahl</a></li>';
                     echo '</ul>';
                     echo '</nav>';
                 }
@@ -76,12 +80,6 @@
             </aside>
         </div>
 
-        <footer>
-            <div class="footer">
-                <a href="impressum.php">Impressum</a>
-                <a href="datenschutz.php">Datenschutz</a>
-            </div>
-        </div>
-        </footer>
+        <?php footer(); ?>
     </body>
 </html>
