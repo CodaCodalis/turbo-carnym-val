@@ -91,7 +91,7 @@ body{
 }
 
 h1{
-    font-size: 50px;
+    font-size: 42px;
     color: #fff;
     text-align: center;
 }
@@ -358,4 +358,9 @@ h4, h3{
 
 #rollenReg{
     color: white;
+}
+
+#regLabel{
+    display: inline-block;
+    width: 120px;
 }

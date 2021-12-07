@@ -43,7 +43,7 @@
             <h1>User Registrieren</h1>
 
             <form action="registrieren.php" method="POST">
-                <label>Benutzername</label>
+                <label id="regLabel">Benutzername</label>
                 <input type="text" name="name" class="Textfeld" value="">
                 <?php
                     if(isset($_POST['name']) AND $_POST['name']){
@@ -60,7 +60,7 @@
                     }
                 ?>
                 <br>
-                <label>Passwort</label>
+                <label id="regLabel">Passwort</label>
                 <input type="password" name="password" class="Textfeld" value="">
                 <?php
                     if(isset($_POST['password']) AND $_POST['password']){
@@ -77,8 +77,7 @@
                     }
                 ?>
                 <br>
-                <label>Rolle</label>
-                <br>"
+                <h3>Rolle</h3>
                 <div id="rollenReg">
                 <?php
                     $DB_CONNECTION->radiobutton_all_roles();
