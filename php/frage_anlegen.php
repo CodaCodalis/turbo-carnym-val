@@ -230,7 +230,7 @@
                 
             ?>
             ></textarea>
-            </div>
+            
             <?php    
                     if(!$valid_question)
                     {
@@ -243,8 +243,11 @@
                     echo "></textarea><br>";
                 }    
             ?>
+            </div>
+            </div>
             <br>
             
+            <div id="faFlex">
             <div id="links">
             <label for="antwort">Antwort 1</label>
             </div>
