@@ -297,16 +297,20 @@ h4, h3{
 .faTextarea{
     font-size: 16px;
     font-weight: 500;
+    width: 300px;
+    height: 100px;
 }
 
 #faFragen{
     text-align: left;
-    width: 800px;
+    width: auto;
+    height: auto;
     margin: auto;
 }
 
 #faKategorien{
     text-align: left;
-    width: 800px;
+    width: auto;
+    height: auto;
     margin: auto;
 }
