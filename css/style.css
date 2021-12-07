@@ -359,3 +359,8 @@ h4, h3{
 #rollenReg{
     color: white;
 }
+
+#regLabel{
+    display: inline-block;
+    width: 80px;
+}
