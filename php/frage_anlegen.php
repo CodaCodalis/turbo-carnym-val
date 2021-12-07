@@ -188,7 +188,7 @@
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
             <div id="faFragen">
             <label for="frage">Frage</label>
-            <input type="text" name="frage" id="frage" class="eingabe Textfeld" ><?php 
+            <input type="text" name="frage" id="frage" class="eingabe Textfeld" <?php 
                 $j = 0;
                 while($j < count($db->get_all_from_table("fragen")))
                 {
@@ -234,7 +234,7 @@
                 }
                 else
                 {
-                    echo "<br>";
+                    echo "><br>";
                 }    
             ?>
             <br>
