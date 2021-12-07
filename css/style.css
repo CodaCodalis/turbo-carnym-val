@@ -329,6 +329,12 @@ h4, h3{
     vertical-align: middle;
 }
 
+#links label{
+    display: inline-block;
+line-height: normal;
+vertical-align: middle;
+}
+
 #mitte{
     flex-direction: row;
     align-items: center;
