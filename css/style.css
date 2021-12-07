@@ -309,7 +309,15 @@ h4, h3{
 }
 
 #faFragen #frage{
-    font-size: 16px;
+    font-size: 14px;
+}
+
+#faFragen input{
+    font-size: 14px;
+}
+
+#faFragen label{
+    width: 60px;
 }
 
 #faKategorien{
@@ -317,31 +325,4 @@ h4, h3{
     width: fit-content;
     height: auto;
     margin: auto;
-}
-
-#faFlex{
-    display: flex;
-}
-
-#links{
-    flex-direction: row;
-    align-items: center;
-    vertical-align: middle;
-}
-
-#links label{
-margin-top:20px;
-margin-bottom:20px;
-}
-
-#mitte{
-    flex-direction: row;
-    align-items: center;
-    vertical-align: middle;   
-}
-
-#rechts{
-    flex-direction: row;
-    align-items: center;
-    vertical-align: middle;  
 }
