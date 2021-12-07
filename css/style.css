@@ -314,9 +314,11 @@ h4, h3{
 
 #faFragen input{
     font-size: 14px;
+    width: 500px;
 }
 
 #faFragen label{
+    display: inline-block;
     min-width: 100px;
 }
 
