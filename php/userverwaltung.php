@@ -53,8 +53,8 @@
                         echo "<td>".$userArray['id']."</td>";
                         echo "<td>".$userArray['name']."</td>";
                         echo "<td>".$role_name."</td>";
-                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/user-pen-solid.svg' id='iconEditUser' alt='User anpassen'></a></td>";
-                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/user-xmark-solid.svg' alt='User l&ouml;schen'></a></td>";
+                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/user-edit.png' id='iconEditUser' alt='User anpassen'></a></td>";
+                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/user-delete.png' alt='User l&ouml;schen'></a></td>";
                         echo "</tr>";
                     }
                 ?>
