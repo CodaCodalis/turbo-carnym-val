@@ -477,7 +477,12 @@ class Database{
                 echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$row['antworttext']."</div></label>";
         }
         */
+        $resultarray = array();
         while ($row = $answer->fetch_array(MYSQLI_ASSOC)) {
+            $resultarray[] = $row;
+        }
+        shuffle($resultarray);
+        foreach ($resultarray as $row) {
             $antworttext = htmlspecialchars($row['antworttext']);
             echo "<label><input type = 'radio' id='radioAntwort' name='wahrheit' value='".$row['id']."' required><div id='antwort'>".$antworttext."</div></label>";
         } 
