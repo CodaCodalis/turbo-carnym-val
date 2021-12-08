@@ -33,4 +33,37 @@ function show_button_userverwaltung($ordner){
         echo '<li><a href="'.$ordner.'userverwaltung.php">Userverwaltung</a></li>';
     }
 }
+
+// Zugriff verweigern, wenn Rolle nicht der Seite entspricht
+function deny_access_to(){
+    switch ($_SESSION['userRoleID']) 
+    {
+        //Administrator = 1
+        case 1:
+            return TRUE;
+        //Frageersteller = 2
+        case 2:
+            return FALSE;
+        default:
+            header("Location: ../access_denied.php");
+            break;
+    }
+}
+
+function footer(){
+    $myPath = getcwd();
+    if(preg_match("/php/", $myPath)){
+        $path = "../";
+    }
+    elseif(preg_match("/Gruppe-4/", $myPath)){
+        $path = "";
+    }
+    
+    echo "<footer>";
+        echo "<div class=\"footer\">";
+            echo "<a href=\"".$path."impressum.php\">Impressum</a>";
+            echo "<a href=\"".$path."datenschutz.php\">Datenschutz</a>";
+        echo "</div>";
+    echo "</footer>";
+}
 ?>

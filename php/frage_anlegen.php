@@ -5,9 +5,14 @@
     require_once "init.inc.php";
     $db = new Database();
     $validate = new Validate();
+
+    /*
     $user_role_id = $_SESSION['userRoleID'];
     $role_name = $db->get_rolename_of_id($user_role_id);
-    
+    $is_admin = deny_access_to($role_name[0]);
+    */
+
+    $is_admin = deny_access_to();
     /*
     switch ($role_name[0]) 
     {
@@ -39,7 +44,7 @@
         $valid_answer2 = $validate->validateText($antwort2);
         $valid_answer3 = $validate->validateText($antwort3);
         $valid_answer4 = $validate->validateText($antwort4);
-        $valide = $valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4; 
+        $valide = ($valid_question AND $valid_answer1 AND $valid_answer2 AND $valid_answer3 AND $valid_answer4); 
         
         $antworten[] = $antwort1;
         $antworten[] = $antwort2;
@@ -157,21 +162,25 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/extern.js"></script>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="../images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
 <title>Frage anlegen</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-            <li><a href="logout.php">Abmelden</a></li>
-                <li><a href="quizauswahl.php">Quizauswahl</a></li>
+                <li><a href="logout.php">Abmelden</a></li>
                 <?php
-                    if($is_admin)
-                    {
-                        echo "<li><a href=\"userverwaltung.php\">Userverwaltung</a></li>";
-                    }
+                    show_button_userverwaltung(NULL);
                 ?>
-                
+                <li><a href="quizauswahl.php">Quizauswahl</a></li>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
@@ -181,11 +190,12 @@
        
     
     
-    <h3>Füge eine Prüfungsfrage hinzu:</h3>
+    <h1>Füge eine Prüfungsfrage hinzu:</h1>
         <form action="frage_anlegen.php" method="POST">
         <h4>Trage die Frage, vier Antworten ein und markiere die richtige Antwort:</h4>
+            <div id="faFragen">
             <label for="frage">Frage</label>
-            <input type="text" name="frage" id="frage" class="eingabe" <?php 
+            <input type="text" name="frage" id="frage" class="eingabe Textfeld" <?php 
                 $j = 0;
                 while($j < count($db->get_all_from_table("fragen")))
                 {
@@ -231,13 +241,13 @@
                 }
                 else
                 {
-                    echo "<br>";
+                    echo "><br>";
                 }    
             ?>
             <br>
             
             <label for="antwort">Antwort 1</label>
-            <input type="text" name="antwort1" id="antwort1" class="eingabe" 
+            <input type="text" name="antwort1" id="antwort1" class="eingabe Textfeld" 
             <?php
                 if (isset($antwort1Obj) AND !$updated)
                 {
@@ -269,7 +279,7 @@
             <br>
             
             <label for="antwort">Antwort 2</label>
-            <input type="text" name="antwort2" id="antwort2" class="eingabe"
+            <input type="text" name="antwort2" id="antwort2" class="eingabe Textfeld"
             <?php
                 if (isset($antwort2Obj) AND !$updated)
                 {
@@ -300,7 +310,7 @@
             <br>
             
             <label for="antwort">Antwort 3</label>
-            <input type="text" name="antwort3" id="antwort3" class="eingabe"
+            <input type="text" name="antwort3" id="antwort3" class="eingabe Textfeld"
             <?php
                 if (isset($antwort3Obj) AND !$updated)
                 {
@@ -332,7 +342,7 @@
             <br>
             
             <label for="antwort">Antwort 4</label>
-            <input type="text" name="antwort4" id="antwort4" class="eingabe"
+            <input type="text" name="antwort4" id="antwort4" class="eingabe Textfeld"
             <?php
                 if (isset($antwort4Obj) AND !$updated)
                 {
@@ -361,9 +371,10 @@
                     }
                 }
             ?>
+            </div>
             <br>
         <h4>Wähle eine oder mehrere Kategorien aus:</h4>
-
+            <div id="faKategorien">
             <?php
                 $kategorien = $db->get_all_from_table('kategorien');
                 if(isset($frageObj))
@@ -390,9 +401,9 @@
                 
                 
             ?>
-            <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie"><br>
+            <input type="checkbox" name="neueKategorieCheck"><input type="text" name="neueKategorie" id="neueKategorie" class="Textfeld"><br>
             
-            <input onclick="inputCheck();" type="submit"  id="send" value="Speichern" 
+            <input onclick="inputCheck();" type="submit" class="Button" id="send" value="Speichern" 
             <?php
                 if (isset($_POST['frageBearbeiten'.$j]) OR (isset($_POST['editQuestion']) AND !$updated))
                 {
@@ -404,51 +415,48 @@
                 }
             ?>
             >
-            <input type="reset" name="reset" id="reset" value="Reset">
+            <input type="reset" name="reset" class="Button" id="reset" value="Reset">
             <?php
 
             if(isset($frageObj) OR (isset($updated) AND !$updated))
             {
-                echo "<input type=\"submit\" id=\"delete\" name=\"delete\" value=\"Löschen\">";
-                echo "<button><a href=\"./unset_question.php\">Abbrechen</a></button>";
+                echo "<input type=\"submit\" id=\"delete\" class=\"Button\" name=\"delete\" value=\"Löschen\">";
+                echo "<button class=\"Button\" id=\"abbrechenBtn\"><a href=\"./unset_question.php\">Abbrechen</a></button>";
                 //echo "<button><a href=\"./frage_anlegen.php\">Abbrechen</a></button>";
             }
-
-            
-
             ?>
-            
+        </div>
                     
         </form>
         <form action="frage_anlegen.php" method="POST">
         <h3>Bearbeite Prüfungsfragen:</h3>
             <h4>Lass' Dir alle Fragen anzeigen oder nach Benutzer bzw. Kategorien gefiltert:</h4>
-                <label for="alleFragen">Alle Fragen: </label><input type="submit" name="alleFragen" id="alleFragen" value="anzeigen"><br>
-                <label for="userName">nach Benutzer: </label><select name="userName" id="userName">
+                <label for="alleFragen">Alle Fragen: </label><input type="submit" class="Button" name="alleFragen" id="alleFragen" value="anzeigen"><br>
+                <label for="userName">nach Benutzer: </label><select class="auswahl" name="userName" id="userName">
                     <?php
                         $userNamen = $db->get_all_from_table('user');
                         for ($i = 0; $i < count($userNamen); $i++) {
                             if($userNamen[$i]['name'] === "admin")
                             {
-                                echo "<option value=\"".$userNamen[$i]['name']."\">carnym</option>";
+                                echo "<option  value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
-                            else
+                            else if ($userNamen[$i]['is_deleted'] != 1)
                             {
-                                echo "<option value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
+                                echo "<option  value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }
                             
                         }
                     ?>
-                </select><input type="submit" name="userFragen" id="userFragen" value="anzeigen"><br>
+                </select><input type="submit" class="Button" name="userFragen" id="userFragen" value="anzeigen"><br>
                 
-                <label for="kategorieName">nach Kategorie: </label><select name="kategorieName" id="kategorieName">
+                <label for="kategorieName">nach Kategorie: </label><select class="auswahl" name="kategorieName" id="kategorieName">
                     <?php
                         $kategorien = $db->get_all_from_table('kategorien');
                         for ($i = 0; $i < count($kategorien); $i++) {
                             echo "<option value=\"".$kategorien[$i]['name']."\">".$kategorien[$i]['name']."</option>";
                         }
                     ?>
-                </select><input type="submit" name="kategorieFragen" id="kategorieFragen" value="anzeigen"><br>
+                </select><input type="submit" class="Button" name="kategorieFragen" id="kategorieFragen" value="anzeigen"><br>
                 <br>
                     <?php
                     if(isset($_REQUEST['alleFragen']))
@@ -468,7 +476,7 @@
                                     <td>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>";
                                 if($alleFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
-                                    echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                    echo "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                 }
                                 else
                                 {
@@ -500,7 +508,7 @@
                                 
                                 if($userFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
-                                    echo "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                    echo "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                 }
                                 else
                                 {
@@ -530,7 +538,7 @@
                                         <td>".$kategorieFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$kategorieFragenArray[$i]['fragetext']."\"></td>";
                                     if($kategorieFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                     {
-                                        echo    "<td><input type=\"submit\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                        echo    "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                     }
                                     else
                                     {
@@ -549,17 +557,6 @@
 
     </div>
 
-    <footer>
-        <div class="footer">
-            <ul>
-                <li>
-                    <a href="impressum.html">Impressum</a>
-                </li>
-                <li>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
+    <?php footer();?>
 </body>
 </html>

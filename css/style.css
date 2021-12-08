@@ -83,7 +83,11 @@ body{
     min-height: 100vh;
     display: block;
     text-align: center;
-    background-image: url(../images/quiz\ BG.jpg) ;
+    background-image: url(../images/quiz\ BG.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    background-attachment:fixed;
 }
 
 .content{
@@ -91,7 +95,7 @@ body{
 }
 
 h1{
-    font-size: 50px;
+    font-size: 42px;
     color: #fff;
     text-align: center;
 }
@@ -257,3 +261,104 @@ img{
 #impressum a:hover{color:rgb(184, 168, 218);}
 
 #impressum a:visited{color: rgb(155, 130, 210);}
+
+/*--------------------Userverwaltung----------------------*/
+
+th{
+    color: white;
+    font-size: 18px;
+}
+td{
+    color: white;
+    font-size: 16px;
+    padding:5px;
+}
+
+#iconEditUser, #iconDeleteUser{
+    height: 20px;
+}
+
+/*-----------------Frage-Erstellen-----------------*/
+
+label{
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+h4, h3{
+    color: white;
+}
+
+.faTextarea{
+    font-size: 16px;
+    font-weight: 500;
+    width: 300px;
+    height: 50px;
+}
+
+#faFragen{
+    text-align: left;
+    width: fit-content;
+    height: auto;
+    margin: auto;
+}
+
+#faFragen #frage{
+    font-size: 14px;
+}
+
+#faFragen .eingabe{
+    font-size: 14px;
+    width: 500px;
+}
+
+#faFragen label{
+    display: inline-block;
+    min-width: 85px;
+}
+
+#faKategorien{
+    text-align: left;
+    width: fit-content;
+    height: auto;
+    margin: auto;
+}
+
+#faKategorien input{
+    margin:5px;
+}
+
+#kategorieName, #userName{
+    width:400px;
+}
+
+#kategorieFragen, #userFragen{
+    margin-left: 10px;
+}
+
+.Button a{
+    color: #555;
+    text-decoration: none;
+}
+
+.Button a:hover{
+    color: #fff;
+}
+
+#abbrechenBtn{
+    margin: 5px;
+}
+
+/*-------------------Registrieren-------------------*/
+
+#rollenReg{
+    color: white;
+}
+
+#regLabel{
+    display: inline-block;
+    width: 120px;
+}

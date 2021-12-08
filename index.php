@@ -30,6 +30,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
 <title>QuiZubi</title>
 </head>
 <body>
@@ -38,10 +46,10 @@
             if(isset($_SESSION['userName'])) {
                 echo '<nav>';
                 echo '<ul>';    
-                echo '<li><a href="php/logout.php">Abmelden</a></li>';       
-                echo '<li><a href="php/frage_anlegen.php">Frage erstellen</a></li>';
+                echo '<li><a href="php/logout.php">Abmelden</a></li>';
+                show_button_frage_anlegen('php/');
+                show_button_userverwaltung('php/');
                 echo '<li><a href="php/quizauswahl.php">Quizauswahl</a></li>';
-                echo '<li><a href="php/userverwaltung.php">Userverwaltung</a></li>';
                 echo '</ul>';
                 echo '</nav>';
             }
@@ -65,7 +73,7 @@
                        echo " <a href='php/quizauswahl.php'><button class='Button' id='QuizauswahlBTN'>Quizauswahl</button></a>";
                 }
                 else{
-                    echo "<h3>Hallo, bitte anmelden oder Registrieren.</h3>";
+                    echo "<h3>Hallo, bitte melde dich an um ein Quiz zu starten.</h3>";
                 }
             ?>
             
@@ -77,16 +85,11 @@
                     echo "<input type='text' placeholder='Benutzername' name='username' class='Textfeld'><br>";
                     echo "<input type='password' placeholder='Passwort' name='password' class='Textfeld'><br>";
                     echo "<input type='submit' class='Button' name='aktion' value='anmelden'></form>";
-                    echo "<button class='Button' id='RegBTN' onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
+                    //echo "<button class='Button' id='RegBTN' onClick=\"window.location.href='registrieren.php'; return false;\">Registrieren</button>";
                 }
             ?>
         </div>
     </div>
-    <footer>
-        <div class="footer">
-            <a href="php/impressum.php">Impressum</a>
-            <a href="php/datenschutz.php">Datenschutz</a>
-        </div>
-    </footer>
+    <?php footer(); ?>
 </body>
 </html>

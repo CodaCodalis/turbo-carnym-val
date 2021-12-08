@@ -23,6 +23,15 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="images/favicon/site.webmanifest">
+        <link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#00aba9">
+        <meta name="theme-color" content="#ffffff">
+
         <title>User Registrieren</title>
     </head>
 
@@ -40,11 +49,11 @@
         </header>
         <div class="clearfix"></div>
         <div class="content">
-            <h2>User Registrieren</h2>
+            <h1>User Registrieren</h1>
 
             <form action="registrieren.php" method="POST">
-                <label>Benutzername</label>
-                <input type="text" name="name" value="">
+                <label id="regLabel">Benutzername</label>
+                <input type="text" name="name" class="Textfeld" value="">
                 <?php
                     if(isset($_POST['name']) AND $_POST['name']){
                         $text = $_POST['name'];
@@ -60,8 +69,8 @@
                     }
                 ?>
                 <br>
-                <label>Passwort</label>
-                <input type="password" name="password" value="">
+                <label id="regLabel">Passwort</label>
+                <input type="password" name="password" class="Textfeld" value="">
                 <?php
                     if(isset($_POST['password']) AND $_POST['password']){
                         $text = $_POST['password'];
@@ -77,8 +86,8 @@
                     }
                 ?>
                 <br>
-                <label>Rolle</label>
-                <br>
+                <h3>Rolle</h3>
+                <div id="rollenReg">
                 <?php
                     $DB_CONNECTION->radiobutton_all_roles();
                     
@@ -88,16 +97,12 @@
                         echo "<p id='validate'>Bitte eine Rolle wählen.</p>";
                     }
                 ?>
+                </div>
                 <!--Formular abschicken -->
-                <input type="submit" name="aktion" value="registrieren">
-                <?php echo "<button onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
+                <input type="submit" name="aktion" class="Button" value="registrieren">
+                <?php echo "<button class=\"Button\" onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
             </form>
         </div>
-        <footer>
-            <div class="footer">
-                        <a href="php/impressum.php">Impressum</a>
-                        <a href="php/datenschutz.php">Datenschutz</a>
-            </div>
-        </footer>
+        <?php footer();?>
     </body>
 </html>

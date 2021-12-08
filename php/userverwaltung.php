@@ -1,6 +1,8 @@
 <?php
     include("init.inc.php");
 
+    $is_admin = deny_access_to();
+
     $DB_CONNECT = new Database();
 ?>
 
@@ -9,6 +11,15 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="../images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
     <title>Userverwaltung</title>
 </head>
 <body>
@@ -16,7 +27,7 @@
         <nav>
             <ul>
                 <li><a href="logout.php">Abmelden</a></li>
-                <li><a href="frage_anlegen.php">Frage erstellen</a></li>
+                <?php show_button_frage_anlegen(NULL);?>
                 <li><a href="quizauswahl.php">Quizauswahl</a></li>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
@@ -24,7 +35,7 @@
     </header>
     <div class="clearfix"></div>
     <div class="content">
-        <h2>Userverwaltung</h2>
+        <h1>Userverwaltung</h1>
         <div>
             <table>
                 <tr>
@@ -42,8 +53,8 @@
                         echo "<td>".$userArray['id']."</td>";
                         echo "<td>".$userArray['name']."</td>";
                         echo "<td>".$role_name."</td>";
-                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/pencil.png' alt='User anpassen'></a></td>";
-                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='buttonicon' src='../images/x.png' alt='User l&ouml;schen'></a></td>";
+                        echo "<td><a href='user_anpassen.php? id=".$userArray['id']."'><img src='../images/user-edit.png' id='iconEditUser' alt='User anpassen'></a></td>";
+                        echo "<td><a title='User l&ouml;schen' onClick='return confDelete();' href='user_loeschen.php? id=".$userArray['id']."'><img id='iconDeleteUser' src='../images/user-delete.png' alt='User l&ouml;schen'></a></td>";
                         echo "</tr>";
                     }
                 ?>
@@ -59,16 +70,11 @@
 
         <div>
             <form action="../registrieren.php" method="POST">
-                <input type="submit" value="User anlegen">
+                <input type="submit" class="Button" value="User anlegen">
             </form>
         </div>
 
     </div>
-    <footer>
-        <div class="footer">
-            <a href="impressum.php">Impressum</a>
-            <a href="datenschutz.php">Datenschutz</a>
-        </div>
-    </footer>
+    <?php footer();?>
 </body>
 </html>
