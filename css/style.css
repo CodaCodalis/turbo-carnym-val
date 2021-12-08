@@ -84,7 +84,9 @@ body{
     display: block;
     text-align: center;
     background-image: url(../images/quiz\ BG.jpg);
-    background-size: auto 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
     background-attachment:fixed;
 }
 
