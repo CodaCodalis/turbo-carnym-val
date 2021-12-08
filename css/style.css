@@ -277,10 +277,12 @@ td{
 
 #iconEditUser{
     height: 25px;
+    margin-bottom: 25%;
 }
 
 #iconDeleteUser{
     height: 21px;
+    margin-bottom: 25%;
 }
 
 /*-----------------Frage-Erstellen-----------------*/
