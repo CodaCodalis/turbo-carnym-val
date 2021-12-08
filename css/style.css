@@ -81,14 +81,13 @@ footer a{
 /*-------------Body--------------*/
 body{
     min-height: 100vh;
-    width: 100%;
     display: block;
     text-align: center;
     background-image: url(../images/quiz\ BG.jpg);
     background-position: center;
     background-size: cover;
     position: relative;
-    background-repeat: no-repeat; 
+    background-attachment:fixed;
 }
 
 .content{
