@@ -274,14 +274,8 @@ td{
     padding:5px;
 }
 
-#iconEditUser{
-    fill: white;
-    size: 1em;
-}
-
-#buttonicon{
-    size: 1em;
-    color: red;
+#iconEditUser, #iconDeleteUser{
+    size: 20%;
 }
 
 /*-----------------Frage-Erstellen-----------------*/
