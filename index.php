@@ -73,7 +73,7 @@
                        echo " <a href='php/quizauswahl.php'><button class='Button' id='QuizauswahlBTN'>Quizauswahl</button></a>";
                 }
                 else{
-                    echo "<h3>Hallo, bitte anmelden oder Registrieren.</h3>";
+                    echo "<h3>Hallo, bitte melde dich an um ein Quiz zu starten.</h3>";
                 }
             ?>
             
