@@ -27,7 +27,7 @@
             ?>  
         <nav>
             <ul>
-                <li><a href="../index.php">Startseite</a></li>
+                <li><a href="index.php">Startseite</a></li>
             </ul>
         </nav>
         </header>
