@@ -56,7 +56,7 @@
                 big.bird@nest.net<br>
                 <br>
                 <b>Online-Streitbeilegung</b><br>
-                Die Europäische Kommission stellt unter <a href="https://ec.europa.eu/consumers/odr/">https://ec.europa.eu/consumers/odr/</a> eine Plattform zur Online-Streitbeilegung bereit, die Verbraucher für die Beilegung einer Streitigkeit nutzen können und auf der weitere Informationen zum Thema Streitschlichtung zu finden sind.<br>
+                Die Europäische Kommission stellt unter <a href="https://ec.europa.eu/consumers/odr/" target="blank">https://ec.europa.eu/consumers/odr/</a> eine Plattform zur Online-Streitbeilegung bereit, die Verbraucher für die Beilegung einer Streitigkeit nutzen können und auf der weitere Informationen zum Thema Streitschlichtung zu finden sind.<br>
                 <br>
                 <b>Außergerichtliche Streitbeilegung</b><br>
                 Wir sind weder verpflichtet noch dazu bereit, im Falle einer Streitigkeit mit einem Verbraucher an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
