@@ -25,12 +25,12 @@ class Database{
 
     //mysql_connect() - öffnet eine Verbindung zum Datenbankserver
     private function db_connect(){
-        /*
+        
         $this->host = 'localhost';
         $this->user = 'grp4_user'; 
         $this->pass = ''; 
         $this->db = 'Gruppe4DB';
-        */
+        
 
         /*
         $this->host = 'localhost';
@@ -39,12 +39,12 @@ class Database{
         $this->db = 'quizubi';
         */
 
-        
+        /*
         $this->host = 'localhost';
         $this->user = 'Spieler';
         $this->pass = 'spieler';
         $this->db = 'carnymQuiz';
-        
+        */
 
 
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);
@@ -512,7 +512,7 @@ class Database{
             }
             
             if($ausgabe){
-                echo "<div id='$div_id'>".$row['antworttext']."</div>";
+                echo "<div id='$div_id'>".htmlspecialchars($row['antworttext'])."</div>";
             }
         }
         $_SESSION['frageCount']+=1;
