@@ -111,6 +111,11 @@ h3{
     font-weight: 700;
 }
 
+#logo{
+    width: 300px;
+    height: auto;
+}
+
 .Button{
     cursor:pointer;
     width: 100px;
@@ -263,7 +268,11 @@ img{
 #impressum a:visited{color: rgb(155, 130, 210);}
 
 /*--------------------Userverwaltung----------------------*/
-
+#userverwalung{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
 th{
     color: white;
     font-size: 18px;
@@ -272,10 +281,17 @@ td{
     color: white;
     font-size: 16px;
     padding:5px;
+    align-items: center;
 }
 
-#iconEditUser, #iconDeleteUser{
-    height: 20px;
+#iconEditUser{
+    height: 25px;
+    margin-bottom: 100%;
+}
+
+#iconDeleteUser{
+    height: 21px;
+    margin-bottom: 100%;
 }
 
 /*-----------------Frage-Erstellen-----------------*/
