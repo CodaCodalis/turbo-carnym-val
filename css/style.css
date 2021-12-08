@@ -272,10 +272,15 @@ td{
     color: white;
     font-size: 16px;
     padding:5px;
+    align-items: center;
 }
 
-#iconEditUser, #iconDeleteUser{
-    height: 20px;
+#iconEditUser{
+    height: 25px;
+}
+
+#iconDeleteUser{
+    height: 21px;
 }
 
 /*-----------------Frage-Erstellen-----------------*/
