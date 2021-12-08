@@ -53,7 +53,7 @@ function deny_access_to(){
 function footer(){
     $myPath = getcwd();
     if(preg_match("/php/", $myPath)){
-        $path = "php/";
+        $path = "../";
     }
     elseif(preg_match("/Gruppe-4/", $myPath)){
         $path = "";
