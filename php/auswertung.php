@@ -83,9 +83,12 @@ $DB_CONNECTION = new Database();
                     echo "<h2>Du hast ".$anzahl_richtige_antwort." von ".$_SESSION['frageCatAnzahl']." Antworten richtig.</h2>";
                     $prozent_richtig = $anzahl_richtige_antwort*100/$_SESSION['frageCatAnzahl'];
                 } else {
-                    $prozent_richtig = 101;
+                    $prozent_richtig = 0;
                 }
-                if($prozent_richtig < 25){
+                if($prozent_richtig == 0){
+                    echo "<div id='feedback'>Sie haben keine Fragen beantwortet. Es gibt hier nichts zu sehen.</div>";
+                }
+                else if($prozent_richtig < 25){
                     echo "<div id='feedback'>Ein Satz mit X ...</div>";
                 }
                 else if($prozent_richtig < 50){
@@ -100,9 +103,7 @@ $DB_CONNECTION = new Database();
                 else if($prozent_richtig == 100){
                     echo "<div id='feedback'>STREBER !!!</div>";
                 }
-                else if($prozent_richtig == 101){
-                    echo "<div id='feedback'>Sie haben keine Fragen beantwortet. Es gibt hier nichts zu sehen.</div>";
-                }
+
             ?>
         </div>
     </div>
