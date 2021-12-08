@@ -263,7 +263,11 @@ img{
 #impressum a:visited{color: rgb(155, 130, 210);}
 
 /*--------------------Userverwaltung----------------------*/
-
+#userverwalung{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
 th{
     color: white;
     font-size: 18px;
