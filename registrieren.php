@@ -94,11 +94,6 @@
                 <?php echo "<button class=\"Button\" onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
             </form>
         </div>
-        <footer>
-            <div class="footer">
-                        <a href="php/impressum.php">Impressum</a>
-                        <a href="php/datenschutz.php">Datenschutz</a>
-            </div>
-        </footer>
+        <?php footer();?>
     </body>
 </html>

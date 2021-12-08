@@ -82,11 +82,6 @@
             ?>
         </div>
     </div>
-    <footer>
-        <div class="footer">
-            <a href="php/impressum.php">Impressum</a>
-            <a href="php/datenschutz.php">Datenschutz</a>
-        </div>
-    </footer>
+    <?php footer(); ?>
 </body>
 </html>

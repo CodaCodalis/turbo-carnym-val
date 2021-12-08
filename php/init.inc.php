@@ -34,16 +34,36 @@ function show_button_userverwaltung($ordner){
     }
 }
 
-function deny_access_to($role_name){
-    switch ($role_name) 
+// Zugriff verweigern, wenn Rolle nicht der Seite entspricht
+function deny_access_to(){
+    switch ($_SESSION['userRoleID']) 
     {
-        case 'Administrator':
+        //Administrator = 1
+        case 1:
             return TRUE;
-        case 'Frageersteller':
+        //Frageersteller = 2
+        case 2:
             return FALSE;
         default:
             header("Location: ../access_denied.php");
             break;
     }
+}
+
+function footer(){
+    $myPath = getcwd();
+    if(preg_match("/php/", $myPath)){
+        $path = "php/";
+    }
+    elseif(preg_match("/Gruppe-4/", $myPath)){
+        $path = "";
+    }
+    
+    echo "<footer>";
+        echo "<div class=\"footer\">";
+            echo "<a href=\"".$path."impressum.php\">Impressum</a>";
+            echo "<a href=\"".$path."datenschutz.php\">Datenschutz</a>";
+        echo "</div>";
+    echo "</footer>";
 }
 ?>

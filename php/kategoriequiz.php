@@ -20,6 +20,10 @@ $DB_CONNECTION = new Database();
         <nav>
             <ul>
                 <li><a href="logout.php">Abmelden</a></li>
+                <?php
+                    show_button_frage_anlegen(NULL);
+                    show_button_userverwaltung(NULL);
+                ?>
                 <li><a href="quizauswahl.php">Quizauswahl</a></li>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
@@ -104,12 +108,7 @@ $DB_CONNECTION = new Database();
          </div>
         </div>
 
-        <footer>
-            <div class="footer">
-                <a href="impressum.php">Impressum</a>
-                <a href="datenschutz.php">Datenschutz</a>
-            </div>
-        </footer>
+        <?php footer();?>
 </body>
 
 </html>

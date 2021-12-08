@@ -5,11 +5,14 @@
     require_once "init.inc.php";
     $db = new Database();
     $validate = new Validate();
+
+    /*
     $user_role_id = $_SESSION['userRoleID'];
     $role_name = $db->get_rolename_of_id($user_role_id);
-    
-
     $is_admin = deny_access_to($role_name[0]);
+    */
+
+    $is_admin = deny_access_to();
     /*
     switch ($role_name[0]) 
     {
@@ -165,15 +168,11 @@
     <header>
         <nav>
             <ul>
-            <li><a href="logout.php">Abmelden</a></li>
-                <li><a href="quizauswahl.php">Quizauswahl</a></li>
+                <li><a href="logout.php">Abmelden</a></li>
                 <?php
-                    if($is_admin)
-                    {
-                        echo "<li><a href=\"userverwaltung.php\">Userverwaltung</a></li>";
-                    }
+                    show_button_userverwaltung(NULL);
                 ?>
-                
+                <li><a href="quizauswahl.php">Quizauswahl</a></li>
                 <li><a href="../index.php">Startseite</a></li>
             </ul>
         </nav>
@@ -550,11 +549,6 @@
 
     </div>
 
-    <footer>
-        <div class="footer">
-            <a href="impressum.html">Impressum</a>
-            <a href="datenschutz.html">Datenschutz</a>
-        </div>
-    </footer>
+    <?php footer();?>
 </body>
 </html>

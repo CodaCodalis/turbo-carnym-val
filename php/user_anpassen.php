@@ -1,6 +1,8 @@
 <?php
     include("init.inc.php");
 
+    $is_admin = deny_access_to();
+
     $DB_CONNECTION = new Database();
     
     // wenn User aktualisiert und das Formular abgeschickt wird, Weiterleitung auf Übersichtsseite
@@ -32,7 +34,7 @@
             <nav>
                 <ul>
                     <li><a href="logout.php">Abmelden</a></li>
-                    <li><a href="frage_anlegen.php">Frage erstellen</a></li>
+                    <?php show_button_frage_anlegen(NULL);?>
                     <li><a href="quizauswahl.php">Quizauswahl</a></li>
                     <li><a href="../index.php">Startseite</a></li>
                 </ul>
@@ -64,12 +66,7 @@
                     ?>
                 </div>
             </form>
-            </div>
-        <footer>
-            <div class="footer">
-                <a href="impressum.php">Impressum</a>
-                <a href="datenschutz.php">Datenschutz</a>
-            </div>
-        </footer>
+        </div>
+        <?php footer();?>
     </body>
 </html>
