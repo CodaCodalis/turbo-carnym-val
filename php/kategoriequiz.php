@@ -12,7 +12,7 @@ $DB_CONNECTION = new Database();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/quiz.css">
 
-    <title>Startseite</title>
+    <title>Kategoriequiz</title>
 </head>
 
 <body>
@@ -92,8 +92,8 @@ $DB_CONNECTION = new Database();
                         $DB_CONNECTION->show_questions($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                         $DB_CONNECTION->show_answers($_SESSION['selectedCategoryQuestions'],$_SESSION['frageCount']);
                         echo "</div>";
-                        echo '<input type="submit" class="Buttton" value="Nächste Frage">';
-                        echo "<button class='Buttton' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
+                        echo '<input type="submit" class="Button" value="Nächste Frage">';
+                        echo "<button class='Button' onClick=\"window.location.href='quizauswahl.php'; return false;\">Abbrechen</button>";
                     }
                     else{
                         header("Location: auswertung.php");
