@@ -440,7 +440,7 @@
                             {
                                 echo "<option  value=\"".$userNamen[$i]['name']."\">carnym</option>";
                             }
-                            else if ($userNamen[$i]['is_deleted'] != 1)
+                            else if (($userNamen[$i]['is_deleted'] != 1) AND ($userNamen[$i]['role_id'] != 3))
                             {
                                 echo "<option  value=\"".$userNamen[$i]['name']."\">".$userNamen[$i]['name']."</option>";
                             }
