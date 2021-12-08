@@ -82,7 +82,7 @@
                     $DB_CONNECTION = new Database();                                                                                            /** new content */
                     $kategorien=$DB_CONNECTION->get_all_from_table('kategorien');                                                                               /** new content */
                      foreach( $kategorien as $element ) {                                                                                       /** new content */
-                        echo "<option value=".$element['name']." name='category'> ".$element['name']." </option>";                              /** new content */
+                        echo "<option value='".$element['name']."' name='category'> ".$element['name']." </option>";                              /** new content */
                     }                                                                                                                           /** new content */
                     ?>                                                                                                                         
                     
