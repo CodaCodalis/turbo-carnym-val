@@ -75,9 +75,9 @@
                     und auf der weitere <br> Informationen zum Thema Streitschlichtung zu finden sind.
                     <h4>Außergerichtliche Streitbeilegung</h4>
 
-                    Wir sind weder verpflichtet noch dazu bereit, im Falle einer Streitigkeit mit einem Verbraucher <br>
-                    an
-                    einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+                    Wir sind weder verpflichtet noch dazu bereit, im Falle einer Streitigkeit mit einem Verbraucher 
+                    an einem Streitbeilegungsverfahren <br>
+                    vor einer Verbraucherschlichtungsstelle teilzunehmen.
                     </p>
 
                     <h4>Haftung für Inhalte</h4>
