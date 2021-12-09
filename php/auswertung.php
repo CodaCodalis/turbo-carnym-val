@@ -106,6 +106,8 @@ $DB_CONNECTION = new Database();
                 }
 
             ?>
+
+            <a href='quizauswahl.php'><button class='Button' id='QuizauswahlBTN'>Quizauswahl</button></a>
         </div>
     </div>
 
