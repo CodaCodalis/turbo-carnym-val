@@ -373,7 +373,7 @@ h4, h3{
 #rollenReg{
     color: white;
     text-align: left;
-    width: 200px;
+    width: fit-content;
     margin: auto;
 }
 
@@ -384,7 +384,7 @@ h4, h3{
 }
 
 .AbstandBTN{
-    margin: 20px;
+    margin: 10px;
 }
 
 /*---------------------User-anpassen----------------------*/
