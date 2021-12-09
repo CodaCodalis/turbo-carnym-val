@@ -19,7 +19,7 @@ $DB_CONNECTION = new Database();
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Startseite</title>
+    <title>Quizubi</title>
 </head>
 
 <body>
