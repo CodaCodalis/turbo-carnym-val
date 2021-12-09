@@ -378,3 +378,9 @@ h4, h3{
     display: inline-block;
     width: 120px;
 }
+
+/*---------------------User-anpassen----------------------*/
+
+.whiteText{
+    color: white;
+}
