@@ -466,7 +466,7 @@
                             <table>
                                 <tr>
                                     <th></th>
-                                    <th>Frage</th>
+                                    <th class='links'>Frage</th>
                                 </tr>";
                         if ($alleFragenArray != 0)
                         {        
