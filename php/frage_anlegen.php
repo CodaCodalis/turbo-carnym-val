@@ -465,8 +465,8 @@
                         echo "<br>
                             <table>
                                 <tr>
+                                    <th></th>
                                     <th>Frage</th>
-                                    <th>edit</th>
                                 </tr>";
                         if ($alleFragenArray != 0)
                         {        
