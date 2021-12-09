@@ -378,3 +378,18 @@ h4, h3{
     display: inline-block;
     width: 120px;
 }
+
+/*---------------------User-anpassen----------------------*/
+
+.whiteText{
+    color: white;
+}
+
+.labelUser{
+    width: 350px;
+    text-align: left;
+}
+
+.whiteText .Button{
+    margin: 20px;
+}

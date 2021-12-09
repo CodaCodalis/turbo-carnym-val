@@ -568,7 +568,7 @@ class Database{
     }
 
     public function delete_selected_user($deleted_user){
-        $sql="UPDATE user SET is_deleted = 1, name='', passwort='', role_id=NULL";
+        $sql="UPDATE user SET is_deleted = 1, name='', passwort=''";
         $sql.=" WHERE id=$deleted_user;";
         $this->mysqli -> query($sql); 
     }
