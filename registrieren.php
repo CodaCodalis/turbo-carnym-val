@@ -99,8 +99,8 @@
                 ?>
                 </div>
                 <!--Formular abschicken -->
-                <input type="submit" name="aktion" class="Button" value="registrieren">
-                <?php echo "<button class=\"Button\" onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
+                <input type="submit" name="aktion" class="Button AbstandBTN" value="registrieren">
+                <?php echo "<button class=\"Button AbstandBTN\" onClick=\"window.location.href='php/userverwaltung.php'; return false;\">Abbrechen</button>";?>
             </form>
         </div>
         <?php footer();?>

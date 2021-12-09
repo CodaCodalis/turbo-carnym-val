@@ -372,11 +372,19 @@ h4, h3{
 
 #rollenReg{
     color: white;
+    text-align: left;
+    width: 200px;
+    margin: auto;
 }
 
 #regLabel{
     display: inline-block;
     width: 120px;
+    text-align: left;
+}
+
+.AbstandBTN{
+    margin: 20px;
 }
 
 /*---------------------User-anpassen----------------------*/
