@@ -384,3 +384,12 @@ h4, h3{
 .whiteText{
     color: white;
 }
+
+.labelUser{
+    width: 350px;
+    text-align: left;
+}
+
+.whiteText .Button{
+    margin: 20px;
+}

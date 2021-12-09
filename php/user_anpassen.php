@@ -58,9 +58,9 @@
                 <div class="whiteText">
                     <?php
                         // die entsprechenden Daten aus der Datenbank in die Inputfelder laden                      
-                        echo "<label>Benuztername</label><input type='text' class='Textfeld' name='name' value='".$userArray['name']."'><br>";
+                        echo "<label class='labelUser'>Benuztername</label><input type='text' class='Textfeld' name='name' value='".$userArray['name']."'><br>";
                         
-                        echo "<label>Passwort</label><input type='password' class='Textfeld' name='passwort' value='".$userArray['passwort']."'><br>";
+                        echo "<label class='labelUser'>Passwort</label><input type='password' class='Textfeld' name='passwort' value='".$userArray['passwort']."'><br>";
                         // verstecktes Feld für Passwort (gecrypted, zum Abgleich)
                         echo "<input type='hidden' name='password_check' value='".$userArray['passwort']."'><br>";
                         // verstecktes Feld für id
@@ -68,7 +68,9 @@
                         
                         // Radiobutton für Rollen
                         echo "<label>Rolle</label><br>";
+                        echo "<p class='whiteText'>";
                         $DB_CONNECTION->get_role_selected_user($userArray['role_id']);
+                        echo "</p>"
                         
                         echo "<input type='submit' class='Button' name='aktion' value='speichern'>";
                         echo "<button class='Button' onClick=\"window.location.href='userverwaltung.php'; return false;\">Abbrechen</button>";
