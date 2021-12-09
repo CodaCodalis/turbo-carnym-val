@@ -70,7 +70,7 @@
                         echo "<label>Rolle</label><br>";
                         echo "<p class='whiteText'>";
                         $DB_CONNECTION->get_role_selected_user($userArray['role_id']);
-                        echo "</p>"
+                        echo "</p>";
                         
                         echo "<input type='submit' class='Button' name='aktion' value='speichern'>";
                         echo "<button class='Button' onClick=\"window.location.href='userverwaltung.php'; return false;\">Abbrechen</button>";
