@@ -11,7 +11,7 @@
         $error = $DB_CONNECTION->write_User_to_database($new_user);
 
         if($error == NULL){
-            echo '<script>alert("Der User wurde erfolgreich angelegt."); window.location.href=\'index.php\';</script>';
+            echo '<script>alert("Der User wurde erfolgreich angelegt."); window.location.href=\'userverwaltung.php\';</script>';
         }else{
             echo '<script>alert("Es ist in Fehler beim Schreiben in die DB aufgetreten."); window.location.href=\'registrieren.php\';</script>';
         }
