@@ -496,15 +496,15 @@
                         echo "<br>
                             <table>
                                 <tr>
-                                    <th>Frage</th>
                                     <th>edit</th>
+                                    <th>Frage</th>
                                 </tr>";
                         if ($userFragenArray != 0)
                         {
                             for ($i=0; $i < count($userFragenArray); $i++) 
                             {
-                                echo "<tr>
-                                    <td>".$userFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$userFragenArray[$i]['fragetext']."\"></td>";
+                                echo "<tr>";
+                                    
                                 
                                 if($userFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
@@ -514,6 +514,7 @@
                                 {
                                     echo "<td></td>";
                                 }
+                                echo "<td class='links'>".$userFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$userFragenArray[$i]['fragetext']."\"></td>";
                                 echo "</tr>";
                             }
                         }
@@ -527,23 +528,24 @@
                         echo "<br>
                             <table>
                                 <tr>
-                                    <th>Frage</th>
                                     <th>edit</th>
+                                    <th>Frage</th>
                                 </tr>";
                         if($kategorieFragenArray > 0)
                         {
                             for ($i=0; $i < count($kategorieFragenArray); $i++) 
                             {
-                                echo "<tr>
-                                        <td>".$kategorieFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$kategorieFragenArray[$i]['fragetext']."\"></td>";
+                                echo "<tr>";
+                                       
                                     if($kategorieFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                     {
-                                        echo    "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
+                                        echo "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
                                     }
                                     else
                                     {
                                         echo "<td></td>";
                                     }
+                                    echo "<td class='links'>".$kategorieFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$kategorieFragenArray[$i]['fragetext']."\"></td>";
                                     echo "</tr>";
                             }
                         }
