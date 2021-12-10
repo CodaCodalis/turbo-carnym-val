@@ -315,6 +315,11 @@ h4, h3{
     height: 50px;
 }
 
+.links{
+    text-align: left;
+    padding-left: 10px;
+}
+
 #faFragen{
     text-align: left;
     width: fit-content;
@@ -372,9 +377,33 @@ h4, h3{
 
 #rollenReg{
     color: white;
+    text-align: left;
+    width: fit-content;
+    margin: auto;
 }
 
 #regLabel{
     display: inline-block;
     width: 120px;
+    text-align: left;
+}
+
+.AbstandBTN{
+    margin: 10px;
+}
+
+/*---------------------User-anpassen----------------------*/
+
+.whiteText{
+    color: white;
+}
+
+.labelUser{
+    min-width: 150px;
+    text-align: left;
+    display: inline-block;
+}
+
+.whiteText .Button{
+    margin: 20px;
 }

@@ -465,15 +465,15 @@
                         echo "<br>
                             <table>
                                 <tr>
-                                    <th>Frage</th>
-                                    <th>edit</th>
+                                    <th></th>
+                                    <th class='links'>Frage</th>
                                 </tr>";
                         if ($alleFragenArray != 0)
                         {        
                             for ($i=0; $i < count($alleFragenArray); $i++) 
                             {
-                                echo "<tr>
-                                    <td>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>";
+                                echo "<tr>";
+                                   
                                 if($alleFragenArray[$i]['user_id'] == $_SESSION['userID'] OR $is_admin)
                                 {
                                     echo "<td><input type=\"submit\" class=\"Button\" name=\"frageBearbeiten$i\" id=\"frageBearbeiten".$i."\" value=\"edit\"></td>";
@@ -482,8 +482,8 @@
                                 {
                                     echo "<td></td>";
                                 }
-                                    
-                                    echo "</tr>";
+                                echo "<td class='links'>".$alleFragenArray[$i]['fragetext']."<input type=\"hidden\" name=\"frage$i\" value=\"".$alleFragenArray[$i]['fragetext']."\"></td>";   
+                                echo "</tr>";
                             }
                         }
                         echo "</table>";
